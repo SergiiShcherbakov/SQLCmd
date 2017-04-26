@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.model.Database;
+package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;

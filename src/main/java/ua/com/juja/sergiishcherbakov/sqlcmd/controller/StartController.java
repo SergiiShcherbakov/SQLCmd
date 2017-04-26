@@ -1,9 +1,13 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.Database.DatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.Database.JDBCPostgresSQLDatabaseManager;
+import org.postgresql.util.PSQLException;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 
 /**
  * Created by StrannikFujitsu on 23.04.2017.
@@ -19,21 +23,32 @@ public class StartController {
     }
 
     public void start() throws Exception {
-
+//SQLCmd|postgres|z
         viewer.write("You started program SQLCmd from Sergii Shcserbakow\n" +
-        "the program can to connect to your localhost database\n" +
-        "please enter your data in format:\"databaseName|userName|password\": ");
+                "the program can to connect to your localhost database\n");
+        while(true){
+            viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
 
-        String[] data = viewer.read(" ").split("[|]");
-        String databaseName = data[0] ;
-        String login = data[1];
-        String password = data[2];
-        viewer.write("connect to database");
+            String[] data = viewer.read(" ").split("[|]");
+            try {
+            if (data.length < 3) {
+                 throw new SQLException("3 parameters are expected but "+ data.length +" is entered" + "please, try again");
+            }
+            String databaseName = data[0];
+            String login = data[1];
+            String password = data[2];
 
-        if (databaseManager.setConnection(databaseName, login, password)) {
-            new MainMenu(databaseManager, viewer).start();
+                databaseManager.setConnection(databaseName, login, password);
+                viewer.write("connect to database");
+                new MainMenu(databaseManager, viewer).start();
+                break;
 
+            } catch (SQLException e ) {
+                viewer.write(e.getMessage());
+                viewer.write("please, try again");
+            }
         }
+        return;
 
     }
 

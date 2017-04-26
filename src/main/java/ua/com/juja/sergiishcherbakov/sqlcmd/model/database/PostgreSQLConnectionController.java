@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.model.Database;
+package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,17 +39,14 @@ public class PostgreSQLConnectionController implements ConnectionController {
         }
 
         if (connection == null) {
-            try {
+
 
                 connection = DriverManager.getConnection(
                         "jdbc:postgresql://localhost:5432/"+databaseName,
                         login,
                         password);
 
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console");
-                throw e;
-            }
+
         }
          return connection;
     }

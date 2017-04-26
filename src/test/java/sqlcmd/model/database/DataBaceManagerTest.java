@@ -1,9 +1,9 @@
-package sqlcmd.controller;
+package sqlcmd.model.database;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.Database.DatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.Database.JDBCPostgresSQLDatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.FiledType;
 
