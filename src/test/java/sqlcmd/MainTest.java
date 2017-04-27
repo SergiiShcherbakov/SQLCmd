@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Created by StrannikFujitsu on 20.04.2017.
  */
 
-public class MainTest {
+ class MainTest {
 
     private ConsoleMock console = new ConsoleMock();
 
@@ -18,14 +18,9 @@ public class MainTest {
     public void TestMain() throws SQLException, ClassNotFoundException {
         // given
 
-
         // when
-        Main.main(new String[0]);
-//
+
         // then
-//        assertOut("-------- PostgreSQL JDBC Connection Testing ------------\n" +
-//                "PostgreSQL JDBC Driver Registered!\n" +
-//                "You made it, take control your database now!\n");
     }
 
     private void assertOut(String expected, String... parameters) {

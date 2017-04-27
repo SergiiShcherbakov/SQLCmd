@@ -32,7 +32,7 @@ public class StartController {
             String[] data = viewer.read(" ").split("[|]");
             try {
             if (data.length < 3) {
-                 throw new SQLException("3 parameters are expected but "+ data.length +" is entered" + "please, try again");
+                 throw new SQLException("3 parameters are expected but "+ data.length +" is entered" + " please, try again");
             }
             String databaseName = data[0];
             String login = data[1];
