@@ -24,8 +24,8 @@ public class StartController {
 
     public void start() throws Exception {
 //SQLCmd|postgres|z
-        viewer.write("You started program SQLCmd from Sergii Shcserbakow\n" +
-                "the program can to connect to your localhost database\n");
+        welcome();
+
         while(true){
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
 
@@ -38,18 +38,24 @@ public class StartController {
             String login = data[1];
             String password = data[2];
 
-                databaseManager.setConnection(databaseName, login, password);
-                viewer.write("connect to database");
-                new MainMenu(databaseManager, viewer).start();
-                break;
+            databaseManager.setConnection(databaseName, login, password);
+            viewer.write("connect to database");
+            new MainMenu(databaseManager, viewer).start();
+
+            viewer.write("Good by. See you soon.");
+            return;
 
             } catch (SQLException e ) {
                 viewer.write(e.getMessage());
                 viewer.write("please, try again");
             }
         }
-        return;
 
+    }
+
+    private void welcome() {
+        viewer.write("You started program SQLCmd from Sergii Shcserbakow\n" +
+                "the program can to connect to your localhost database\n");
     }
 
     public static void main(String[] args) throws Exception {
