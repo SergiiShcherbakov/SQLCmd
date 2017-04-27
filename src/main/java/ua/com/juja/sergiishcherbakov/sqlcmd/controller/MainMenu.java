@@ -18,7 +18,9 @@ public class MainMenu {
     }
 
     boolean start() throws Exception {
+        viewer.write("Connection successful!");
         viewer.write("Main menu:");
-     throw  new Exception("Method start do not realized!!");
+        return true;
+//     throw  new Exception("Method start do not realized!!");
     }
 }

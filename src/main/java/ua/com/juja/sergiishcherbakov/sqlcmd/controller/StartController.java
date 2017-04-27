@@ -54,8 +54,8 @@ public class StartController {
     }
 
     private void welcome() {
-        viewer.write("You started program SQLCmd from Sergii Shcserbakow\n" +
-                "the program can to connect to your localhost database\n");
+        viewer.write("You started program SQLCmd from Sergii Shcserbakow");
+        viewer.write("the program can to connect to your localhost database");
     }
 
     public static void main(String[] args) throws Exception {
