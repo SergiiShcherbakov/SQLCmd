@@ -39,6 +39,7 @@ public class LogingUserIntegrationTest {
         // given
         consoleMock = new ConsoleMock();
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "exit");
 
         // when
         StartController.main(new String[0]);
@@ -51,6 +52,8 @@ public class LogingUserIntegrationTest {
                 "connect to database\n" +
                 "Connection successful!\n" +
                 "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
                 "Good by. See you soon.\n"
         );
     }
@@ -61,6 +64,7 @@ public class LogingUserIntegrationTest {
         consoleMock = new ConsoleMock();
         consoleMock.addIn( wrongBaseName+ "|" + userName + "|" + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "exit");
 
         // when
         StartController.main(new String[0]);
@@ -77,6 +81,8 @@ public class LogingUserIntegrationTest {
                 "connect to database\n" +
                 "Connection successful!\n" +
                 "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
                 "Good by. See you soon.\n"
         );
     }
@@ -87,6 +93,7 @@ public class LogingUserIntegrationTest {
         consoleMock = new ConsoleMock();
         consoleMock.addIn( baseName+ "|" + wrongUserName + "|" + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "exit");
 
         // when
         StartController.main(new String[0]);
@@ -103,6 +110,8 @@ public class LogingUserIntegrationTest {
                 "connect to database\n" +
                 "Connection successful!\n" +
                 "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
                 "Good by. See you soon.\n"
         );
     }
@@ -113,6 +122,7 @@ public class LogingUserIntegrationTest {
         consoleMock = new ConsoleMock();
         consoleMock.addIn( baseName+ "|" + userName + "|" + wrongPassword);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "exit");
 
         // when
         StartController.main(new String[0]);
@@ -129,6 +139,8 @@ public class LogingUserIntegrationTest {
                 "connect to database\n" +
                 "Connection successful!\n" +
                 "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
                 "Good by. See you soon.\n"
         );
     }
@@ -139,6 +151,7 @@ public class LogingUserIntegrationTest {
         consoleMock = new ConsoleMock();
         consoleMock.addIn( wrongBaseName+ "|"  + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "exit");
 
         // when
         StartController.main(new String[0]);
@@ -155,9 +168,12 @@ public class LogingUserIntegrationTest {
                 "connect to database\n" +
                 "Connection successful!\n" +
                 "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
                 "Good by. See you soon.\n"
         );
     }
+
 
     private void assertOut(String expected, String... parameters) {
         String string = expected.replaceAll("\\n", System.lineSeparator());
