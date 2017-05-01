@@ -160,12 +160,7 @@ public class LogingUserIntegrationTest {
     }
 
     private void assertOut(String expected, String... parameters) {
-        String string = expected.replaceAll("\\n", "\r\n");
-        if (parameters.length > 0) {
-            string = string.replaceAll("%s", parameters[0]);
-        }
-
-//        assertEquals(Arrays.toString(string.toCharArray()), Arrays.toString(consoleMock.getOut().toCharArray()));
+        String string = expected.replaceAll("\\n", System.lineSeparator());
         assertEquals(string, consoleMock.getOut());
     }
 }
