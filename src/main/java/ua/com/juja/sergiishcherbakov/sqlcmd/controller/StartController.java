@@ -1,7 +1,7 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.MenuCommand;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.menuCommandFactory;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.TeamMenuCommandFactory;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
@@ -42,7 +42,7 @@ public class StartController {
             databaseManager.setConnection(databaseName, login, password); // can throw exeption
             viewer.write("connect to database");
 
-            Map<String, MenuCommand> menuCommandMap = new menuCommandFactory().getMenuCommand();
+            Map<String, MenuCommand> menuCommandMap = new TeamMenuCommandFactory().getMenuCommand();
             new MainMenu(databaseManager, viewer, menuCommandMap).start();
 
             viewer.write("Good by. See you soon.");

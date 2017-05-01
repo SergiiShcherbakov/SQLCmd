@@ -37,7 +37,7 @@ public class MainMenu {
             inputCommand = viewer.read("String");
 
             menuCommand = menuComandMap.get(inputCommand);
-            if(menuCommand != null)  isExit = menuCommand.process();
+            if(menuCommand != null)  isExit = menuCommand.process(viewer , databaseManager);
         }
         return true;
     }
