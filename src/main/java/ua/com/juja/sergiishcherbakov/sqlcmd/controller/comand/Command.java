@@ -6,12 +6,15 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 /**
  * Created by StrannikFujitsu on 01.05.2017.
  */
-public interface MenuCommand {
+public interface Command {
 
     String getName();
 
     String getDescription();
 
-    boolean process(Viewer viewer, DatabaseManager databaseManager);
+    boolean canProcess(String command);
+
+
+    boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand);
 
 }

@@ -3,17 +3,23 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by StrannikFujitsu on 01.05.2017.
  */
-public class HelpMenu implements  MenuCommand {
+public class HelpMenu implements Command {
     private List<String> programDescription;
 
-    public HelpMenu(List programDescription) {
-        this.programDescription =  programDescription;
+    public HelpMenu(List<Command> menuComand) {
+
+        this.programDescription = new LinkedList<String>();
+        for (Command c :
+                menuComand) {
+            programDescription.add(c.getDescription());
+        }
+
     }
 
     @Override
@@ -27,7 +33,15 @@ public class HelpMenu implements  MenuCommand {
     }
 
     @Override
-    public boolean process(Viewer viewer, DatabaseManager databaseManager) {
+    public boolean canProcess(String command) {
+        String newCommand = new String(command);
+        newCommand.toLowerCase();
+        return newCommand.equals("help");
+    }
+
+
+    @Override
+    public boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         viewer.write("The program suport next comand:");
         for (String menu: programDescription ) {
             viewer.write(menu);

@@ -1,13 +1,14 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.MenuCommand;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.TeamMenuCommandFactory;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.Command;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.MenuCommandFactory;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +43,7 @@ public class StartController {
             databaseManager.setConnection(databaseName, login, password); // can throw exeption
             viewer.write("connect to database");
 
-            Map<String, MenuCommand> menuCommandMap = new TeamMenuCommandFactory().getMenuCommand();
+            List<Command> menuCommandMap = new MenuCommandFactory().getMenuCommand();
             new MainMenu(databaseManager, viewer, menuCommandMap).start();
 
             viewer.write("Good by. See you soon.");

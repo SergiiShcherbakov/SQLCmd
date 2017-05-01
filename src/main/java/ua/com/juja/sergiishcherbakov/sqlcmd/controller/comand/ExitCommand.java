@@ -6,7 +6,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 /**
  * Created by StrannikFujitsu on 01.05.2017.
  */
-public class Exit implements MenuCommand {
+public class ExitCommand implements Command {
 
     @Override
     public String getName() {
@@ -19,7 +19,14 @@ public class Exit implements MenuCommand {
     }
 
     @Override
-    public boolean process(Viewer viewer, DatabaseManager databaseManager) {
+    public boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         return true;
+    }
+
+    @Override
+    public boolean canProcess(String command) {
+        String newCommand = new String(command);
+        newCommand.toLowerCase();
+        return newCommand.equals("exit");
     }
 }
