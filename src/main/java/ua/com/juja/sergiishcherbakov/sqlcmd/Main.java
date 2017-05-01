@@ -3,7 +3,9 @@ package ua.com.juja.sergiishcherbakov.sqlcmd;
 
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.sql.*;
 
@@ -12,9 +14,11 @@ import java.sql.*;
  * This class starts program SQLCmd
  */
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws Exception {
 
-//        new StartController(new ConsoleViewer()).start();
+        new StartController(new ConsoleViewer(),
+                new JDBCPostgresSQLDatabaseManager())
+                .start();
 
     }
 }
