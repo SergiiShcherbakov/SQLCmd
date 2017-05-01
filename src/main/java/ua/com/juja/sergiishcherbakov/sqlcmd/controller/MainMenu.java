@@ -29,16 +29,22 @@ public class MainMenu {
         viewer.write("Main menu:");
         boolean isExit = false;
         String inputCommand = "";
-        Command menuCommand;
-
+        boolean commandWasProcessed = false;
         while(!isExit) {
             viewer.write("Enter your command or type help to get help:");
             inputCommand = viewer.read("String");
             for (Command command: menuComandList ) {
                 if(command.canProcess(inputCommand)){
                     isExit = command.process(viewer, databaseManager, inputCommand);
+                    commandWasProcessed = true;
+                    continue;
                 }
             }
+
+            if (!commandWasProcessed) {
+                viewer.write(inputCommand + " don`t supported.");
+            }
+                commandWasProcessed = false;
         }
         return true;
     }
