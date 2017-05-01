@@ -42,7 +42,7 @@ public class MainMenu {
             }
 
             if (!commandWasProcessed) {
-                viewer.write(inputCommand + " don`t supported.");
+                viewer.write(inputCommand + " does not supported.");
             }
                 commandWasProcessed = false;
         }
