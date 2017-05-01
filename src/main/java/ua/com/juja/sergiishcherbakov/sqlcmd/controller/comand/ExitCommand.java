@@ -20,6 +20,7 @@ public class ExitCommand implements Command {
 
     @Override
     public boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
+        viewer.write("Good by. See you soon.");
         return true;
     }
 

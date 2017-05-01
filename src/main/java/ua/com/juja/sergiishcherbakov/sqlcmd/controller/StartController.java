@@ -46,7 +46,6 @@ public class StartController {
             List<Command> menuCommandMap = new MenuCommandFactory().getMenuCommand();
             new MainMenu(databaseManager, viewer, menuCommandMap).start();
 
-            viewer.write("Good by. See you soon.");
             return;
 
             } catch (SQLException e ) {
