@@ -23,11 +23,4 @@ import static org.junit.Assert.assertEquals;
         // then
     }
 
-    private void assertOut(String expected, String... parameters) {
-        String string = expected.replaceAll("\\n", "\r\n");
-        if (parameters.length > 0) {
-            string = string.replaceAll("%s", parameters[0]);
-        }
-        assertEquals(string, console.getOut());
-    }
 }
