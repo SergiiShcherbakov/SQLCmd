@@ -2,8 +2,6 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
 
 
 import org.reflections.Reflections;
-import sun.reflect.Reflection;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -14,62 +12,42 @@ import java.util.Set;
  */
 public class MenuCommandFactory {
 
+    public static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand";
+    public static final String HELP_MENU_COMMAND_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.HelpMenu";
+
     public List <Command> getMenuCommand() {
-//        List<Command> result = new LinkedList<Command>();
-//
-//        Command tables = new TablesCommand();
-//        result.add(tables);
-//
-//        Command exit = new ExitCommand();
-//        result.add(exit);
-//
-//        Command help = new HelpMenu(result);
-//        result.add(help);
+        return setClasses();
+}
 
+    private   List <Command> setClasses(){
 
+        List<Command> result = getCommands();
+        setHelpClass(result, HELP_MENU_COMMAND_NAME);
 
-        return setClases();
+        return result;
     }
 
-    private   List <Command>   setClases(){
-        List<Command> result = new LinkedList<Command>();
-        Reflections reflections = new Reflections("ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand");
+    private List<Command> getCommands() {
+        List<Command> result = new LinkedList<>();
 
-        Set<Class<? extends Command>> allClasses =
-                reflections.getSubTypesOf(Command.class);
-        Class<? extends Command> helpClass = null;
-        for (Class<? extends Command> c: allClasses) {
-            if (c.getCanonicalName().equals("ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.HelpMenu")) {
-                helpClass = c;
-            }
-            else{
+        Reflections reflections = new Reflections(COMMAND_PACKAGE_NAME);
+        Set<Class<? extends Command>> allClasses = reflections.getSubTypesOf(Command.class);
+
+        for (Class<? extends Command> classCommand : allClasses) {
                 try {
-                    result.add((Command) c.newInstance() );
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                    result.add(  classCommand.newInstance() );
+                } catch (InstantiationException  | IllegalAccessException e ) {
                     e.printStackTrace();
                 }
-            }
         }
-
-        if (helpClass != null) {
-            try {
-                HelpMenu helpMenu =(HelpMenu) helpClass.newInstance();
-                result.add(helpMenu);
-                helpMenu.setCommand(result);
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-       return result;
+        return result;
     }
 
-    public static void main(String[] args) {
-        new MenuCommandFactory().setClases();
+    private void setHelpClass(List<Command> result, String helpClassName) {
+        for (Command command : result) {
+            if (command.getClass().equals(helpClassName)) {
+                ((HelpMenu) command).setCommand(result);
+            }
+        }
     }
 }
