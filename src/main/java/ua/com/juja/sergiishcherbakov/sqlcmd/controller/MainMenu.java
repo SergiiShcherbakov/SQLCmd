@@ -44,12 +44,8 @@ public class MainMenu {
             if (!commandWasProcessed) {
                 viewer.write(inputCommand + " does not supported.");
             }
-                commandWasProcessed = false;
+            commandWasProcessed = false;
         }
         return true;
     }
-
-    private void printMenuComands() {
-    }
-
 }
