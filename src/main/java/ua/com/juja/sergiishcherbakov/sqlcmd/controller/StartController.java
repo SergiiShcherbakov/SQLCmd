@@ -25,9 +25,7 @@ public class StartController {
     }
 
     public void start() throws Exception {
-//SQLCmd|postgres|z
         welcome();
-
         while(true){
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
 
