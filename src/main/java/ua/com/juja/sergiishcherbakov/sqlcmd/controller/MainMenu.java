@@ -40,7 +40,6 @@ public class MainMenu {
                     continue;
                 }
             }
-
             if (!commandWasProcessed) {
                 viewer.write(inputCommand + " does not supported.");
             }
