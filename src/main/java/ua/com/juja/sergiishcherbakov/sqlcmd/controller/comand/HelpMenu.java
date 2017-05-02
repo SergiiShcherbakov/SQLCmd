@@ -12,14 +12,19 @@ import java.util.List;
 public class HelpMenu implements Command {
     private List<String> programDescription;
 
+    public HelpMenu(){}
+
     public HelpMenu(List<Command> menuComand) {
 
+
+    }
+
+    public void setCommand(List<Command> menuCommand){
         this.programDescription = new LinkedList<String>();
         for (Command c :
-                menuComand) {
+                menuCommand) {
             programDescription.add(c.getDescription());
         }
-
     }
 
     @Override
