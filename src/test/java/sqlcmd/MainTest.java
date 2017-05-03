@@ -1,13 +1,10 @@
 package sqlcmd;
 
 import org.junit.Test;
-import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
-
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertEquals;
 /**
- * Created by StrannikFujitsu on 20.04.2017.
+ * Created by Sergii Shcherbakov on 20.04.2017.
  */
 
  class MainTest {
