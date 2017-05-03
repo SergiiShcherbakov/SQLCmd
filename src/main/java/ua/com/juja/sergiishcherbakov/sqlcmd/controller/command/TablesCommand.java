@@ -27,9 +27,9 @@ public class TablesCommand implements Command {
     }
 
     @Override
-    public boolean process(Viewer viewer,
-                           DatabaseManager databaseManager,
-                           String inputCommand) {
+    public boolean processAndExit(Viewer viewer,
+                                  DatabaseManager databaseManager,
+                                  String inputCommand) {
         try {
             viewer.write(databaseManager.getTablesNames().toString());
         } catch (SQLException e) {

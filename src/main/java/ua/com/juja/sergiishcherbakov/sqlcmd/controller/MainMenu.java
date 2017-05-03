@@ -37,7 +37,7 @@ public class MainMenu {
 
         for (Command command: menuCommandList) {
             if(command.canProcess(inputCommand)){
-                isTheLastCommand = command.process(viewer, databaseManager, inputCommand);
+                isTheLastCommand = command.processAndExit(viewer, databaseManager, inputCommand);
                 commandWasProcessed = true;
                 continue;
             }

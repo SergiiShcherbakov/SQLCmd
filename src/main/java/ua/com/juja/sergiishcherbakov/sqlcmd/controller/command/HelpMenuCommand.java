@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by StrannikFujitsu on 01.05.2017.
+ * Created by Sergii Shcherbakov on 01.05.2017.
  */
 public class HelpMenuCommand implements Command, HelpMenu {
     private List<String> programDescription;
@@ -44,7 +44,7 @@ public class HelpMenuCommand implements Command, HelpMenu {
     }
 
     @Override
-    public boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
+    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         viewer.write("The program support next command:");
         for (String pointOfMenu : programDescription ) {
             viewer.write( pointOfMenu );
