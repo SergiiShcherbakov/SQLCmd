@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
+package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
@@ -48,7 +48,7 @@ public class HelpMenuCommand implements Command, HelpMenu {
 
     @Override
     public boolean process(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        viewer.write("The program suport next comand:");
+        viewer.write("The program suport next command:");
         for (String menu: programDescription ) {
             viewer.write(menu);
         }

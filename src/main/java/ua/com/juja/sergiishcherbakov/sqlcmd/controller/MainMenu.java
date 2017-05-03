@@ -1,8 +1,10 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.Command;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -21,26 +23,34 @@ public class MainMenu {
     }
 
     boolean start() throws Exception {
+        welcome();
+        while(!isThisCommandLast()) { }
+        return true;
+    }
+
+    private boolean isThisCommandLast() throws SQLException, ClassNotFoundException {
+        boolean isTheLastCommand = false;
+        boolean commandWasProcessed = false;
+        String inputCommand = "";
+        viewer.write("Enter your command or type help to get help:");
+        inputCommand = viewer.read();
+
+        for (Command command: menuCommandList) {
+            if(command.canProcess(inputCommand)){
+                isTheLastCommand = command.process(viewer, databaseManager, inputCommand);
+                commandWasProcessed = true;
+                continue;
+            }
+        }
+        if (!commandWasProcessed) {
+            viewer.write(inputCommand + " does not supported.");
+            return false;
+        }
+        return isTheLastCommand;
+    }
+
+    private void welcome() {
         viewer.write("Connection successful!");
         viewer.write("Main menu:");
-        boolean isExit = false;
-        String inputCommand = "";
-        boolean commandWasProcessed = false;
-        while(!isExit) {
-            viewer.write("Enter your command or type help to get help:");
-            inputCommand = viewer.read();
-            for (Command command: menuCommandList) {
-                if(command.canProcess(inputCommand)){
-                    isExit = command.process(viewer, databaseManager, inputCommand);
-                    commandWasProcessed = true;
-                    continue;
-                }
-            }
-            if (!commandWasProcessed) {
-                viewer.write(inputCommand + " does not supported.");
-            }
-            commandWasProcessed = false;
-        }
-        return true;
     }
 }

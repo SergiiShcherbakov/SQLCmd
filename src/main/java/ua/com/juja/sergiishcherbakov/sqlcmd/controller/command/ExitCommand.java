@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
+package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;

@@ -6,7 +6,6 @@ import sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
-
 import static org.junit.Assert.assertEquals;
 
 /**

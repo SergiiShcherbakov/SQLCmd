@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
+package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import java.util.List;
 
