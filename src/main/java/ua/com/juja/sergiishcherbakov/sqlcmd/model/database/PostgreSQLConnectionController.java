@@ -14,7 +14,6 @@ public class PostgreSQLConnectionController implements ConnectionController {
 
     private  Connection connection; // todo add connections pull
 
-
     @Override
     public boolean setParameters(String databaseName, String login, String password) throws SQLException, ClassNotFoundException {
         this.databaseName = databaseName;
@@ -29,25 +28,26 @@ public class PostgreSQLConnectionController implements ConnectionController {
         return connection != null;
     }
 
+    @Override
     public Connection getConnection( )
             throws SQLException, ClassNotFoundException {
-
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             throw e;
         }
-
         if (connection == null) {
-
-
                 connection = DriverManager.getConnection(
                         "jdbc:postgresql://localhost:5432/"+databaseName,
                         login,
                         password);
-
-
         }
          return connection;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        if(connection != null)
+            connection.close();
     }
 }
