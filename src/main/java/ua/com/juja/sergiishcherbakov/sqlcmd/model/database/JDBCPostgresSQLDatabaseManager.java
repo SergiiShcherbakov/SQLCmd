@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
-    ConnectionController connectionController;
+    private ConnectionController connectionController;
 
     public JDBCPostgresSQLDatabaseManager() {
 
@@ -41,7 +41,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                 statement.executeUpdate(sql);
             }
         } else {
-            throw new RuntimeException("Databasemaneger.createNewTable is fall! It haven`t connection");
+            throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
         }
         return true;
     }
@@ -71,7 +71,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                  ResultSet rs =
                          statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")){
 
-                    result = new LinkedList<String>();
+                    result = new LinkedList<>();
                     while (rs.next() ){
                         result.add( rs.getString(1));
                     }

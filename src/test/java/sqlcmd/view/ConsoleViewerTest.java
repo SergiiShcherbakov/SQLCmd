@@ -30,7 +30,7 @@ public class ConsoleViewerTest {
         consoleMock.addIn(expected);
 
         // then
-        assertEquals( viewer.read( " "), expected );
+        assertEquals( viewer.read( ), expected );
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ConsoleViewerTest {
        // System.out.println(viewer.read(""));
 
         // then
-        assertEquals( false, viewer.read( " ").equals( expected) );
+        assertEquals( false, viewer.read( ).equals( expected) );
     }
 
      @Test

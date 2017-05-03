@@ -4,24 +4,27 @@ import org.junit.Before;
 import org.junit.Test;
 import sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by StrannikFujitsu on 27.04.2017.
+ * Created by Sergii Shcherbakov on 27.04.2017.
+ * SQLCmd|postgres|z good data for testing in local postgreSQL database
  */
 
-public class LogingUserIntegrationTest {
+public class LoginUserIntegrationTest {
 
-   private ConsoleMock consoleMock;
+    private ConsoleMock consoleMock;
+    private StartController startController;
 
-    String wrongBaseName;
-    String baseName;
-    String userName;
-    String wrongUserName;
-    String password;
-    String wrongPassword;
-// //SQLCmd|postgres|z good data
+    private String wrongBaseName;
+    private String baseName;
+    private String userName;
+    private String wrongUserName;
+    private String password;
+    private String wrongPassword;
 
     @Before
     public void set(){
@@ -32,20 +35,21 @@ public class LogingUserIntegrationTest {
         wrongUserName = "postgres1";
         password = "z";
         wrongPassword = "zz";
+        startController = new StartController(new ConsoleViewer(), new JDBCPostgresSQLDatabaseManager());
     }
 
     @Test
-    public void goodAutentificationStart() throws Exception {
+    public void goodAuthorizationStart() throws Exception {
         // given
         consoleMock = new ConsoleMock();
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
 
         // when
-        StartController.main(new String[0]);
+        startController.start();
 
         // then
-        assertOut("You started program SQLCmd from Sergii Shcserbakow\n" +
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 "SQLCmd|postgres|z\n" +
@@ -67,10 +71,9 @@ public class LogingUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        StartController.main(new String[0]);
-
+        startController.start();
         // then
-        assertOut("You started program SQLCmd from Sergii Shcserbakow\n" +
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 "SQLCmd1|postgres|z\n" +
@@ -96,10 +99,9 @@ public class LogingUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        StartController.main(new String[0]);
-
+        startController.start();
         // then
-        assertOut("You started program SQLCmd from Sergii Shcserbakow\n" +
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 "SQLCmd|postgres1|z\n" +
@@ -125,10 +127,9 @@ public class LogingUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        StartController.main(new String[0]);
-
+        startController.start();
         // then
-        assertOut("You started program SQLCmd from Sergii Shcserbakow\n" +
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 "SQLCmd|postgres|zz\n" +
@@ -154,10 +155,9 @@ public class LogingUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        StartController.main(new String[0]);
-
+        startController.start();
         // then
-        assertOut("You started program SQLCmd from Sergii Shcserbakow\n" +
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 "SQLCmd1|z\n" +
