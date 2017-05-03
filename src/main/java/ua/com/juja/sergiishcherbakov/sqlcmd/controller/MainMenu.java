@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by StrannikFujitsu on 23.04.2017.
+ * Created by Sergii Shcherbakov on 23.04.2017.
  */
 public class MainMenu {
 
