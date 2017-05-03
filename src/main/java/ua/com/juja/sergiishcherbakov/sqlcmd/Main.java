@@ -5,7 +5,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDataba
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 
 /**
- * Created by StrannikFujitsu on 19.04.2017.
+ * Created by Sergii Shcherbakov on 19.04.2017.
  * This class starts program SQLCmd
  */
 public class Main {

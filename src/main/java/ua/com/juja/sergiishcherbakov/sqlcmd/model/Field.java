@@ -1,16 +1,16 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model;
 
 /**
- * Created by StrannikFujitsu on 21.04.2017.
+ * Created by Sergii Shcherbakov  on 21.04.2017.
  */
 public class Field {
-    String name;
+    private String name;
 
-    boolean isPrimaryKey;
-    boolean isNull;
-    boolean isUnique;
-    FiledType filedType;
-    int size;
+    private boolean isPrimaryKey;
+    private boolean isNull;
+    private boolean isUnique;
+    private FiledType filedType;
+    private int size;
 
     public Field(String name, FiledType filedType, boolean isPrimaryKey, boolean inNull, boolean isUnique,  int size) {
         this.name = name;
@@ -26,40 +26,46 @@ public class Field {
     }
 
     public String isPrimaryKey() {
-        if( isPrimaryKey) return "PRIMARY KEY";
-        else return "";
+        if( isPrimaryKey){
+            return "PRIMARY KEY";
+        } else {
+            return "";
+        }
     }
 
     public String isInNull() {
-         if(isNull)return "NULL";
-         else return "NOT NULL";
+        if (isNull) {
+            return "NULL";
+        } else {
+            return "NOT NULL";
+        }
     }
 
     public String isUnique() {
-        if(isUnique) return "UNIQUE";
-        else return "";
+        if (isUnique) {
+            return "UNIQUE";
+        } else {
+            return "";
+        }
     }
 
-    public FiledType getFiledType() {
+    public FiledType getFieldType() {
         return filedType;
     }
 
     public String getSize() {
         if (filedType == FiledType.VARCHAR) {
-        return  "["+ size+"]";
+            return "[" + size + "]";
+        } else {
+            return "";
         }
-        else return "";
     }
 
-    public String getSqlFild(){
-       return getName() + " " +
-               filedType.toString()  + getSize()+" " +
-               isPrimaryKey() + " " +
-               isInNull() + " " +
-               isUnique() ;
+    public String getSqlField(){
+        return getName() + " " +
+                filedType.toString()  + getSize() + " " +
+                isPrimaryKey() + " " +
+                isInNull() + " " +
+                isUnique() ;
     }
-
-    /*"(id INTEGER PRIMARY KEY NOT NULL," +
-                    " username varchar(225) NOT NULL UNIQUE, " +
-                    " PASSWORD varchar(225) NOT NULL)";*/
 }

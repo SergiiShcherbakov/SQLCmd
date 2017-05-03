@@ -35,7 +35,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
             String sql = "CREATE TABLE IF NOT EXISTS public." + tableName + "( ";
             for (int i = 0; i <fields.length; i++) {
-                sql +=  fields[i].getSqlFild();
+                sql +=  fields[i].getSqlField();
                 if(i !=  fields.length -1 ) sql += " ,";
                 else sql += " )";
             }

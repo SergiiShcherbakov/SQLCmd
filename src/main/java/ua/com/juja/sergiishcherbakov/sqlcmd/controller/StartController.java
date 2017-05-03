@@ -25,7 +25,7 @@ public class StartController {
         while( true ){
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
 
-            String[] data = viewer.read(" ").split("[|]");
+            String[] data = viewer.read().split("[|]");
             try {
                 if (data.length < 3) {
                     throw new IllegalArgumentException("3 parameters are expected but "+ data.length +" is entered" + " please, try again");

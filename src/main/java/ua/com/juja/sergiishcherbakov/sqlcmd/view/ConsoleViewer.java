@@ -3,7 +3,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.view;
 import java.util.Scanner;
 
 /**
- * Created by StrannikFujitsu on 21.04.2017.
+ * Created by Sergii Shcherbakov  on 21.04.2017.
  */
  public class ConsoleViewer implements Viewer {
 
@@ -13,10 +13,8 @@ import java.util.Scanner;
     }
 
     @Override
-    public String read(String string) {
+    public String read() {
             Scanner sc = new Scanner(System.in);
             return sc.nextLine();
     }
-
-
 }
