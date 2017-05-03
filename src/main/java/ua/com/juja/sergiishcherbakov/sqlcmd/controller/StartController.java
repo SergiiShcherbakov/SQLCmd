@@ -28,7 +28,7 @@ public class StartController {
             String[] data = viewer.read(" ").split("[|]");
             try {
                 if (data.length < 3) {
-                    throw new SQLException("3 parameters are expected but "+ data.length +" is entered" + " please, try again");
+                    throw new IllegalArgumentException("3 parameters are expected but "+ data.length +" is entered" + " please, try again");
                 }
                 String databaseName = data[0];
                 String login = data[1];
@@ -41,7 +41,7 @@ public class StartController {
                 new MainMenu(databaseManager, viewer, menuCommandMap).start();
 
                 return;
-            } catch (SQLException e ) {
+            } catch (SQLException | IllegalArgumentException e ) {
                 viewer.write(e.getMessage());
                 viewer.write("please, try again");
             }
