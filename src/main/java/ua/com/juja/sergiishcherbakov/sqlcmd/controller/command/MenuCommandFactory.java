@@ -1,19 +1,17 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
-
 import org.reflections.Reflections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-
 /**
- * Created by StrannikFujitsu on 01.05.2017.
+ * Created by Sergii Shcherbakov on 01.05.2017.
  */
 public class MenuCommandFactory {
 
-    public static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.command";
-    public static final String HELP_MENU_COMMAND_NAME = "class ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.HelpMenuCommand";
+    private static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.command";
+    private static final String HELP_MENU_COMMAND_NAME = "class ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.HelpMenuCommand";
 
     public List <Command> getMenuCommand() {
         return setClasses();
@@ -23,7 +21,6 @@ public class MenuCommandFactory {
 
         List<Command> result = getCommands();
         setHelpClass(result, HELP_MENU_COMMAND_NAME);
-
         return result;
     }
 
@@ -35,7 +32,7 @@ public class MenuCommandFactory {
 
         for (Class<? extends Command> classCommand : allClasses) {
                 try {
-                    result.add(  classCommand.newInstance() );
+                    result.add( classCommand.newInstance() );
                 } catch (InstantiationException  | IllegalAccessException e ) {
                     e.printStackTrace();
                 }
