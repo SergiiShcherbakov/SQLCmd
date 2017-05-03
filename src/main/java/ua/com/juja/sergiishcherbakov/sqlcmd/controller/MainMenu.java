@@ -14,7 +14,6 @@ public class MainMenu {
     private Viewer viewer;
     private List <Command> menuCommandList;
 
-
     public MainMenu(DatabaseManager databaseManager, Viewer viewer, List<Command> menuComandList) {
         this.databaseManager = databaseManager;
         this.viewer = viewer;
@@ -29,7 +28,7 @@ public class MainMenu {
         boolean commandWasProcessed = false;
         while(!isExit) {
             viewer.write("Enter your command or type help to get help:");
-            inputCommand = viewer.read("String");
+            inputCommand = viewer.read();
             for (Command command: menuCommandList) {
                 if(command.canProcess(inputCommand)){
                     isExit = command.process(viewer, databaseManager, inputCommand);
