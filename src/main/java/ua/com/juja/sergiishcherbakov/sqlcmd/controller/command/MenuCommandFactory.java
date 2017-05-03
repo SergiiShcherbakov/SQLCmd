@@ -1,4 +1,4 @@
-package ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand;
+package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 
 import org.reflections.Reflections;
@@ -12,8 +12,8 @@ import java.util.Set;
  */
 public class MenuCommandFactory {
 
-    public static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand";
-    public static final String HELP_MENU_COMMAND_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.comand.HelpMenu";
+    public static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.command";
+    public static final String HELP_MENU_COMMAND_NAME = "class ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.HelpMenuCommand";
 
     public List <Command> getMenuCommand() {
         return setClasses();
@@ -45,7 +45,7 @@ public class MenuCommandFactory {
 
     private void setHelpClass(List<Command> result, String helpClassName) {
         for (Command command : result) {
-            if (command.getClass().equals(helpClassName)) {
+            if (command.getClass().toString().equals(helpClassName)) {
                 ((HelpMenu) command).setCommand(result);
             }
         }
