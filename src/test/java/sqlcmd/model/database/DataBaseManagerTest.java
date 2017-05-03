@@ -6,7 +6,6 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.FiledType;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
@@ -14,11 +13,11 @@ import java.util.Random;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by StrannikFujitsu on 23.04.2017.
+ * Created by Sergii Shcherbakov on 23.04.2017.
  */
-public class DataBaceManagerTest {
+public class DataBaseManagerTest {
 //SQLCmd|postgres|z
-    DatabaseManager dbm;
+    private DatabaseManager dbm;
 
     @Before
     public void set() throws SQLException, ClassNotFoundException {
@@ -55,14 +54,7 @@ public class DataBaceManagerTest {
         // then
         assertEquals( tablesNames.contains(tableName), false );
     }
-
-
-
-
-    // given
-
-    // when
-
-    // then
-
 }
+    // given
+    // when
+    // then
