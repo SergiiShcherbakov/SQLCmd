@@ -46,6 +46,15 @@ public class PostgreSQLConnectionController implements ConnectionController {
     }
 
     @Override
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+           throw new RuntimeException("Connection was not close");
+        }
+    }
+
+    @Override
     protected void finalize() throws Throwable {
         if(connection != null)
             connection.close();

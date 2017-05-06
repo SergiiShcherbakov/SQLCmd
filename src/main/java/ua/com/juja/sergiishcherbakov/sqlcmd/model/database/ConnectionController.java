@@ -15,4 +15,6 @@ public interface ConnectionController {
 
     Connection getConnection()
             throws SQLException, ClassNotFoundException;
+
+    void closeConnection();
 }

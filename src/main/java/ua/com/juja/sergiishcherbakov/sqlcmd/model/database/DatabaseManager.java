@@ -20,4 +20,5 @@ public interface DatabaseManager {
     List<String> getTablesNames()
             throws SQLException, ClassNotFoundException;
 
+    void closeConnection();
 }

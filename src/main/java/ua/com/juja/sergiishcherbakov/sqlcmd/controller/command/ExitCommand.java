@@ -21,6 +21,7 @@ public class ExitCommand implements Command {
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         viewer.write("Good by. See you soon.");
+        databaseManager.closeConnection();
         return true;
     }
 

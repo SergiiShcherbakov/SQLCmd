@@ -81,4 +81,9 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             throw new RuntimeException("DatabaseManager.getTablesNames is fall! It haven`t connection");
         }
     }
+
+    @Override
+    public void closeConnection() {
+        connectionController.closeConnection();
+    }
 }
