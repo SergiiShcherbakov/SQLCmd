@@ -1,7 +1,10 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class HelpMenuCommand implements Command, HelpMenu {
         for (Command c : menuCommand) {
             programDescription.add( c.getDescription() );
         }
+        Collections.sort(programDescription);
     }
 
     @Override
