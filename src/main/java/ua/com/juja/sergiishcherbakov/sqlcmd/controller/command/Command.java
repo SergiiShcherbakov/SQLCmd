@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Created by Sergii Shcherbakov on 01.05.2017.
  */
 public interface Command {
-
+//    todo create abstract command skeleton
     String getName();
 
     String getDescription();
