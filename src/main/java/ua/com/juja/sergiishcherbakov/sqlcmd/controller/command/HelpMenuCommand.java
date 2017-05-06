@@ -1,6 +1,5 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
