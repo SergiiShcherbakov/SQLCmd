@@ -173,6 +173,36 @@ public class LoginUserIntegrationTest {
         );
     }
 
+    @Test
+    public void connectToBaseHelpAndExit() throws Exception {
+        // given
+        consoleMock = new ConsoleMock();
+        consoleMock.addIn( baseName+ "|" + userName + "|" + password);
+        consoleMock.addIn( "help");
+        consoleMock.addIn( "exit");
+
+        // when
+        startController.start();
+        // then
+        assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
+                "the program can to connect to your localhost database\n" +
+                "please enter your data in format:\"databaseName|userName|password\": \n" +
+                "SQLCmd|postgres|z\n" +
+                "connect to database\n" +
+                "Connection successful!\n" +
+                "Main menu:\n" +
+                "Enter your command or type help to get help:\n" +
+                "help\n" +
+                "The program support next command:\n" +
+                "tables\tdisplays all tables in the database\n" +
+                "exit\texit from the program\n" +
+                "help\tget name of command that support the program\n" +
+                "Enter your command or type help to get help:\n" +
+                "exit\n"+
+                "Good by. See you soon.\n"
+        );
+    }
+
 
     private void assertOut(String expected, String... parameters) {
         String string = expected.replaceAll("\\n", System.lineSeparator());
