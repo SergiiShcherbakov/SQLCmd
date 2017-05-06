@@ -43,7 +43,7 @@ public class HelpMenuCommand implements Command, HelpMenu {
     public boolean canProcess(String command) {
         String newCommand = new String(command);
         newCommand.toLowerCase();
-        return newCommand.equals("help");
+        return newCommand.equals(getName());
     }
 
     @Override

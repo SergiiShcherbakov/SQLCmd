@@ -29,6 +29,6 @@ public class ExitCommand implements Command {
     public boolean canProcess(String command) {
         String newCommand = new String(command);
         newCommand.toLowerCase();
-        return newCommand.equals("exit");
+        return newCommand.equals(getName());
     }
 }

@@ -23,7 +23,7 @@ public class TablesCommand implements Command {
     public boolean canProcess(String command) {
         String newCommand = new String(command);
         newCommand.toLowerCase();
-        return newCommand.equals("tables");
+        return newCommand.equals(getName());
     }
 
     @Override
