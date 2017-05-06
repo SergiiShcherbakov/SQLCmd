@@ -53,7 +53,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         Connection connection = connectionController.getConnection();
         if( connection != null) {
             try (Statement statement = connection.createStatement()) {
-                String sql = "Drop TABLE IF EXISTS public." + tableName;
+                String sql = "Drop TABLE public." + tableName;
                 statement.executeUpdate(sql);
             }
         }else{
