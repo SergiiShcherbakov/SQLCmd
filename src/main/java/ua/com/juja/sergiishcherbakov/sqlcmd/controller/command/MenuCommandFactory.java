@@ -11,7 +11,6 @@ import java.util.Set;
 public class MenuCommandFactory {
 
     private static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.command";
-    private static final String HELP_MENU_COMMAND_NAME = "class ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.HelpMenuCommand";
 
     public List <Command> getMenuCommand() {
         return setClasses();
@@ -20,7 +19,7 @@ public class MenuCommandFactory {
     private   List <Command> setClasses(){
 
         List<Command> result = getCommands();
-        setHelpClass(result, HELP_MENU_COMMAND_NAME);
+        setHelpClass(result);
         return result;
     }
 
@@ -40,9 +39,9 @@ public class MenuCommandFactory {
         return result;
     }
 
-    private void setHelpClass(List<Command> result, String helpClassName) {
+    private void setHelpClass(List<Command> result) {
         for (Command command : result) {
-            if (command.getClass().toString().equals(helpClassName)) {
+            if (command instanceof HelpMenu) {
                 ((HelpMenu) command).setCommand(result);
             }
         }
