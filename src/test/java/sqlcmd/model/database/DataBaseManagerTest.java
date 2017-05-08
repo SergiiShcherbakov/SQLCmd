@@ -5,7 +5,7 @@ import org.junit.Test;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.FiledType;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.FieldType;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
@@ -29,8 +29,8 @@ public class DataBaseManagerTest {
     @Test
     public void Create_Delete_GetTablesName_Test() throws SQLException, ClassNotFoundException {
         // given
-        Field field = new Field("id", FiledType.INTEGER, true, true, true, 0  );
-        Field field1 = new Field("br", FiledType.VARCHAR, false, true, true, 50  );
+        Field field = new Field("id", FieldType.INTEGER, true, true, true, 0  );
+        Field field1 = new Field("br", FieldType.VARCHAR, false, true, true, 50  );
         String tableName = "tab"  + Math.abs( new Random().nextInt(100));
 
         // when
