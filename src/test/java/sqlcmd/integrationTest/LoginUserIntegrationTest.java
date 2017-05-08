@@ -194,11 +194,14 @@ public class LoginUserIntegrationTest {
                 "Enter your command or type help to get help:\n" +
                 "help\n" +
                 "The program support next command:\n" +
+                "drop\tremove tables specified by user\n" +
+                "\tformat the command:\n" +
+                "\tdrop|\"table name\"\n" +
                 "exit\texit from the program\n" +
                 "help\tget name of command that support the program\n" +
                 "tables\tdisplays all tables in the database\n" +
                 "Enter your command or type help to get help:\n" +
-                "exit\n"+
+                "exit\n" +
                 "Good by. See you soon.\n"
         );
     }

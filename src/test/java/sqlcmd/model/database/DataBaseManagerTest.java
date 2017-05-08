@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
@@ -33,23 +34,36 @@ public class DataBaseManagerTest {
         String tableName = "tab"  + Math.abs( new Random().nextInt(100));
 
         // when
-        dbm.deleteTable(tableName );
+        try {
+            dbm.deleteTable(tableName);
+        } catch ( SQLException e){
+            // do nothing
+        }
         dbm.createNewTable(tableName , new Field[] {field, field1});
         List<String> tablesNames = dbm.getTablesNames();
 
         // then
         assertEquals( tablesNames.contains(tableName), true );
+        dbm.deleteTable(tableName);
     }
 
     @Test
     public void deleteNotExistTable() throws SQLException, ClassNotFoundException {
 
         // given
-        String tableName = "tab"  + Math.abs( new Random().nextInt(100));
-
-        // when
-        dbm.deleteTable(tableName);
+        String tableName = "tab"  + Math.abs( new Random().nextInt(10));
         List<String> tablesNames = dbm.getTablesNames();
+        while (tablesNames.contains(tableName)){
+            tableName += Math.abs( new Random().nextInt(10));
+        }
+        // when
+        try {
+            dbm.deleteTable(tableName);
+            fail("Expected exeption");
+        } catch ( SQLException e){
+            // do nothing
+        }
+        tablesNames = dbm.getTablesNames();
 
         // then
         assertEquals( tablesNames.contains(tableName), false );

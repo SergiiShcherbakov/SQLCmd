@@ -17,8 +17,8 @@ public class dropCommand implements Command{
     @Override
     public String getDescription() {
         return getName() +
-                "\tremove tables specified by user\n"+
-                "\tformat the command:\n" +
+                "\tremove tables specified by user"+ System.lineSeparator() +
+                "\tformat the command:" + System.lineSeparator() +
                 "\t" + getName() + "|\"table name\"";
     }
 
