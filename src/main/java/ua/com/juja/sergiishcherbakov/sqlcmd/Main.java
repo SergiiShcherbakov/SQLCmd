@@ -1,8 +1,10 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 /**
  * Created by Sergii Shcherbakov on 19.04.2017.
@@ -11,8 +13,8 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        ConsoleViewer viewer = new ConsoleViewer();
-        JDBCPostgresSQLDatabaseManager databaseManager = new JDBCPostgresSQLDatabaseManager();
+        Viewer viewer = new ConsoleViewer();
+        DatabaseManager databaseManager = new JDBCPostgresSQLDatabaseManager();
 
         new StartController(viewer, databaseManager)
                 .start();
