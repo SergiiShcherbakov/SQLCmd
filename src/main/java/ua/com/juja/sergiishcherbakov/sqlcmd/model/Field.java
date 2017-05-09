@@ -21,39 +21,27 @@ public class Field {
         this.size = size;
     }
 
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    public String isPrimaryKey() {
-        if( isPrimaryKey){
-            return "PRIMARY KEY";
-        } else {
-            return "";
-        }
+    private String GetIsPrimaryKeyInText() {
+        return isPrimaryKey ? "PRIMARY KEY" : "";
     }
 
-    public String isInNull() {
-        if (isNull) {
-            return "NULL";
-        } else {
-            return "NOT NULL";
-        }
+    private String getIsNullInText() {
+        return isNull ? "NULL" : "NOT NULL";
     }
 
-    public String isUnique() {
-        if (isUnique) {
-            return "UNIQUE";
-        } else {
-            return "";
-        }
+    private String getIsUniqueInText() {
+        return isUnique ? "UNIQUE" : "";
     }
 
     public FieldType getFieldType() {
         return fieldType;
     }
 
-    public String getSize() {
+    private String getSizeInText() {
         if (fieldType == FieldType.VARCHAR) {
             return "[" + size + "]";
         } else {
@@ -63,9 +51,9 @@ public class Field {
 
     public String getSqlField(){
         return getName() + " " +
-                fieldType.toString()  + getSize() + " " +
-                isPrimaryKey() + " " +
-                isInNull() + " " +
-                isUnique() ;
+                fieldType.toString()  + getSizeInText() + " " +
+                GetIsPrimaryKeyInText() + " " +
+                getIsNullInText() + " " +
+                getIsUniqueInText() ;
     }
 }
