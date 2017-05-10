@@ -59,7 +59,7 @@ public class DataBaseManagerTest {
         // when
         try {
             dbm.deleteTable(tableName);
-            fail("Expected exeption");
+            fail("Expected exception");
         } catch ( SQLException e){
             // do nothing
         }
