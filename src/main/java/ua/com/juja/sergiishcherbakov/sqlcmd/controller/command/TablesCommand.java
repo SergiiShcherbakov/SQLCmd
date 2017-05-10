@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
  */
-public class TablesCommand extends CommandSkeleton {
+public class TablesCommand extends CommandSkeleton implements Command  {
 
     public TablesCommand() {
         super("tables",

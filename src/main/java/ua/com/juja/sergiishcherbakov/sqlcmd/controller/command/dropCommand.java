@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class dropCommand extends CommandSkeleton{
+public class dropCommand extends CommandSkeleton implements Command {
 
     public dropCommand() {
         super("drop",

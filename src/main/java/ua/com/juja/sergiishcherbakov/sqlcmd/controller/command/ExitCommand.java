@@ -6,7 +6,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
  */
-public class ExitCommand extends CommandSkeleton {
+public class ExitCommand extends CommandSkeleton implements Command {
 
     public ExitCommand() {
         super("exit",

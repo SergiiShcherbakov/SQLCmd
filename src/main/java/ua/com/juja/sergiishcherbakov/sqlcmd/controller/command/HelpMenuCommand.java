@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
  */
-public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu {
+public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Command {
 
     private List<String> programDescription;
 
