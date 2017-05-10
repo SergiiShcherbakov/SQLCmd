@@ -15,17 +15,21 @@ public class PostgreSQLConnectionController implements ConnectionController {
     private  Connection connection; // todo add connections pull
 
     @Override
-    public boolean setParameters(String databaseName, String login, String password) throws SQLException, ClassNotFoundException {
+    public void setParameters(String databaseName, String login, String password) throws SQLException, ClassNotFoundException {
         this.databaseName = databaseName;
         this.login = login;
         this.password = password;
-        getConnection();
-        return Connect();
+//        getConnection();
+//        return connect();
     }
 
     @Override
-    public boolean Connect() {
-        return connection != null;
+    public boolean isConnected() {
+        try {
+            return connection != null && !connection.isClosed();
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     @Override
@@ -45,10 +49,12 @@ public class PostgreSQLConnectionController implements ConnectionController {
          return connection;
     }
 
+    // todo realize connection pull and after using connection return it to connection pul
     @Override
     public void closeConnection() {
         try {
             connection.close();
+            connection = null;
         } catch (SQLException e) {
            throw new RuntimeException("Connection was not close");
         }

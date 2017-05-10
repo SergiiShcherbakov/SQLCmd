@@ -20,8 +20,9 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     @Override
     public boolean setConnection(String databaseName, String login, String password)
             throws SQLException, ClassNotFoundException {
-
-        return connectionController.setParameters(databaseName,  login,  password);
+        connectionController.setParameters(databaseName,  login,  password);
+        connectionController.getConnection();
+        return connectionController.isConnected();
     }
 
     @Override

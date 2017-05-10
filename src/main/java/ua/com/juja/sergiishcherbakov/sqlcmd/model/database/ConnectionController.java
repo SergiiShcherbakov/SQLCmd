@@ -8,10 +8,10 @@ import java.sql.SQLException;
  */
 public interface ConnectionController {
 
-    boolean setParameters(String databaseName, String login, String password)
+    void setParameters(String databaseName, String login, String password)
             throws SQLException, ClassNotFoundException;
 
-    boolean Connect();
+    boolean isConnected();
 
     Connection getConnection()
             throws SQLException, ClassNotFoundException;
