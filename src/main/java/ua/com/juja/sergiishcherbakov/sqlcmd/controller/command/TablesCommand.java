@@ -27,4 +27,9 @@ public class TablesCommand extends CommandSkeleton implements Command  {
         }
         return false;
     }
+
+    @Override
+    public boolean canProcess(String command) {
+        return command.toLowerCase().equals(super.name);
+    }
 }
