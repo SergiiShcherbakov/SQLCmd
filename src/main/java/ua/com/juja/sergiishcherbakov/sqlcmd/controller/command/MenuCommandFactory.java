@@ -10,23 +10,17 @@ import java.util.Set;
  */
 public class MenuCommandFactory {
 
-    private static final String COMMAND_PACKAGE_NAME = "ua.com.juja.sergiishcherbakov.sqlcmd.controller.command";
 
     public List <Command> getMenuCommand() {
-        return setClasses();
-}
-
-    private   List <Command> setClasses(){
-
         List<Command> result = getCommands();
         setHelpClass(result);
         return result;
-    }
+}
 
     private List<Command> getCommands() {
         List<Command> result = new LinkedList<>();
 
-        Reflections reflections = new Reflections(COMMAND_PACKAGE_NAME);
+        Reflections reflections = new Reflections( this.getClass().getPackage() );
         Set<Class<? extends Command>> allClasses = reflections.getSubTypesOf(Command.class);
 
         for (Class<? extends Command> classCommand : allClasses) {
@@ -46,4 +40,5 @@ public class MenuCommandFactory {
             }
         }
     }
+
 }

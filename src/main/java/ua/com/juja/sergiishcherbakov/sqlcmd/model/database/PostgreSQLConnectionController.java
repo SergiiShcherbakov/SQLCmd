@@ -19,8 +19,6 @@ public class PostgreSQLConnectionController implements ConnectionController {
         this.databaseName = databaseName;
         this.login = login;
         this.password = password;
-//        getConnection();
-//        return connect();
     }
 
     @Override
