@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
  */
-public class HelpMenuCommand implements Command, HelpMenu {
+public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu {
+
     private List<String> programDescription;
 
-    public HelpMenuCommand(){}
-
-    public HelpMenuCommand(List<Command> menuCommand) {
-        setCommand(menuCommand);
+    public HelpMenuCommand(){
+        super("help",
+                "\tget name and description of command that support the program");
     }
 
     @Override
@@ -28,23 +28,6 @@ public class HelpMenuCommand implements Command, HelpMenu {
         Collections.sort(programDescription);
     }
 
-    @Override
-    public String getName() {
-        return "help";
-    }
-
-    @Override
-    public String getDescription() {
-        return getName() +
-                "\tget name of command that support the program";
-    }
-
-    @Override
-    public boolean canProcess(String command) {
-        String newCommand = new String(command);
-        newCommand.toLowerCase();
-        return newCommand.equals(getName());
-    }
 
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
