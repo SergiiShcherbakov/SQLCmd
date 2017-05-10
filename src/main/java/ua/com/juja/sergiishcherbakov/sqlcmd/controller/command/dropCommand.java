@@ -7,25 +7,13 @@ import java.sql.SQLException;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class dropCommand implements Command{
-    @Override
-    public String getName() {
-        return "drop";
-    }
+public class dropCommand extends CommandSkeleton{
 
-    @Override
-    public String getDescription() {
-        return getName() +
+    public dropCommand() {
+        super("drop",
                 "\tremove tables specified by user"+ System.lineSeparator() +
-                "\tformat the command:" + System.lineSeparator() +
-                "\t" + getName() + "|\"table name\"";
-    }
-
-    @Override
-    public boolean canProcess(String command) {
-        String newCommand = new String(command);
-        newCommand.toLowerCase();
-        return newCommand.startsWith(getName());
+                        "\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t drop|\"table name\"");
     }
 
     @Override
