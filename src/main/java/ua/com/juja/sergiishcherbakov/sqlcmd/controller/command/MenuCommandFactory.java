@@ -31,7 +31,7 @@ public class MenuCommandFactory {
                     result.add( classCommand.newInstance() );
                     }
                 } catch (InstantiationException  | IllegalAccessException e ) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
         }
         return result;
