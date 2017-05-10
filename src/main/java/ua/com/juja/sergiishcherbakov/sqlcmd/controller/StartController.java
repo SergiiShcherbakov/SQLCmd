@@ -21,7 +21,7 @@ public class StartController {
     }
 
     public void start() throws Exception {
-        welcome();
+        printWelcome();
         while( true ){
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
 
@@ -51,7 +51,7 @@ public class StartController {
         }
     }
 
-    private void welcome() {
+    private void printWelcome() {
         viewer.write("You started program SQLCmd from Sergii Shcherbakov");
         viewer.write("the program can to connect to your localhost database");
     }
