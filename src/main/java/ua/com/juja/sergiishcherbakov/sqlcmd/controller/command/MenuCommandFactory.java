@@ -1,6 +1,8 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import org.reflections.Reflections;
+
+import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -25,9 +27,11 @@ public class MenuCommandFactory {
 
         for (Class<? extends Command> classCommand : allClasses) {
                 try {
+                    if (!Modifier.isAbstract(classCommand.getModifiers())) {
                     result.add( classCommand.newInstance() );
+                    }
                 } catch (InstantiationException  | IllegalAccessException e ) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
         }
         return result;
