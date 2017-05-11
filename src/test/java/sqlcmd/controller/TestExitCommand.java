@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.DropCommand;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.ExitCommand;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
@@ -19,10 +20,10 @@ import static org.mockito.Mockito.never;
 /**
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
-public class TestDropCommand {
-        DatabaseManager dBManager;
-        Viewer viewer;
-        Command dropCommand;
+public class TestExitCommand {
+    DatabaseManager dBManager;
+    Viewer viewer;
+    Command exitCommand;
 
     private void setMoks() {
         dBManager = mock(DatabaseManager.class);
@@ -31,22 +32,20 @@ public class TestDropCommand {
 
     @Before
     public void setCommand(){
-        dropCommand = new DropCommand();
+        exitCommand = new ExitCommand();
     }
-
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab");
+        isExit = exitCommand.processAndExit(viewer, dBManager, "exit");
 
         // then
-        Mockito.verify(dBManager).deleteTable("tab");
-        Mockito.verify(viewer).write("tab was removed");
-        assertFalse(isExit);
-
+        Mockito.verify(dBManager).closeConnection();
+        Mockito.verify(viewer).write("Good by. See you soon.");
+        assertTrue(isExit);
     }
 
     @Test
@@ -55,10 +54,11 @@ public class TestDropCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
+        isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
+
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 3 is entered please, try again");
+        Mockito.verify(dBManager, never()).closeConnection();
+        Mockito.verify(viewer).write("parameter \"exit\" are expected but exitt is entered");
         assertFalse(isExit);
     }
 
@@ -68,23 +68,10 @@ public class TestDropCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
+        isExit = exitCommand.processAndExit(viewer, dBManager, "");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered please, try again");
-        assertFalse(isExit);
-    }
-
-  @Test
-    public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
-        // given
-        setMoks();
-        // when
-        boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
-        // then
-        Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered please, try again");
+        Mockito.verify(dBManager, never()).closeConnection();
+        Mockito.verify(viewer).write("parameter \"exit\" are expected but  is entered");
         assertFalse(isExit);
     }
 
@@ -92,28 +79,37 @@ public class TestDropCommand {
     public void getName(){
         // given
         // when
-        String name = dropCommand.getName();
+        String name = exitCommand.getName();
         // then
-        assertEquals("drop", name);
+        assertEquals("exit", name);
     }
 
     @Test
     public void getDescriptionTest(){
         // given
         // when
-        String name = dropCommand.getDescription();
+        String description = exitCommand.getDescription();
         // then
-        assertEquals("drop\t\tremove tables specified by user" + System.lineSeparator()+
-                "\t\tformat the command:" + System.lineSeparator()+
-                "\t\t drop|\"table name\"", name);
+        assertEquals("exit\t\texit from the program"
+                , description);
     }
 
     @Test
-    public void canProcessWithBigString(){
+    public void canProcessWithGoodString(){
         // given
         // when
-        boolean canProcess = dropCommand.canProcess("drop");
+        boolean canProcess = exitCommand.canProcess("exit");
         // then
         assertTrue(canProcess);
     }
+
+    @Test
+    public void canProcessWithBagString(){
+        // given
+        // when
+        boolean canProcess = exitCommand.canProcess("exitt");
+        // then
+        assertFalse(canProcess);
+    }
+
 }
