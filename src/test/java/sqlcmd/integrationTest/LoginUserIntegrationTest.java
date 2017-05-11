@@ -3,6 +3,7 @@ package sqlcmd.integrationTest;
 import org.junit.Before;
 import org.junit.Test;
 import sqlcmd.ConsoleMock;
+import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
@@ -45,7 +46,7 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
 
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
@@ -70,7 +71,7 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
@@ -98,7 +99,8 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
+
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
@@ -126,7 +128,8 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
+
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
@@ -154,7 +157,8 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
+
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
@@ -182,7 +186,7 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( "exit");
 
         // when
-        startController.start();
+        Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your localhost database\n" +
