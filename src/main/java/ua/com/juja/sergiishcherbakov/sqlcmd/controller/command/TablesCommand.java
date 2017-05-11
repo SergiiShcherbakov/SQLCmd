@@ -15,8 +15,7 @@ public class TablesCommand extends CommandSkeleton implements Command  {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer,
-                                  DatabaseManager databaseManager,
+    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager,
                                   String inputCommand) {
         try {
             viewer.write(databaseManager.getTablesNames().toString());

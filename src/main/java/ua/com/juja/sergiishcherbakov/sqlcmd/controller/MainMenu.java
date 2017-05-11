@@ -22,10 +22,10 @@ public class MainMenu {
         this.menuCommandList = menuCommandList;
     }
 
-    boolean start() throws Exception {
+    void start() throws Exception {
         welcome();
         while(!isThisCommandLast()) { }
-        return true;
+        return ;
     }
 
     private boolean isThisCommandLast() throws SQLException, ClassNotFoundException {

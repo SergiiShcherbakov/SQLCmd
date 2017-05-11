@@ -35,5 +35,5 @@ public abstract class CommandSkeleton implements Command {
     }
 
     @Override
-    abstract public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) throws SQLException, ClassNotFoundException ;
+    abstract public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) ;
 }

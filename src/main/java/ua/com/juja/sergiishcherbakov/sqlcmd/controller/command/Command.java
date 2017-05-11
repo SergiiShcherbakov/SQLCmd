@@ -16,6 +16,6 @@ public interface Command {
     boolean canProcess(String command);
 
 
-    boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) throws SQLException, ClassNotFoundException;
+    boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand);
 
 }

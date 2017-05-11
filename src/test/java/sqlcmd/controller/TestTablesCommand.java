@@ -26,13 +26,7 @@ public class TestTablesCommand {
         Command tablesCommand = new TablesCommand();
         // when
         boolean isExit = true;
-        try {
-             isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
         assertFalse(isExit);
     }

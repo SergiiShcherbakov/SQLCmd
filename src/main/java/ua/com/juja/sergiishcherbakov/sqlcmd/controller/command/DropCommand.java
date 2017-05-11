@@ -7,9 +7,9 @@ import java.sql.SQLException;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class dropCommand extends CommandSkeleton implements Command {
+public class DropCommand extends CommandSkeleton implements Command {
 
-    public dropCommand() {
+    public DropCommand() {
         super("drop",
                 "\tremove tables specified by user"+ System.lineSeparator() +
                         "\t\tformat the command:" + System.lineSeparator() +
@@ -17,7 +17,7 @@ public class dropCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) throws SQLException, ClassNotFoundException {
+    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         String[] data = inputCommand.split("[|]");
         try {
             if ( data.length != 2) {
@@ -33,6 +33,8 @@ public class dropCommand extends CommandSkeleton implements Command {
         } catch (SQLException | IllegalArgumentException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return false;
     }

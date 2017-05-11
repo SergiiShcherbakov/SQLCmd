@@ -12,7 +12,6 @@ import java.util.Set;
  */
 public class MenuCommandFactory {
 
-
     public List <Command> getMenuCommand() {
         List<Command> result = getCommands();
         setHelpClass(result);
@@ -31,7 +30,7 @@ public class MenuCommandFactory {
                     result.add( classCommand.newInstance() );
                     }
                 } catch (InstantiationException  | IllegalAccessException e ) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e.getCause());
                 }
         }
         return result;
@@ -44,5 +43,4 @@ public class MenuCommandFactory {
             }
         }
     }
-
 }
