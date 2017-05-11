@@ -20,9 +20,9 @@ import static org.mockito.Mockito.never;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestDropCommand {
-        DatabaseManager dBManager;
-        Viewer viewer;
-        Command dropCommand;
+    DatabaseManager dBManager;
+    Viewer viewer;
+    Command dropCommand;
 
     private void setMoks() {
         dBManager = mock(DatabaseManager.class);
@@ -50,6 +50,22 @@ public class TestDropCommand {
     }
 
     @Test
+    public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
+        // given
+        setMoks();
+        // when
+        boolean isExit = true;
+        isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
+
+        // then
+        Mockito.verify(viewer).write("\"drop\" parameters are expected but \"drop1\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verify(dBManager, never()).deleteTable("tab");
+        assertFalse(isExit);
+
+    }
+
+    @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
@@ -58,7 +74,8 @@ public class TestDropCommand {
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
         // then
         Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 3 is entered please, try again");
+        Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
+        Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
 
@@ -71,11 +88,12 @@ public class TestDropCommand {
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
         // then
         Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered please, try again");
+        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
+        Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
 
-  @Test
+    @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
@@ -84,7 +102,8 @@ public class TestDropCommand {
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
         // then
         Mockito.verify(dBManager, never()).deleteTable("");
-        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered please, try again");
+        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
+        Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
 

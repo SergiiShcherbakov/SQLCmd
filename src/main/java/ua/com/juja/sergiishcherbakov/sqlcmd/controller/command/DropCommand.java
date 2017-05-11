@@ -1,6 +1,8 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 import java.sql.SQLException;
 
@@ -18,22 +20,19 @@ public class DropCommand extends CommandSkeleton implements Command {
 
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        String[] data = inputCommand.split("[|]");
-        try {
-            if ( data.length != 2) {
-                throw new IllegalArgumentException("2 parameters are expected but " +
-                        data.length +
-                        " is entered" +
-                        " please, try again");
-            }
-            String tableName = data[1];
-            databaseManager.deleteTable(tableName);
-            viewer.write(tableName +" was removed" );
+        try{
+            String [] parameters = CorrectParameterChecker.
+                    getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
+
+            databaseManager.deleteTable(parameters[1]);
+            viewer.write(parameters[1] + " was removed" );
             return false;
-        } catch (SQLException | IllegalArgumentException | ClassNotFoundException e ) {
+        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }
         return false;
     }
+
+
 }
