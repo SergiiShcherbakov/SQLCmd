@@ -2,10 +2,8 @@ package sqlcmd.controller;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.verification.VerificationMode;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.DropCommand;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.TablesCommand;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
@@ -14,7 +12,6 @@ import java.sql.SQLException;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 

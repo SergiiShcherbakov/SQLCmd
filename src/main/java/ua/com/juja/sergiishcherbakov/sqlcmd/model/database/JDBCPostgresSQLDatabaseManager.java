@@ -33,13 +33,13 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         if(connection != null) {
             try (Statement statement = connection.createStatement()) {
 
-                String sql = "CREATE TABLE IF NOT EXISTS public." + tableName + "( ";
+                StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
                 for (int i = 0; i < fields.length; i++) {
-                    sql += fields[i].getSqlField();
-                    if (i != fields.length - 1) sql += " ,";
-                    else sql += " )";
+                    sql.append(fields[i].getSqlField());
+                    if (i != fields.length - 1) sql.append(" ,");
+                    else sql.append(" )");
                 }
-                statement.executeUpdate(sql);
+                statement.executeUpdate(sql.toString());
             }
         } else {
             throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");

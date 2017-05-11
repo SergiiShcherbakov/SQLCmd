@@ -3,8 +3,6 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.sql.SQLException;
-
 /**
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
@@ -30,8 +28,7 @@ public abstract class CommandSkeleton implements Command {
 
     @Override
     public boolean canProcess( String  command) {
-        String newString = new String(command).toLowerCase();
-        return newString.startsWith(name);
+        return command.toLowerCase().startsWith(name);
     }
 
     @Override
