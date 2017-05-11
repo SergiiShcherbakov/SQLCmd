@@ -30,11 +30,9 @@ public class DropCommand extends CommandSkeleton implements Command {
             databaseManager.deleteTable(tableName);
             viewer.write(tableName +" was removed" );
             return false;
-        } catch (SQLException | IllegalArgumentException e ) {
+        } catch (SQLException | IllegalArgumentException | ClassNotFoundException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         return false;
     }
