@@ -16,10 +16,10 @@ public class MainMenu {
     private Viewer viewer;
     private List <Command> menuCommandList;
 
-    public MainMenu(DatabaseManager databaseManager, Viewer viewer, List<Command> menuComandList) {
+    public MainMenu(DatabaseManager databaseManager, Viewer viewer, List<Command> menuCommandList) {
         this.databaseManager = databaseManager;
         this.viewer = viewer;
-        this.menuCommandList = menuComandList;
+        this.menuCommandList = menuCommandList;
     }
 
     boolean start() throws Exception {
