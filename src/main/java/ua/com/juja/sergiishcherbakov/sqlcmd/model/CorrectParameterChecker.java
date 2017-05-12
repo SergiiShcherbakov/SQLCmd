@@ -32,7 +32,7 @@ public class CorrectParameterChecker {
         }
         if (!data[0].toLowerCase().equals(goodParameter)) {
             throw new IncorrectNumberOfParametersException( "\"" + goodParameter +
-                    "\" parameters are expected but \"" +
+                    "\" parameter are expected but \"" +
                     data[0] +
                     "\" is entered");
         } else {
