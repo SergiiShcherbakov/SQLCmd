@@ -3,11 +3,8 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.ExitCommand;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
-
 import java.sql.SQLException;
 
 import static junit.framework.TestCase.assertFalse;

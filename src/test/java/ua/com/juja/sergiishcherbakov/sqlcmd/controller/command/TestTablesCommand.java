@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
-
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +48,23 @@ public class TestTablesCommand {
         // then
         Mockito.verify(dBManager).getTablesNames();
         Mockito.verify(viewer).write("[User, Bugs]");
+        assertFalse(isExit);
+    }
+    @Test
+    public void canProcessAndExitWithGoodStringAndWithoutTables() throws SQLException, ClassNotFoundException {
+        // given
+        tablesCommand = new TablesCommand();
+        setMoks();
+        List<String> response = new LinkedList<>();
+//        response.add("User");
+//        response.add("Bugs");
+        // when
+        boolean isExit = true;
+        when(dBManager.getTablesNames()).thenReturn(response);
+        isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
+        // then
+        Mockito.verify(dBManager).getTablesNames();
+        Mockito.verify(viewer).write("[]");
         assertFalse(isExit);
     }
 

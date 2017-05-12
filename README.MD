@@ -64,7 +64,7 @@ exit
 Формат: exit (без параметров)
 Формат вывода: текстовое сообщение с результатом выполнения операции
 
-7y [Подключение к базе] Я как ЮЗЕР хочу отключиться от базы данных и выйти из приложения что бы окончить работу
+7y [Отключение от базы] Я как ЮЗЕР хочу отключиться от базы данных и выйти из приложения что бы окончить работу
     7y.1 [успешный выход]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
@@ -74,7 +74,7 @@ exit
         "Good by. See you soon."
         Программа завершает свою работу
         PROFIT
-    7y.2 [несуществующая база]
+    7y.2 [неверная комманда exit]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         я ввожу команду: "exitt"
@@ -83,11 +83,6 @@ exit
         "Enter your command or type help to get help:"
         PROFIT
 
-help
-Команда выводит в консоль список всех доступных команд
-Формат: help (без параметров)
-Формат вывода: текст, описания команд с любым форматированием
-
 tables
 Команда выводит список всех таблиц
 Формат: tables (без параметров)
@@ -95,11 +90,75 @@ tables
 в любом удобном формате
 например [table1, table2, table3]
 
+3j [Команда выводит список всех таблиц] Я как ЮЗЕР хочу увидеть все таблицы в базе данных
+что бы выбрать конкретную нужную таблицу
+    3j.1 [Успешный вывод всех таблиц]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "tables"
+        я вижу вывод всех существующих таблиц в базе в формате [таб1, таб2, ... табn]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    3j.2 [неверная комманда tables]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "tabless"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "exitt does not supported."
+        "Enter your command or type help to get help:"
+        PROFIT
+    3j.3 [просмотр всех таблиц при пустой базе данных]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "tabless"
+        я вижу вывод в формате []
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+
 drop
 Команда удаляет заданную таблицу
 Формат: drop | tableName
 где tableName - имя удаляемой таблицы
 Формат вывода: текстовое сообщение с результатом выполнения операции
+
+8t [Команда удаляет заданную таблицу] Я как ЮЗЕР хочу удалить таблицу с заданным именем что бы её небыло в базе
+    8t.1 [Успешный удаление таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "drop|tableName"
+        я вижу сообщение tableName was removed
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    8t.2 [неверная комманда drop]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "dropp|tableName"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "drop" parameter are expected but "dropp" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    8t.3 [отсутствует параметр имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "drop|"
+        я вижу сообщение об ошибке и повторном вооде команды
+        2 parameters are expected but 1 is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    8t.4 [отсутствует таблица указанная в базе]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "drop|неверное имя таблицы"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: table "неверное имя таблицы" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
 
 clear
 Команда очищает содержимое указанной (всей) таблицы
@@ -159,3 +218,9 @@ delete
 Column - имя столбца записи которое проверяется
 value - значение которому должен соответствовать столбец column1 для удаляемой записи
 Формат вывода: табличный, как при find со старыми значениями удаляемых записей.
+
+help
+Команда выводит в консоль список всех доступных команд
+Формат: help (без параметров)
+Формат вывода: текст, описания команд с любым форматированием
+

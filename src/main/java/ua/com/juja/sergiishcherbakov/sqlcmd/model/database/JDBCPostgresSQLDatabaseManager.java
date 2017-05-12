@@ -13,7 +13,6 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     private ConnectionController connectionController;
 
     public JDBCPostgresSQLDatabaseManager() {
-
         this.connectionController =  new PostgreSQLConnectionController( );
     }
 
@@ -26,13 +25,10 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public boolean createNewTable(String tableName, Field[] fields)
-            throws SQLException, ClassNotFoundException {
-
+    public boolean createNewTable(String tableName, Field[] fields) throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if(connection != null) {
             try (Statement statement = connection.createStatement()) {
-
                 StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
                 for (int i = 0; i < fields.length; i++) {
                     sql.append(fields[i].getSqlField());
@@ -48,9 +44,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public boolean deleteTable(String tableName)
-            throws SQLException, ClassNotFoundException {
-
+    public boolean deleteTable(String tableName) throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if( connection != null) {
             try (Statement statement = connection.createStatement()) {
@@ -69,9 +63,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         if(connection != null) {
             LinkedList<String> result;
             try (Statement statement = connection.createStatement();
-                 ResultSet rs =
-                         statement.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")){
-
+                 ResultSet rs = statement.executeQuery("SELECT table_name " +
+                         "FROM information_schema.tables WHERE table_schema='public'")){
                     result = new LinkedList<>();
                     while (rs.next() ){
                         result.add( rs.getString(1));
