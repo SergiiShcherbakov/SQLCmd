@@ -1,6 +1,8 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.util.Collections;
@@ -30,9 +32,14 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
 
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        viewer.write("The program support next command:");
-        for (String pointOfMenu : programDescription ) {
-            viewer.write( pointOfMenu );
+        try {
+            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
+            viewer.write("The program support next command:");
+            for (String pointOfMenu : programDescription ) {
+                viewer.write( pointOfMenu );
+            }
+        } catch (IncorrectNumberOfParametersException e) {
+            viewer.write("help can`t be printed because " + e.getMessage());
         }
         return false;
     }

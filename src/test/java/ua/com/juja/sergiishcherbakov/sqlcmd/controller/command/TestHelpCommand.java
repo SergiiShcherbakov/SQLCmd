@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
-
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,11 +20,19 @@ import static org.mockito.Mockito.*;
 public class TestHelpCommand {
     DatabaseManager dBManager;
     Viewer viewer;
-    Command helpCommand;
+    HelpMenuCommand helpCommand;
 
     private void setMoks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
+
+        List<Command> commands = new LinkedList<>();
+        for ( int i = 0; i <5 ; i++) {
+            Command tempCommand = mock( Command.class);
+            when( tempCommand.getDescription()).thenReturn( "test description" );
+            commands.add( tempCommand );
+        }
+        helpCommand.setCommand(commands);
     }
 
     @Before
@@ -33,20 +40,15 @@ public class TestHelpCommand {
         helpCommand = new HelpMenuCommand();
     }
     @Test
-    public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
+    public void canProcessAndExitWithGoodStringAndFiveCommands() throws SQLException, ClassNotFoundException {
         // given
-        helpCommand = new TablesCommand();
         setMoks();
-        List<String> responce = new LinkedList<>();
-        responce.add("User");
-        responce.add("Bugs");
         // when
         boolean isExit = true;
-        when(dBManager.getTablesNames()).thenReturn(responce);
-        isExit = helpCommand.processAndExit(viewer, dBManager, "tables");
+        isExit = helpCommand.processAndExit(viewer, dBManager, "help");
         // then
-        Mockito.verify(dBManager).getTablesNames();
-        Mockito.verify(viewer).write("[User, Bugs]");
+        Mockito.verify(viewer).write("The program support next command:");
+        Mockito.verify(viewer, times(5)).write("test description");
         assertFalse(isExit);
     }
 
@@ -56,12 +58,10 @@ public class TestHelpCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = helpCommand.processAndExit(viewer, dBManager, "tabless");
-
+        isExit = helpCommand.processAndExit(viewer, dBManager, "helpp");
         // then
-        Mockito.verify(dBManager, never()).getTablesNames();
-        Mockito.verify(viewer).write("tables cant be printed because \"tables\" " +
-                "parameters are expected but \"tabless\" is entered");
+        Mockito.verify(viewer).write("help can`t be printed because \"help\" " +
+                "parameter are expected but \"helpp\" is entered");
         assertFalse(isExit);
     }
 
@@ -73,7 +73,7 @@ public class TestHelpCommand {
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "");
         // then
-        Mockito.verify(viewer).write("tables cant be printed because \"tables\" parameters are expected but \"\" is entered");
+        Mockito.verify(viewer).write("help can`t be printed because \"help\" parameter are expected but \"\" is entered");
         assertFalse(isExit);
     }
 
@@ -113,5 +113,4 @@ public class TestHelpCommand {
         // then
         assertFalse(canProcess);
     }
-
 }
