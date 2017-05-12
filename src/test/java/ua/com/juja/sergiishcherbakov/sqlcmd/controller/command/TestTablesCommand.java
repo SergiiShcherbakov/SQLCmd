@@ -39,12 +39,12 @@ public class TestTablesCommand {
         // given
         tablesCommand = new TablesCommand();
         setMoks();
-        List<String> responce = new LinkedList<>();
-        responce.add("User");
-        responce.add("Bugs");
+        List<String> response = new LinkedList<>();
+        response.add("User");
+        response.add("Bugs");
         // when
         boolean isExit = true;
-        when(dBManager.getTablesNames()).thenReturn(responce);
+        when(dBManager.getTablesNames()).thenReturn(response);
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
         Mockito.verify(dBManager).getTablesNames();

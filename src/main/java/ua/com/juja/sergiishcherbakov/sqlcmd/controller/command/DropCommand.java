@@ -23,7 +23,6 @@ public class DropCommand extends CommandSkeleton implements Command {
         try{
             String [] parameters = CorrectParameterChecker.
                     getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
-
             databaseManager.deleteTable(parameters[1]);
             viewer.write(parameters[1] + " was removed" );
             return false;
@@ -33,6 +32,4 @@ public class DropCommand extends CommandSkeleton implements Command {
         }
         return false;
     }
-
-
 }

@@ -5,8 +5,6 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.sql.SQLException;
-
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
  */

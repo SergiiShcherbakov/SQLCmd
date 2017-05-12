@@ -33,11 +33,7 @@ public class PostgreSQLConnectionController implements ConnectionController {
     @Override
     public Connection getConnection( )
             throws SQLException, ClassNotFoundException {
-        try {
             Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw e;
-        }
         if (connection == null) {
                 connection = DriverManager.getConnection(
                         "jdbc:postgresql://localhost:5432/"+databaseName,
