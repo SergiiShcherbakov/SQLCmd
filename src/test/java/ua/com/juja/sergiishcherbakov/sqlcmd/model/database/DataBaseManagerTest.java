@@ -1,4 +1,4 @@
-package sqlcmd.model.database;
+package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package sqlcmd;
+package ua.com.juja.sergiishcherbakov.sqlcmd;
 
 import org.junit.Test;
 import java.sql.SQLException;

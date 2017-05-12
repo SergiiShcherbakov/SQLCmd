@@ -1,4 +1,4 @@
-package sqlcmd.controller;
+package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import org.junit.Before;
 import org.junit.Test;

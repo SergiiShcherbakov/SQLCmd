@@ -1,11 +1,9 @@
-package sqlcmd.view;
+package ua.com.juja.sergiishcherbakov.sqlcmd.view;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import sqlcmd.ConsoleMock;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 
 import static org.junit.Assert.assertEquals;
 
