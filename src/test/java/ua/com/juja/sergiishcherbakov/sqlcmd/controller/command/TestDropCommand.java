@@ -58,7 +58,7 @@ public class TestDropCommand {
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
 
         // then
-        Mockito.verify(viewer).write("\"drop\" parameters are expected but \"drop1\" is entered");
+        Mockito.verify(viewer).write("\"drop\" parameter are expected but \"drop1\" is entered");
         Mockito.verify(viewer).write("please, try again");
         Mockito.verify(dBManager, never()).deleteTable("tab");
         assertFalse(isExit);

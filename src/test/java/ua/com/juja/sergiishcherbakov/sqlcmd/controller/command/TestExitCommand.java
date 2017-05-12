@@ -57,7 +57,7 @@ public class TestExitCommand {
 
         // then
         Mockito.verify(dBManager, never()).closeConnection();
-        Mockito.verify(viewer).write("parameter \"exit\" are expected but exitt is entered");
+        Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
         assertFalse(isExit);
     }
 
@@ -70,7 +70,7 @@ public class TestExitCommand {
         isExit = exitCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
-        Mockito.verify(viewer).write("parameter \"exit\" are expected but  is entered");
+        Mockito.verify(viewer).write("\"exit\" parameter are expected but \"\" is entered");
         assertFalse(isExit);
     }
 
