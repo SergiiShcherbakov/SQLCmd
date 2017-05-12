@@ -1,6 +1,8 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.sql.SQLException;
@@ -17,25 +19,19 @@ public class ExitCommand extends CommandSkeleton implements Command {
 
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-
         try {
-            if ( !canProcess( inputCommand)) {
-                throw new IllegalArgumentException("parameter \"exit\" are expected but " +
-                        inputCommand +
-                        " is entered" );
-            }
+            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
             viewer.write("Good by. See you soon.");
             databaseManager.closeConnection();
             return true;
-        } catch ( IllegalArgumentException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
+        } catch ( IncorrectNumberOfParametersException  e) {
+            viewer.write( e.getMessage());
         }
         return false;
     }
 
     @Override
     public boolean canProcess(String command) {
-        return command.toLowerCase().equals(name);
+        return canProcessWithoutParameters(command);
     }
 }

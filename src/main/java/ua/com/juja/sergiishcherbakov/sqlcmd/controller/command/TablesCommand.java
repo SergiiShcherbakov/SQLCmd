@@ -30,6 +30,6 @@ public class TablesCommand extends CommandSkeleton implements Command  {
 
     @Override
     public boolean canProcess(String command) {
-        return command.toLowerCase().equals(super.name);
+        return canProcessWithoutParameters(command);
     }
 }

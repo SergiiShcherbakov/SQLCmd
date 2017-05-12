@@ -28,7 +28,6 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
         Collections.sort(programDescription);
     }
 
-
     @Override
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         viewer.write("The program support next command:");
@@ -36,5 +35,10 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
             viewer.write( pointOfMenu );
         }
         return false;
+    }
+
+    @Override
+    public boolean canProcess(String command) {
+        return canProcessWithoutParameters(command);
     }
 }
