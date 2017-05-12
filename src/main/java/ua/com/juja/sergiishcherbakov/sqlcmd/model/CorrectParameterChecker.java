@@ -39,8 +39,10 @@ public class CorrectParameterChecker {
             return data;
         }
     }
-    //todo
-//    public static String getCorrectNumberOfParameters(String goodParameter, String inputCommand) throws IncorrectNumberOfParametersException {
-//    {}
+
+    public static String getCorrectParameter(String name, String inputCommand)
+            throws IncorrectNumberOfParametersException {
+        return getCorrectNumberOfParameters(name, inputCommand, 1)[0];
+    }
 }
 

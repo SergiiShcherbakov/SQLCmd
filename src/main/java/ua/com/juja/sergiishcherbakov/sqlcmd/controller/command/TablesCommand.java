@@ -20,7 +20,7 @@ public class TablesCommand extends CommandSkeleton implements Command  {
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager,
                                   String inputCommand) {
         try {
-            CorrectParameterChecker.getCorrectNumberOfParameter(getName(), inputCommand);
+            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
             viewer.write(databaseManager.getTablesNames().toString());
         } catch (SQLException | IncorrectNumberOfParametersException | ClassNotFoundException e) {
             viewer.write("tables cant be printed because " + e.getMessage());
