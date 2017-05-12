@@ -33,4 +33,8 @@ public abstract class CommandSkeleton implements Command {
 
     @Override
     abstract public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) ;
+
+    protected boolean canProcessWithoutParameters(String command) {
+        return command.toLowerCase().equals(name);
+    }
 }
