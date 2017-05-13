@@ -4,6 +4,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.FirstTablePrinter;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 /**
@@ -14,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Viewer viewer = new ConsoleViewer();
+        viewer.setTablePrinter(new FirstTablePrinter(viewer));
         DatabaseManager databaseManager = new JDBCPostgresSQLDatabaseManager();
 
         new StartController(viewer, databaseManager)

@@ -28,7 +28,7 @@ public class FindCommand extends CommandSkeleton implements Command {
                     getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
             List<List<String>> table = databaseManager.selectAllFromTable(parameters[1]);
             new FirstTablePrinter(viewer).printTable(table);
-            //viewer.write(parameters[1] + " was removed" );
+            viewer.printTable(table);
             return false;
         } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
             viewer.write(e.getMessage());
