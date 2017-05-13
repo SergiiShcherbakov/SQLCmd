@@ -159,22 +159,6 @@ drop
         please, try again
         Enter your command or type help to get help:
         PROFIT
-
-clear
-Команда очищает содержимое указанной (всей) таблицы
-Формат: clear | tableName
-где tableName - имя очищаемой таблицы
-Формат вывода: текстовое сообщение с результатом выполнения операции
-
-create
-Команда создает новую таблицу с заданными полями
-Формат: create | tableName | column1 | column2 | ... | columnN
-где: tableName - имя таблицы
-column1 - имя первого столбца записи
-column2 - имя второго столбца записи
-columnN - имя n-го столбца записи
-Формат вывода: текстовое сообщение с результатом выполнения операции
-
 find
 Команда для получения содержимого указанной таблицы
 Формат: find | tableName
@@ -187,6 +171,94 @@ find
 +  345   +  eva    +     pupkina      +
 +--------+---------+------------------+
 
+9i [Команда для получения содержимого указанной таблицы] Я как ЮЗЕР просмотреть указанную таблицу что
+бы уидеть запись в ней.
+    9i.1 [Успешный вывод таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "find|tableName"
+        я вывод таблицы в формате:
+         +--------+---------+------------------+
+         +  col1  +  col2   +       col3       +
+         +--------+---------+------------------+
+         +  123   +  stiven +     pupkin       +
+         +  345   +  eva    +     pupkina      +
+         +--------+---------+------------------+
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    9i.2 [неверная комманда find]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "findd|tableName"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "find" parameter are expected but "findd" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    9i.3 [отсутствует параметр имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "find|"
+        я вижу сообщение об ошибке и повторном вооде команды
+        2 parameters are expected but 1 is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    9i.4 [отсутствует таблица указанная в базе]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "find|неверное имя таблицы"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: table "неверное имя таблицы" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+
+clear
+Команда очищает содержимое указанной (всей) таблицы
+Формат: clear | tableName
+где tableName - имя очищаемой таблицы
+Формат вывода: текстовое сообщение с результатом выполнения операции
+12w [Команда очищает содержимое указанной (всей) таблицы] Я как ЮЗЕР хочу очистить всю таблицу что
+бы она была пустой.
+    12w.1 [Успешный вывод таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "clear|tableName"
+        я вывод вижу подтверждение об успешном действии
+        "tableName was cleared"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    12w.2 [неверная комманда clear]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "clearr|tableName"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "find" parameter are expected but "clearr" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    12w.3 [отсутствует параметр имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "clear|"
+        я вижу сообщение об ошибке и повторном вооде команды
+        2 parameters are expected but 1 is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    12w.4 [отсутствует таблица указанная в базе]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "clear|неверное имя таблицы"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: table "неверное имя таблицы" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+
 insert
 Команда для вставки одной строки в заданную таблицу
 Формат: insert | tableName | column1 | value1 | column2 | value2 | ... | columnN | valueN
@@ -198,6 +270,76 @@ value2 - значение второго столбца записи
 columnN - имя n-го столбца записи
 valueN - значение n-го столбца записи
 Формат вывода: текстовое сообщение с результатом выполнения операции
+17t [Команда для вставки одной строки в заданную таблицу] Я как ЮЗЕР хочу вставить новую строку что
+бы она в таблице.
+    17t.1 [Успешная вставка записи в таблицу]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "insert|tableName|column1|value1|column2|value2|...|columnN|valueN"
+        я вывод вижу подтверждение об успешном действии
+        "table row was inset"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    17t.2 [колонок меньше чем записей]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду где колонок меньше чем есть в таблице:
+        "insert|tableName|column1|value1|column2|value2|...|columnN|valueN"
+        я вжу сообщение об успешном действии и что в недостающие колонки были вставлены значения по умолчанию
+        "table row was inset
+        in column4 insert default value(0)"
+        in column5 insert default value("")"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    17t.3 [неверная комманда insert]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу неверную команду:  "insertt|tableName|column1|value1|column2|value2|...|columnN|valueN"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "insert" parameter are expected but "insertt" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    17t.4 [отсутствует параметр имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "insert|column1|value1|column2|value2|...|columnN|valueN"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "insert wrong number of parameters. An even number of parameters is expected and an odd"
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    17t.5 [введено неверное имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "insert|неверное имя таблицы|column1|value1|column2|value2|...|columnN|valueN"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: table "неверное имя таблицы" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    17t.6 [введено неверное колличество параметров]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "insert|tableName|value1|column2|value2|...|columnN|valueN"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "insert wrong number of parameters. An even number of parameters is expected and an odd"
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+
+create
+Команда создает новую таблицу с заданными полями
+Формат: create | tableName | column1 | column2 | ... | columnN
+где: tableName - имя таблицы
+column1 - имя первого столбца записи
+column2 - имя второго столбца записи
+columnN - имя n-го столбца записи
+Формат вывода: текстовое сообщение с результатом выполнения операции
+
+
 
 update
 Команда обновит запись, установив значение column2 = value2, для которой соблюдается условие column1 = value1
