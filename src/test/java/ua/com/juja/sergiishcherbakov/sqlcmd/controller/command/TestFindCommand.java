@@ -7,6 +7,8 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +22,7 @@ import static org.mockito.Mockito.never;
 public class TestFindCommand {
     DatabaseManager dBManager;
     Viewer viewer;
-    Command dropCommand;
+    Command findCommand;
 
     private void setMoks() {
         dBManager = mock(DatabaseManager.class);
@@ -29,7 +31,7 @@ public class TestFindCommand {
 
     @Before
     public void setCommand(){
-        dropCommand = new DropCommand();
+        findCommand = new FindCommand();
     }
 
     @Test
@@ -38,13 +40,22 @@ public class TestFindCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab");
+        List<List<String>> table = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            List<String> row = new LinkedList<>();
+            for (int j = 0; j < 5; j++) {
+                row.add("testRow " + i +" col " + j );
+            }
+            table.add(row);
+        }
+        Mockito.when(dBManager.selectAllFromTable("tab")).thenReturn(table);
+        isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
 
         // then
-        Mockito.verify(dBManager).deleteTable("tab");
-        Mockito.verify(viewer).write("tab was removed");
+        Mockito.verify(viewer).write("\"find\" parameter are expected but \"find1\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verify(dBManager, never()).selectAllFromTable("tab");
         assertFalse(isExit);
-
     }
 
     @Test
@@ -53,12 +64,12 @@ public class TestFindCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
+        isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
 
         // then
-        Mockito.verify(viewer).write("\"drop\" parameter are expected but \"drop1\" is entered");
+        Mockito.verify(viewer).write("\"find\" parameter are expected but \"find1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).deleteTable("tab");
+        Mockito.verify(dBManager, never()).selectAllFromTable("tab");
         assertFalse(isExit);
 
     }
@@ -69,9 +80,9 @@ public class TestFindCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
+        isExit = findCommand.processAndExit(viewer, dBManager, "find|tab|tab");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).selectAllFromTable("");
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -83,9 +94,9 @@ public class TestFindCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
+        isExit = findCommand.processAndExit(viewer, dBManager, "find|");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).selectAllFromTable("");
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -97,9 +108,9 @@ public class TestFindCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
+        isExit = findCommand.processAndExit(viewer, dBManager, "find");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).selectAllFromTable("");
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -109,27 +120,27 @@ public class TestFindCommand {
     public void getName(){
         // given
         // when
-        String name = dropCommand.getName();
+        String name = findCommand.getName();
         // then
-        assertEquals("drop", name);
+        assertEquals("find", name);
     }
 
     @Test
     public void getDescriptionTest(){
         // given
         // when
-        String name = dropCommand.getDescription();
+        String name = findCommand.getDescription();
         // then
-        assertEquals("drop\t\tremove tables specified by user" + System.lineSeparator()+
-                "\t\tformat the command:" + System.lineSeparator()+
-                "\t\t drop|\"table name\"", name);
+        assertEquals("find\t\tfind and print tables specified by user"+ System.lineSeparator() +
+                "\t\tformat the command:"+ System.lineSeparator() +
+                "\t\t find|\"table name\"" , name);
     }
 
     @Test
     public void canProcessWithBigString(){
         // given
         // when
-        boolean canProcess = dropCommand.canProcess("drop");
+        boolean canProcess = findCommand.canProcess("find");
         // then
         assertTrue(canProcess);
     }
