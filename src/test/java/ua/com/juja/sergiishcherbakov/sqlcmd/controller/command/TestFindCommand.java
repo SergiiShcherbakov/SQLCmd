@@ -38,23 +38,14 @@ public class TestFindCommand {
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        // when
         boolean isExit = true;
         List<List<String>> table = new LinkedList<>();
-        for (int i = 0; i < 5; i++) {
-            List<String> row = new LinkedList<>();
-            for (int j = 0; j < 5; j++) {
-                row.add("testRow " + i +" col " + j );
-            }
-            table.add(row);
-        }
+        // when
         Mockito.when(dBManager.selectAllFromTable("tab")).thenReturn(table);
-        isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
-
+        isExit = findCommand.processAndExit(viewer, dBManager, "find|tab");
         // then
-        Mockito.verify(viewer).write("\"find\" parameter are expected but \"find1\" is entered");
-        Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).selectAllFromTable("tab");
+        Mockito.verify(dBManager).selectAllFromTable("tab");
+        Mockito.verify(viewer).printTable(table);
         assertFalse(isExit);
     }
 
@@ -62,8 +53,8 @@ public class TestFindCommand {
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        // when
         boolean isExit = true;
+        // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
 
         // then
@@ -78,8 +69,8 @@ public class TestFindCommand {
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        // when
         boolean isExit = true;
+        // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find|tab|tab");
         // then
         Mockito.verify(dBManager, never()).selectAllFromTable("");
@@ -92,8 +83,8 @@ public class TestFindCommand {
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        // when
         boolean isExit = true;
+        // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find|");
         // then
         Mockito.verify(dBManager, never()).selectAllFromTable("");
@@ -106,8 +97,8 @@ public class TestFindCommand {
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        // when
         boolean isExit = true;
+        // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find");
         // then
         Mockito.verify(dBManager, never()).selectAllFromTable("");

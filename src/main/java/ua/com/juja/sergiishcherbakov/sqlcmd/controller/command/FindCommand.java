@@ -27,7 +27,6 @@ public class FindCommand extends CommandSkeleton implements Command {
             String [] parameters = CorrectParameterChecker.
                     getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
             List<List<String>> table = databaseManager.selectAllFromTable(parameters[1]);
-            new FirstTablePrinter(viewer).printTable(table);
             viewer.printTable(table);
             return false;
         } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
