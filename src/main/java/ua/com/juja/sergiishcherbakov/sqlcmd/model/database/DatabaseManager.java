@@ -21,4 +21,7 @@ public interface DatabaseManager {
             throws SQLException, ClassNotFoundException;
 
     void closeConnection();
+
+   List<List<String>> selectAllFromTable(String parameter)
+           throws SQLException, ClassNotFoundException;;
 }

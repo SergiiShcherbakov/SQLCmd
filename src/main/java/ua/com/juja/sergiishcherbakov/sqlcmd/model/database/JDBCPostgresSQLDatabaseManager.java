@@ -80,4 +80,9 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     public void closeConnection() {
         connectionController.closeConnection();
     }
+
+    @Override
+    public List<List<String>> selectAllFromTable(String parameter) throws SQLException, ClassNotFoundException {
+        throw new RuntimeException("It`s not work");
+    }
 }
