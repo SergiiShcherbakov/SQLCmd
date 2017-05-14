@@ -1,6 +1,11 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.FirstTablePrinter;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.TablePrinter;
+import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -82,7 +87,61 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public List<List<String>> selectAllFromTable(String parameter) throws SQLException, ClassNotFoundException {
-        throw new RuntimeException("It`s not work");
+    public List<List<String>> selectAllFromTable(String tableName) throws SQLException, ClassNotFoundException {
+        List<List<String>> result = new LinkedList<>();
+        Connection connection = connectionController.getConnection();
+        if(connection != null) {
+            try (Statement statement = connection.createStatement();
+                 ResultSet rs = statement.executeQuery("SELECT * from public." + tableName)
+            ){
+                result.add(getTitles(rs));
+                while (rs.next() ){
+                    result.add(getDataFromRow(rs));
+                }
+            }
+            return result;
+        }else{
+            throw new RuntimeException("DatabaseManager.getTablesNames is fall! It haven`t connection");
+        }
+    }
+
+    private List<String> getTitles(ResultSet rs) {
+
+        LinkedList<String> result = new LinkedList<>();
+        ResultSetMetaData metadata = null;
+        try {
+            metadata = rs.getMetaData();
+            int i=1;
+            while (true){
+                String name = metadata.getColumnName(i++);
+                result.add(name);
+            }
+        } catch (SQLException e) {
+            // do nothing
+        }
+        return result;
+    }
+
+    private List<String> getDataFromRow(ResultSet rs) {
+        List<String> result = new LinkedList<>();
+        try {
+            int i=1;
+            while (true){
+                String data = rs.getString(i++);
+                result.add(data);
+            }
+        } catch (SQLException e) {
+            // do nothing
+        }
+        return result;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        DatabaseManager db = new JDBCPostgresSQLDatabaseManager();
+        db.setConnection("SQLCmd" ,"postgres","z");
+        List<List<String>> tab = db.selectAllFromTable("user");
+        Viewer console = new ConsoleViewer();
+        TablePrinter tp = new FirstTablePrinter(console);
+        console.printTable(tab);
     }
 }
