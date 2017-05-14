@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
  class MainTest {
 
-    private ConsoleMock console = new ConsoleMock();
+    public ConsoleMock console = new ConsoleMock();
 
     @Test
     public void TestMain() throws SQLException, ClassNotFoundException {

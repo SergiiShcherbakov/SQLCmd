@@ -17,7 +17,6 @@ public class Main {
         viewer.setTablePrinter(new FirstTablePrinter(viewer));
         DatabaseManager databaseManager = new JDBCPostgresSQLDatabaseManager();
 
-        new StartController(viewer, databaseManager)
-                .start();
+        new StartController(viewer, databaseManager).start();
     }
 }
