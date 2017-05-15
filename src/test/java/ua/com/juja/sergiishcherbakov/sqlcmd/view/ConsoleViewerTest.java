@@ -3,9 +3,15 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.view;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by StrannikFujitsu on 22.04.2017.
@@ -66,15 +72,20 @@ public class ConsoleViewerTest {
         // when
         viewer.write(expected);
         viewer.write(expected);
-
-        // System.out.println(viewer.read(""));
-
         // then
         assertEquals( expected + "\r\n" +
                         expected + "\r\n" ,
                 consoleMock.getOut() );
     }
-
-
-
+    @Test
+    public void TestSetAndPrintInTablePrinter(){
+        // given
+        TablePrinter printer =  mock(TablePrinter.class);
+        List<List<String>> table = new LinkedList<>();
+        viewer.setTablePrinter(printer);
+        // when
+        viewer.printTable(table);
+        // then
+       Mockito.verify(printer).printTable(table);
+    }
 }

@@ -14,7 +14,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 public class Main {
     public static void main(String[] args) throws Exception {
         Viewer viewer = new ConsoleViewer();
-        viewer.setTablePrinter(new FirstTablePrinter(viewer));
+        new FirstTablePrinter(viewer);
         DatabaseManager databaseManager = new JDBCPostgresSQLDatabaseManager();
 
         new StartController(viewer, databaseManager).start();

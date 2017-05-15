@@ -10,6 +10,7 @@ public class FirstTablePrinter implements TablePrinter {
 
     public FirstTablePrinter(Viewer viewer) {
         this.viewer = viewer;
+        viewer.setTablePrinter( this);
     }
 
     @Override
@@ -33,6 +34,7 @@ public class FirstTablePrinter implements TablePrinter {
         result.append( System.lineSeparator());
         return result;
     }
+
     private StringBuffer addRow(List<String> row, int[] maxSizeOfColumn) {
         StringBuffer result = new StringBuffer("|");
         char[] add;
@@ -70,21 +72,5 @@ public class FirstTablePrinter implements TablePrinter {
             if( currentSize > result ) result = currentSize;
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        List<List<String>> tab = new LinkedList<>();
-        FirstTablePrinter fp = new FirstTablePrinter(new ConsoleViewer());
-
-        for (int i = 0; i < 22; i++) {
-        List<String> row = new ArrayList<>();
-            for (int j = 0; j < 2; j++) {
-                row.add("testTab row " + (i+1) + " column " +
-                        (j+1) +
-                        Arrays.toString( fp.fillChars(new Random().nextInt(2), '_')) );
-            }
-         tab.add(row);
-        }
-        fp.printTable(tab);
     }
 }

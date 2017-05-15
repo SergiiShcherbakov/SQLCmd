@@ -204,6 +204,9 @@ public class LoginUserIntegrationTest {
                 "\t\tformat the command:\n" +
                 "\t\t drop|\"table name\"\n" +
                 "exit\t\texit from the program\n" +
+                "find\t\tfind and print tables specified by user\n" +
+                        "\t\tformat the command:\n" +
+                        "\t\t find|\"table name\"\n"+
                 "help\t\tget name and description of command that support the program\n" +
                 "tables\t\tdisplays all tables in the database\n" +
                 "Enter your command or type help to get help:\n" +
@@ -211,7 +214,6 @@ public class LoginUserIntegrationTest {
                 "Good by. See you soon.\n"
         );
     }
-
 
     private void assertOut(String expected, String... parameters) {
         String string = expected.replaceAll("\\n", System.lineSeparator());
