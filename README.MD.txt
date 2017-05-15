@@ -1,4 +1,4 @@
-
+Описание UserStories.
 сonnect
 Команда для подключения к соответствующей БД
 Формат команды: connect | database | username | password
@@ -245,7 +245,7 @@ clear
         "Enter your command or type help to get help:"
         я ввожу команду: "clear|"
         я вижу сообщение об ошибке и повторном вооде команды
-        2 parameters are expected but 1 is entered
+        "2 parameters are expected but 1 is entered"
         please, try again
         Enter your command or type help to get help:
         PROFIT
@@ -326,20 +326,97 @@ valueN - значение n-го столбца записи
         я ввожу команду: "insert|tableName|value1|column2|value2|...|columnN|valueN"
         я вижу сообщение об ошибке и повторном вооде команды
         "insert wrong number of parameters. An even number of parameters is expected and an odd"
-        please, try again
+        "please, try again"
         Enter your command or type help to get help:
         PROFIT
 
-create
-Команда создает новую таблицу с заданными полями
-Формат: create | tableName | column1 | column2 | ... | columnN
+delete
+Команда удаляет одну или несколько записей для которых соблюдается условие column = value
+Формат: delete | tableName | column | value
 где: tableName - имя таблицы
-column1 - имя первого столбца записи
-column2 - имя второго столбца записи
-columnN - имя n-го столбца записи
-Формат вывода: текстовое сообщение с результатом выполнения операции
-
-
+Column - имя столбца записи которое проверяется
+value - значение которому должен соответствовать столбец column1 для удаляемой записи
+Формат вывода: табличный, как при find со старыми значениями удаляемых записей.
+37k [Команда удаляет одну или несколько записей для которых соблюдается условие column = value] Я как ЮЗЕР хочу удалить строку из базы данных что
+бы её небыло в таблице.
+    37k.1 [Успешное удаление записи из таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "delete|tableName|column|value"
+        я вывод вижу подтверждение об успешном действии
+        "the row was deleted"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    37k.2 [не введено название таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду где колонок меньше чем есть в таблице:
+        я ввожу команду: "delete|column|value"
+        я вижу сообщение о неверном вводе команды
+        "4 parameters are expected but 3 is entered"
+        "please, try again"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    37k.3 [не введено название колонки]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду где колонок меньше чем есть в таблице:
+        я ввожу команду: "delete|table name|value"
+        я вижу сообщение о неверном вводе команды
+        "4 parameters are expected but 3 is entered"
+        "please, try again"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    37k.4 [не введено название колонки]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду где колонок меньше чем есть в таблице:
+        я ввожу команду: "delete|table name|column"
+        я вижу сообщение о неверном вводе команды
+        "4 parameters are expected but 3 is entered"
+        "please, try again"
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    37k.5 [неверная комманда delete]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу неверную команду:  "deleteе|tableName|column|value"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "delete" parameter are expected but "deleteе" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    37k.6 [введено неверное имя таблицы]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "delete|неверное имя таблицы|column|value"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: table "неверное имя таблицы" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    37k.7 [введено неверное имя колонки]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "delete|table name|неверная колонка|value"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: column "неверная колонка" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+    37k.8 [введено неверное имя колонки]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "delete|table name|column|неверное значение"
+        я вижу сообщение об ошибке и повторном вооде команды
+        ERROR: value "неверное значение" does not exist
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
 
 update
 Команда обновит запись, установив значение column2 = value2, для которой соблюдается условие column1 = value1
@@ -353,13 +430,14 @@ columnN - имя n-го обновляемого столбца записи
 valueN - значение n-го обновляемого столбца записи
 Формат вывода: табличный, как при find со старыми значениями обновленных записей.
 
-delete
-Команда удаляет одну или несколько записей для которых соблюдается условие column = value
-Формат: delete | tableName | column | value
+create
+Команда создает новую таблицу с заданными полями
+Формат: create | tableName | column1 | column2 | ... | columnN
 где: tableName - имя таблицы
-Column - имя столбца записи которое проверяется
-value - значение которому должен соответствовать столбец column1 для удаляемой записи
-Формат вывода: табличный, как при find со старыми значениями удаляемых записей.
+column1 - имя первого столбца записи
+column2 - имя второго столбца записи
+columnN - имя n-го столбца записи
+Формат вывода: текстовое сообщение с результатом выполнения операции
 
 help
 Команда выводит в консоль список всех доступных команд
