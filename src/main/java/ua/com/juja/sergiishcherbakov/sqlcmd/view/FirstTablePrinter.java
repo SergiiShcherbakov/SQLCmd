@@ -40,7 +40,11 @@ public class FirstTablePrinter implements TablePrinter {
         char[] add;
 
         for (int i = 0; i < row.size(); i++) {
-            add = fillChars(maxSizeOfColumn[i] - row.get(i).length(), ' ');
+            if (row.get(i) != null) {
+                add = fillChars(maxSizeOfColumn[i] - row.get(i).length(), ' ');
+            } else {
+                add = fillChars(maxSizeOfColumn[i] - "null".length(), ' ');
+            }
             result.append(add);
             result.append(row.get(i)) ;
             result.append("|") ;
@@ -68,8 +72,10 @@ public class FirstTablePrinter implements TablePrinter {
         int result = 0;
         int currentSize ;
         for (int i = 0; i < table.size(); i++) {
+            if (table.get(i).get(column) != null) {
             currentSize = table.get(i).get(column).length();
             if( currentSize > result ) result = currentSize;
+            }
         }
         return result;
     }
