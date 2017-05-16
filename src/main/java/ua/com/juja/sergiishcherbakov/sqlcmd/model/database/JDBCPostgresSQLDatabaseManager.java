@@ -1,5 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
+import com.sun.deploy.util.StringUtils;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.FirstTablePrinter;
@@ -9,6 +10,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sergii Shcherbakov on 21.04.2017.
@@ -105,6 +107,53 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         }
     }
 
+    @Override
+    public boolean clearTable(String tableName) throws SQLException, ClassNotFoundException {
+        Connection connection = connectionController.getConnection();
+        if( connection != null) {
+            try (Statement statement = connection.createStatement()) {
+                String sql = "TRUNCATE TABLE  public." + tableName;
+                statement.executeUpdate(sql);
+            }
+        }else{
+            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        }
+        return true;
+    }
+
+    @Override
+    public String insertRow(String tableName, Map<String, String> addRowToTable) throws SQLException, ClassNotFoundException {
+        String result = "Ok";
+        Connection connection = connectionController.getConnection();
+        if( connection != null) {
+            StringBuilder columns = new StringBuilder();
+            StringBuilder values = new StringBuilder();
+            for (Map.Entry<String, String> row : addRowToTable.entrySet()) {
+                columns.append(row.getKey() + ", ");
+                addDataByValues(values, row.getValue() );
+            }
+            columns.deleteCharAt(columns.length()-2);
+            values.deleteCharAt(values.length()-2);
+            String sql =  "INSERT INTO public."+ tableName + "(" +
+                      columns + ") VALUES (" + values + ")";
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(sql);
+        // todo add insert answer about default values
+            }
+        }else{
+            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        }
+        return result;
+    }
+
+    private void addDataByValues(StringBuilder values, String value) {
+        if (isNumeric(value)) {
+            values.append(value + ", ");
+        } else {
+            values.append("'" + value + "', ");
+        }
+    }
+
     private List<String> getTitles(ResultSet rs) {
 
         LinkedList<String> result = new LinkedList<>();
@@ -144,4 +193,18 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         TablePrinter tp = new FirstTablePrinter(console);
         console.printTable(tab);
     }
+
+    public  boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+//    private List<String> missingColumnsInDB(List<String> columnsInDB, Map<String,String> nedToInsert){
+//        List<String> result = new LinkedList<>();
+//        for (String columnInDB : columnsInDB) {
+//            if ( ! nedToInsert.containsKey(columnInDB)) {
+//                result.add(columnInDB);
+//            }
+//        }
+//        return result;
+//    }
 }

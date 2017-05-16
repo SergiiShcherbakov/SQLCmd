@@ -30,19 +30,39 @@ public class CorrectParameterChecker {
                     data.length +
                     " is entered");
         }
-        if (!data[0].toLowerCase().equals(goodParameter)) {
-            throw new IncorrectNumberOfParametersException( "\"" + goodParameter +
-                    "\" parameter are expected but \"" +
-                    data[0] +
-                    "\" is entered");
-        } else {
+        if (isCorrectFirstParameter(data[0], goodParameter))  {
             return data;
+        } else {
+            //newer
+            throw new IncorrectNumberOfParametersException("");
         }
     }
 
     public static String getCorrectParameter(String name, String inputCommand)
             throws IncorrectNumberOfParametersException {
         return getCorrectNumberOfParameters(name, inputCommand, 1)[0];
+    }
+
+
+    public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand) throws IncorrectNumberOfParametersException {
+        String[] data = inputCommand.split("[|]");
+        isCorrectFirstParameter(goodFirstParameter, data[0]);
+        if ( data.length % 2 != 0 ) {
+            throw new IncorrectNumberOfParametersException(
+                    "insert wrong number of parameters. An even number of parameters is expected and an odd are entered");
+        }
+        return data;
+    }
+
+    private static boolean isCorrectFirstParameter(String goodFirstParameter, String parameter) throws IncorrectNumberOfParametersException {
+        if (!parameter.toLowerCase().equals(goodFirstParameter)) {
+            throw new IncorrectNumberOfParametersException("\"" + goodFirstParameter +
+                    "\" parameter are expected but \"" +
+                    parameter +
+                    "\" is entered");
+        } else {
+            return true;
+        }
     }
 }
 

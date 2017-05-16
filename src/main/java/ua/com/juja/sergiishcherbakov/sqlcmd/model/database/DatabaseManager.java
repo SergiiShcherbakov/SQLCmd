@@ -3,6 +3,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
@@ -23,5 +24,9 @@ public interface DatabaseManager {
     void closeConnection();
 
    List<List<String>> selectAllFromTable(String parameter)
-           throws SQLException, ClassNotFoundException, RuntimeException;
+           throws SQLException, ClassNotFoundException;
+
+    boolean clearTable(String parameter) throws SQLException, ClassNotFoundException;
+
+    String insertRow(String tableName, Map<String, String> addRowToTable) throws SQLException, ClassNotFoundException;
 }
