@@ -499,9 +499,9 @@ column2 - имя второго столбца записи
 columnN - имя n-го столбца записи
 Формат вывода: текстовое сообщение с результатом выполнения операции
 
-8t [Команда создает новую таблицу с заданными полями] Я как ЮЗЕР хочу добавить таблицу с заданным именем и полями
+43h [Команда создает новую таблицу с заданными полями] Я как ЮЗЕР хочу добавить таблицу с заданным именем и полями
 что-бы она была в базе
-    8t.1 [Успешное добавление таблицы]
+    43h.1 [Успешное добавление таблицы]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         я ввожу команду: "create|tableName|column1|column2|...|columnN"
@@ -509,7 +509,7 @@ columnN - имя n-го столбца записи
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         PROFIT
-    8t.2 [неверная комманда create]
+    43h.2 [неверная комманда create]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         я ввожу команду: "created|tableName|column1|column2|...|columnN"
@@ -518,7 +518,7 @@ columnN - имя n-го столбца записи
         please, try again
         Enter your command or type help to get help:
         PROFIT
-    8t.3 [недопустимое название или отсутствует параметр имя таблицы]
+    43h.3 [недопустимое название или отсутствует параметр имя таблицы]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         я ввожу команду: "create||column1|column2|...|column3"
@@ -527,7 +527,7 @@ columnN - имя n-го столбца записи
         please, try again
         Enter your command or type help to get help:
         PROFIT
-    8t.4 [недопустимое название или отсутствует параметр имя название колонки]
+    43h.4 [недопустимое название или отсутствует параметр имя название колонки]
         я вижу приглашение от главного меню
         "Enter your command or type help to get help:"
         я ввожу команду: "create|table|"
@@ -541,3 +541,50 @@ help
 Формат: help (без параметров)
 Формат вывода: текст, описания команд с любым форматированием
 
+48z [Команда выводит помощь по всем командам которые поддерживаются программой]
+Я как ЮЗЕР хочу видеть все команды и форматы ввода что-бы увидеть как ввести нужную мне команду
+ 43h.1 [Успешный ввод команды]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "help"
+        я вижу сообщение:
+        clear		-Команда очищает содержимое указанной (всей) таблицы
+            Формат: clear|tableName
+        сonnect 	- Команда для подключения к соответствующей БД
+            Формат команды:connect|database|username|password
+        create		-Команда создает новую таблицу с заданными полями
+            Формат: create|tableName|column1|column2|...|columnN
+        delete		-Команда удаляет одну или несколько записей для которых соблюдается условие column=value
+            Формат: delete|tableName|column|value
+        drop		-Команда удаляет заданную таблицу
+            Формат: drop|tableName
+        exit		-Команда для отключения от БД и выход из приложения
+            Формат: exit (без параметров)
+        find		-Команда для получения содержимого указанной таблицы
+            Формат: find|tableName
+        help		-Команда выводит в консоль список всех доступных команд
+            Формат: help (без параметров)
+        insert		-Команда для вставки одной строки в заданную таблицу
+            Формат: insert|tableName|column1|value1|column2|value2|...|columnN|valueN
+        tables		-Команда выводит список всех таблиц
+            Формат: tables (без параметров)
+        update		-Команда обновит запись, установив значение column2 = value2, для которой соблюдается условие column1=value1
+            Формат: update|tableName|column1|value1|column2|value2
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        PROFIT
+    43h.2 [неверная комманда create]
+        я вижу приглашение от главного меню
+        "Enter your command or type help to get help:"
+        я ввожу команду: "helpp"
+        я вижу сообщение об ошибке и повторном вооде команды
+        "help" parameter are expected but "helpp" is entered
+        please, try again
+        Enter your command or type help to get help:
+        PROFIT
+
+------- обработать ошибки------------------------
+insert|user|id|4
+ERROR: null value in column "login" violates not-null constraint
+  Подробности: Failing row contains (4, null, null, null).
+please, try again
