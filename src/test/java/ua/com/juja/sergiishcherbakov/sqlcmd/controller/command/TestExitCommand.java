@@ -64,10 +64,10 @@ public class TestExitCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = exitCommand.processAndExit(viewer, dBManager, "");
+        isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
-        Mockito.verify(viewer).write("\"exit\" parameter are expected but \"\" is entered");
+        Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
         assertFalse(isExit);
     }
 

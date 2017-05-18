@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * SQLCmd|postgres|z good data for testing in local postgreSQL database
  */
 
-@Ignore
+//@Ignore
 public class LoginUserIntegrationTest {
 
     private ConsoleMock consoleMock;
@@ -200,6 +200,9 @@ public class LoginUserIntegrationTest {
                 "Enter your command or type help to get help:\n" +
                 "help\n" +
                 "The program support next command:\n" +
+                "clear\t\tclear table specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\t clear|\"table name\"\n" +
                 "drop\t\tremove tables specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\t drop|\"table name\"\n" +
@@ -208,6 +211,9 @@ public class LoginUserIntegrationTest {
                         "\t\tformat the command:\n" +
                         "\t\t find|\"table name\"\n"+
                 "help\t\tget name and description of command that support the program\n" +
+                "insert\t\tinsert row into table specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"\n"+
                 "tables\t\tdisplays all tables in the database\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n" +
