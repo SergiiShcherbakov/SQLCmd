@@ -30,7 +30,7 @@ public class CorrectParameterChecker {
                     data.length +
                     " is entered");
         }
-        if (isCorrectFirstParameter(data[0], goodParameter))  {
+        if (isCorrectFirstParameter( goodParameter, data[0]))  {
             return data;
         } else {
             //newer
