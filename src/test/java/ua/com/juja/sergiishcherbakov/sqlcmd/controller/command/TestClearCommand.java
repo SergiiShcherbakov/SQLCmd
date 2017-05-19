@@ -71,7 +71,7 @@ public class TestClearCommand {
         setMoks();
         // when
         boolean isExit = true;
-        isExit = clearCommand.processAndExit(viewer, dBManager, "clear1|tab|tab");
+        isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab|tab");
         // then
         Mockito.verify(dBManager, never()).clearTable("");
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");

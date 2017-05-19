@@ -44,12 +44,17 @@ public class CorrectParameterChecker {
     }
 
 
-    public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand) throws IncorrectNumberOfParametersException {
+    public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand, int minCountParamers) throws IncorrectNumberOfParametersException {
         String[] data = inputCommand.split("[|]");
         isCorrectFirstParameter(goodFirstParameter, data[0]);
         if ( data.length % 2 != 0 ) {
             throw new IncorrectNumberOfParametersException(
-                    "insert wrong number of parameters. An even number of parameters is expected and an odd are entered");
+                    "insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
+        }
+        if(data.length < minCountParamers){
+            throw new IncorrectNumberOfParametersException(
+                    "insert wrong number of parameters. Minimum " + minCountParamers + " are expected and " +
+                            + data.length + " are entered");
         }
         return data;
     }
