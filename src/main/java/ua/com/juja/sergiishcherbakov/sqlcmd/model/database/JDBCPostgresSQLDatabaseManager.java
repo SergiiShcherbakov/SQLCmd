@@ -1,11 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
-import com.sun.deploy.util.StringUtils;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.FirstTablePrinter;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.TablePrinter;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -146,6 +141,23 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return result;
     }
 
+    @Override
+    public void deleteRowFromTable(String tableName, String fieldName, String value) throws SQLException, ClassNotFoundException {
+        Connection connection = connectionController.getConnection();
+        if( connection != null) {
+            StringBuilder val = new StringBuilder();
+            addDataByValues(val, value);
+            val.deleteCharAt(val.length()-2);
+            String sql =  "DELETE FROM public." + tableName +
+                    "  WHERE " + fieldName + "= " + val + ";";
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(sql);
+            }
+        }else{
+            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        }
+    }
+
     private void addDataByValues(StringBuilder values, String value) {
         if (isNumeric(value)) {
             values.append(value + ", ");
@@ -185,26 +197,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return result;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        DatabaseManager db = new JDBCPostgresSQLDatabaseManager();
-        db.setConnection("SQLCmd" ,"postgres","z");
-        List<List<String>> tab = db.selectAllFromTable("user");
-        Viewer console = new ConsoleViewer();
-        TablePrinter tp = new FirstTablePrinter(console);
-        console.printTable(tab);
-    }
-
     public  boolean isNumeric(String str)
     {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
-//    private List<String> missingColumnsInDB(List<String> columnsInDB, Map<String,String> nedToInsert){
-//        List<String> result = new LinkedList<>();
-//        for (String columnInDB : columnsInDB) {
-//            if ( ! nedToInsert.containsKey(columnInDB)) {
-//                result.add(columnInDB);
-//            }
-//        }
-//        return result;
-//    }
 }

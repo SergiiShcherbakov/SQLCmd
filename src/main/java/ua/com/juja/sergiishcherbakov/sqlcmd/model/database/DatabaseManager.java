@@ -29,4 +29,6 @@ public interface DatabaseManager {
     boolean clearTable(String parameter) throws SQLException, ClassNotFoundException;
 
     String insertRow(String tableName, Map<String, String> addRowToTable) throws SQLException, ClassNotFoundException;
+
+    void deleteRowFromTable(String tableName, String fieldName, String value) throws SQLException, ClassNotFoundException;
 }
