@@ -13,6 +13,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 
@@ -56,13 +57,11 @@ public class TestFindCommand {
         boolean isExit = true;
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
-
         // then
         Mockito.verify(viewer).write("\"find\" parameter are expected but \"find1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).selectAllFromTable("tab");
+        Mockito.verify(dBManager, never()).selectAllFromTable(any());
         assertFalse(isExit);
-
     }
 
     @Test
@@ -73,7 +72,7 @@ public class TestFindCommand {
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find|tab|tab");
         // then
-        Mockito.verify(dBManager, never()).selectAllFromTable("");
+        Mockito.verify(dBManager, never()).selectAllFromTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);

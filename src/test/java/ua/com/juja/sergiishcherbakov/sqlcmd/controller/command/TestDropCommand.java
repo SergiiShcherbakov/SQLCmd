@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 
@@ -39,7 +40,6 @@ public class TestDropCommand {
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab");
-
         // then
         Mockito.verify(dBManager).deleteTable("tab");
         Mockito.verify(viewer).write("tab was removed");
@@ -54,11 +54,10 @@ public class TestDropCommand {
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
-
         // then
         Mockito.verify(viewer).write("\"drop\" parameter are expected but \"drop1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).deleteTable("tab");
+        Mockito.verify(dBManager, never()).deleteTable(any());
         assertFalse(isExit);
 
     }
@@ -71,7 +70,7 @@ public class TestDropCommand {
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).deleteTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -85,7 +84,7 @@ public class TestDropCommand {
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).deleteTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -99,7 +98,7 @@ public class TestDropCommand {
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
         // then
-        Mockito.verify(dBManager, never()).deleteTable("");
+        Mockito.verify(dBManager, never()).deleteTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);

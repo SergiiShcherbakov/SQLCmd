@@ -214,8 +214,8 @@ public class LoginUserIntegrationTest {
                 "\t\t drop|\"table name\"\n" +
                 "exit\t\texit from the program\n" +
                 "find\t\tfind and print tables specified by user\n" +
-                        "\t\tformat the command:\n" +
-                        "\t\t find|\"table name\"\n"+
+                "\t\tformat the command:\n" +
+                "\t\t find|\"table name\"\n"+
                 "help\t\tget name and description of command that support the program\n" +
                 "insert\t\tinsert row into table specified by user\n" +
                 "\t\tformat the command:\n" +

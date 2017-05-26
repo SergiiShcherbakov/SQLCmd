@@ -45,12 +45,10 @@ public class TestInsertCommand {
         addRowToTable.put("columnN", "valueN");
         when(dBManager.insertRow("insert", addRowToTable )).thenReturn("Ok");
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|column1|value1|column2|value2|columnN|valueN");
-
         // then
         Mockito.verify(dBManager).insertRow("tab", addRowToTable);
         Mockito.verify(viewer).write("row \"column1=value1, column2=value2, columnN=valueN\" was added to table \"tab\"");
         assertFalse(isExit);
-
     }
 
     @Test
@@ -59,13 +57,11 @@ public class TestInsertCommand {
         setMoks();
         // when
         boolean isExit = true;
-        Map addRowToTable = new HashMap();
         isExit = insertCommand.processAndExit(viewer, dBManager, "insertt|tab|column1|value1|column2|value2|columnN|valueN");
-
         // then
         Mockito.verify(viewer).write("\"insert\" parameter are expected but \"insertt\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).insertRow("tab", addRowToTable);
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
         assertFalse(isExit);
 
     }
@@ -74,12 +70,11 @@ public class TestInsertCommand {
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        Map addRowToTable = new HashMap();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|tab|column1|value1|column2|value2|columnN|valueN");
         // then
-        Mockito.verify(dBManager, never()).insertRow("", addRowToTable);
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
         Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -89,12 +84,11 @@ public class TestInsertCommand {
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        Map addRowToTable = new HashMap();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|");
         // then
-        Mockito.verify(dBManager, never()).insertRow("", addRowToTable);
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
         Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -104,12 +98,11 @@ public class TestInsertCommand {
     public void canProcessAndExitWithoutRows() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        Map addRowToTable = new HashMap();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab");
         // then
-        Mockito.verify(dBManager, never()).insertRow("", addRowToTable);
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
         Mockito.verify(viewer).write("insert wrong number of parameters. Minimum 4 are expected and 2 are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -119,12 +112,11 @@ public class TestInsertCommand {
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
         setMoks();
-        Map addRowToTable = new HashMap();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert");
         // then
-        Mockito.verify(dBManager, never()).insertRow("", addRowToTable);
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
         Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -146,9 +138,9 @@ public class TestInsertCommand {
         String name = insertCommand.getDescription();
         // then
         assertEquals("insert\t\tinsert row into table specified by user" + System.lineSeparator() +
-                "\t\tformat the command:" + System.lineSeparator() +
-                "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\""
-                 , name);
+                        "\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\""
+                , name);
     }
 
     @Test

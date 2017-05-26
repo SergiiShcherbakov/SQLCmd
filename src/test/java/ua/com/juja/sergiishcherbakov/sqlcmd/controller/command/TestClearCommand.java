@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
@@ -39,14 +40,12 @@ public class TestClearCommand {
         setMoks();
         // when
         boolean isExit = true;
-         when(dBManager.clearTable("tab")).thenReturn(true);
+        when(dBManager.clearTable("tab")).thenReturn(true);
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab");
-
         // then
         Mockito.verify(dBManager).clearTable("tab");
         Mockito.verify(viewer).write("table was cleared");
         assertFalse(isExit);
-
     }
 
     @Test
@@ -56,13 +55,11 @@ public class TestClearCommand {
         // when
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear1|tab");
-
         // then
         Mockito.verify(viewer).write("\"clear\" parameter are expected but \"clear1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).clearTable("tab");
+        Mockito.verify(dBManager, never()).clearTable(any());
         assertFalse(isExit);
-
     }
 
     @Test
@@ -73,7 +70,7 @@ public class TestClearCommand {
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab|tab");
         // then
-        Mockito.verify(dBManager, never()).clearTable("");
+        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -87,7 +84,7 @@ public class TestClearCommand {
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|");
         // then
-        Mockito.verify(dBManager, never()).clearTable("");
+        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
@@ -101,7 +98,7 @@ public class TestClearCommand {
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear");
         // then
-        Mockito.verify(dBManager, never()).clearTable("");
+        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);

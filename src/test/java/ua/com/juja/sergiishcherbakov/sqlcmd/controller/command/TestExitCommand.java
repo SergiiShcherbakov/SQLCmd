@@ -37,7 +37,6 @@ public class TestExitCommand {
         // when
         boolean isExit = true;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exit");
-
         // then
         Mockito.verify(dBManager).closeConnection();
         Mockito.verify(viewer).write("Good by. See you soon.");
@@ -51,7 +50,6 @@ public class TestExitCommand {
         // when
         boolean isExit = true;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
-
         // then
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");

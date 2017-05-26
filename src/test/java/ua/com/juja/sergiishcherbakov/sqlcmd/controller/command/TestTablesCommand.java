@@ -56,8 +56,6 @@ public class TestTablesCommand {
         tablesCommand = new TablesCommand();
         setMoks();
         List<String> response = new LinkedList<>();
-//        response.add("User");
-//        response.add("Bugs");
         // when
         boolean isExit = true;
         when(dBManager.getTablesNames()).thenReturn(response);
@@ -75,7 +73,6 @@ public class TestTablesCommand {
         // when
         boolean isExit = true;
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tabless");
-
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
         Mockito.verify(viewer).write("tables can`t be printed because \"tables\" " +

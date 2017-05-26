@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
-
 import java.sql.SQLException;
 
 import static junit.framework.TestCase.assertFalse;
