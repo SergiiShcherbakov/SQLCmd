@@ -1,13 +1,13 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.integrationTest;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -203,6 +203,12 @@ public class LoginUserIntegrationTest {
                 "clear\t\tclear table specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\t clear|\"table name\"\n" +
+                "connect\t\tconnect to database specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\t connect|database|user|password\n" +
+                "delete\t\tdelete row from by table name and value specified by user \n" +
+                "\t\tformat the command:\n" +
+                "\t\t delete|tableName|column|value\n" +
                 "drop\t\tremove tables specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\t drop|\"table name\"\n" +
