@@ -89,7 +89,8 @@ public class TestInsertCommand {
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
-        Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
+        Mockito.verify(viewer).write("insert wrong number of parameters. " +
+                "Minimum 4 parameters are expected and 1 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
@@ -103,7 +104,7 @@ public class TestInsertCommand {
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
-        Mockito.verify(viewer).write("insert wrong number of parameters. Minimum 4 are expected and 2 are entered");
+        Mockito.verify(viewer).write("insert wrong number of parameters. Minimum 4 parameters are expected and 2 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
@@ -117,7 +118,8 @@ public class TestInsertCommand {
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
-        Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
+        Mockito.verify(viewer).write("insert wrong number of parameters. " +
+                "Minimum 4 parameters are expected and 1 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
         assertFalse(isExit);
     }
