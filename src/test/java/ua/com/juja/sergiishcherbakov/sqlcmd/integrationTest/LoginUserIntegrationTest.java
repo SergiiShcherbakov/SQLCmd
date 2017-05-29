@@ -221,6 +221,10 @@ public class LoginUserIntegrationTest {
                 "\t\tformat the command:\n" +
                 "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"\n"+
                 "tables\t\tdisplays all tables in the database\n" +
+                "update\t\tupdate table where column 1 = value1 \n" +
+                "\t\twith values 2 ... value n in column 2 - column n specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n" +
                 "Good by. See you soon.\n"

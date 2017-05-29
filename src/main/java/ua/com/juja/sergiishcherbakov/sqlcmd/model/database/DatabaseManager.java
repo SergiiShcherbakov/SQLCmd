@@ -1,6 +1,8 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
+import javafx.util.Pair;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -31,4 +33,7 @@ public interface DatabaseManager {
     String insertRow(String tableName, Map<String, String> addRowToTable) throws SQLException, ClassNotFoundException;
 
     void deleteRowFromTable(String tableName, String fieldName, String value) throws SQLException, ClassNotFoundException;
+
+    boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue)
+            throws SQLException, ClassNotFoundException;
 }

@@ -2,10 +2,9 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.FieldType;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +31,6 @@ public class DataBaseManagerTest {
         Field field = new Field("id", FieldType.INTEGER, true, true, true, 0  );
         Field field1 = new Field("br", FieldType.VARCHAR, false, true, true, 50  );
         String tableName = "tab"  + Math.abs( new Random().nextInt(100));
-
         // when
         try {
             dbm.deleteTable(tableName);
@@ -41,7 +39,6 @@ public class DataBaseManagerTest {
         }
         dbm.createNewTable(tableName , new Field[] {field, field1});
         List<String> tablesNames = dbm.getTablesNames();
-
         // then
         assertEquals( tablesNames.contains(tableName), true );
         dbm.deleteTable(tableName);

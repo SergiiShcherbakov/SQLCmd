@@ -1,7 +1,9 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
+import javafx.util.Pair;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 
+import javax.annotation.Resource;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.Map;
  * Created by Sergii Shcherbakov on 21.04.2017.
  */
 public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
-
+    @Resource
     private ConnectionController connectionController;
 
     public JDBCPostgresSQLDatabaseManager() {
@@ -108,6 +110,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         if( connection != null) {
             try (Statement statement = connection.createStatement()) {
                 String sql = "TRUNCATE TABLE  public." + tableName;
+                //todo check will it work with execute()
                 statement.executeUpdate(sql);
             }
         }else{
@@ -156,6 +159,32 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         }else{
             throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
         }
+    }
+
+    @Override
+    public boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue) throws SQLException, ClassNotFoundException {
+        Connection connection = connectionController.getConnection();
+        if( connection != null) {
+            StringBuilder WhereValue = new StringBuilder();
+            addDataByValues(WhereValue, whereColumnValue.getValue());
+            WhereValue.deleteCharAt(WhereValue.length()-2);
+            StringBuilder changes = new StringBuilder();
+            for (Map.Entry<String, String> change : changeColumnValue.entrySet()) {
+                changes.append(change.getKey())
+                        .append('=');
+                        addDataByValues(changes, change.getValue());
+            }
+            changes.deleteCharAt(changes.length()-2);
+            String sql =  "UPDATE public." + tableName +
+                    " SET " + changes +
+                    "WHERE " + whereColumnValue.getKey() + "=" + WhereValue + ";";
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(sql);
+            }
+        }else{
+            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        }
+        return true;
     }
 
     private void addDataByValues(StringBuilder values, String value) {
