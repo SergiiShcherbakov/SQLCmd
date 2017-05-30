@@ -36,4 +36,6 @@ public interface DatabaseManager {
 
     boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue)
             throws SQLException, ClassNotFoundException;
+
+    boolean createTableWithoutTypesColumn(String tableName, List<String> addColumn) throws SQLException, ClassNotFoundException;
 }

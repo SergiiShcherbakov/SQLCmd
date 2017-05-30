@@ -187,6 +187,11 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return true;
     }
 
+    @Override
+    public boolean createTableWithoutTypesColumn(String tableName, List<String> addColumn) throws SQLException, ClassNotFoundException {
+        throw  new RuntimeException("method create table is not realize in class JDBCPostgresSQLDatabaseManager");
+    }
+
     private void addDataByValues(StringBuilder values, String value) {
         if (isNumeric(value)) {
             values.append(value + ", ");

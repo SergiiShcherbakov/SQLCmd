@@ -206,6 +206,9 @@ public class LoginUserIntegrationTest {
                 "connect\t\tconnect to database specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\t connect|database|user|password\n" +
+                "create\t\tcreate new table specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\tcreate|tableName|column1|column2|...|columnN\n" +
                 "delete\t\tdelete row from by table name and value specified by user \n" +
                 "\t\tformat the command:\n" +
                 "\t\t delete|tableName|column|value\n" +
