@@ -2,6 +2,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
 import javafx.util.Pair;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
+import ua.com.juja.sergiishcherbakov.sqlcmd.model.FieldType;
 
 import javax.annotation.Resource;
 import java.sql.*;
@@ -28,23 +29,35 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return connectionController.isConnected();
     }
 
+
     @Override
     public boolean createNewTable(String tableName, Field[] fields) throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if(connection != null) {
+            StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
+            for (int i = 0; i < fields.length; i++) {
+                sql.append(fields[i].getSqlField());
+                if (i != fields.length - 1) sql.append(" ,");
+                else sql.append(" )");
+            }
             try (Statement statement = connection.createStatement()) {
-                StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
-                for (int i = 0; i < fields.length; i++) {
-                    sql.append(fields[i].getSqlField());
-                    if (i != fields.length - 1) sql.append(" ,");
-                    else sql.append(" )");
-                }
-                statement.executeUpdate(sql.toString());
+                statement.execute(sql.toString());
             }
         } else {
             throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
         }
         return true;
+    }
+
+    @Override
+    public boolean createTableWithoutTypesFields(String tableName, List<String> addColumn)
+            throws SQLException, ClassNotFoundException {
+        Field[] fields = new Field[addColumn.size()] ;
+        int index = 0;
+        for (String columnName : addColumn) {
+            fields[index++] = new Field(columnName, FieldType.VARCHAR, false, true, false, 50  );
+        }
+        return createNewTable(tableName, fields );
     }
 
     @Override
@@ -69,10 +82,10 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             try (Statement statement = connection.createStatement();
                  ResultSet rs = statement.executeQuery("SELECT table_name " +
                          "FROM information_schema.tables WHERE table_schema='public'")){
-                    result = new LinkedList<>();
-                    while (rs.next() ){
-                        result.add( rs.getString(1));
-                    }
+                result = new LinkedList<>();
+                while (rs.next() ){
+                    result.add( rs.getString(1));
+                }
             }
             return result;
         }else{
@@ -120,7 +133,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public String insertRow(String tableName, Map<String, String> addRowToTable) throws SQLException, ClassNotFoundException {
+    public String insertRow(String tableName, Map<String, String> addRowToTable)
+            throws SQLException, ClassNotFoundException {
         String result = "Ok";
         Connection connection = connectionController.getConnection();
         if( connection != null) {
@@ -133,10 +147,10 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             columns.deleteCharAt(columns.length()-2);
             values.deleteCharAt(values.length()-2);
             String sql =  "INSERT INTO public."+ tableName + "(" +
-                      columns + ") VALUES (" + values + ")";
+                    columns + ") VALUES (" + values + ")";
             try (Statement statement = connection.createStatement()) {
                 statement.execute(sql);
-        // todo add insert answer about default values
+                // todo add insert answer about default values
             }
         }else{
             throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
@@ -145,7 +159,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void deleteRowFromTable(String tableName, String fieldName, String value) throws SQLException, ClassNotFoundException {
+    public void deleteRowFromTable(String tableName, String fieldName, String value)
+            throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if( connection != null) {
             StringBuilder val = new StringBuilder();
@@ -162,7 +177,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue) throws SQLException, ClassNotFoundException {
+    public boolean updateTable(String tableName, Pair<String, String> whereColumnValue,
+                               Map<String, String> changeColumnValue) throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if( connection != null) {
             StringBuilder WhereValue = new StringBuilder();
@@ -172,7 +188,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             for (Map.Entry<String, String> change : changeColumnValue.entrySet()) {
                 changes.append(change.getKey())
                         .append('=');
-                        addDataByValues(changes, change.getValue());
+                addDataByValues(changes, change.getValue());
             }
             changes.deleteCharAt(changes.length()-2);
             String sql =  "UPDATE public." + tableName +
@@ -185,11 +201,6 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
         }
         return true;
-    }
-
-    @Override
-    public boolean createTableWithoutTypesColumn(String tableName, List<String> addColumn) throws SQLException, ClassNotFoundException {
-        throw  new RuntimeException("method create table is not realize in class JDBCPostgresSQLDatabaseManager");
     }
 
     private void addDataByValues(StringBuilder values, String value) {

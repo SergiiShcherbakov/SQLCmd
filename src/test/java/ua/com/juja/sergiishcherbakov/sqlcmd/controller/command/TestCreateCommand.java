@@ -43,10 +43,10 @@ public class TestCreateCommand {
         addColumn.add("column2");
         addColumn.add("columnN");
         // when
-        when(dBManager.createTableWithoutTypesColumn("tab", addColumn )).thenReturn(true);
+        when(dBManager.createTableWithoutTypesFields("tab", addColumn )).thenReturn(true);
         isExit = createCommand.processAndExit(viewer, dBManager, "create|tab|column1|column2|columnN");
         // then
-        Mockito.verify(dBManager).createTableWithoutTypesColumn("tab", addColumn);
+        Mockito.verify(dBManager).createTableWithoutTypesFields("tab", addColumn);
         Mockito.verify(viewer).write("table with name \"tab\" and with column \"column1, column2, columnN\" " +
                 "was added to current database");
         assertFalse(isExit);
@@ -62,7 +62,7 @@ public class TestCreateCommand {
         // then
         Mockito.verify(viewer).write("\"create\" parameter are expected but \"createe\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).createTableWithoutTypesColumn(any(), any());
+        Mockito.verify(dBManager, never()).createTableWithoutTypesFields(any(), any());
         assertFalse(isExit);
 
     }
@@ -75,7 +75,7 @@ public class TestCreateCommand {
         boolean isExit = true;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|");
         // then
-        Mockito.verify(dBManager, never()).createTableWithoutTypesColumn(any(), any());
+        Mockito.verify(dBManager, never()).createTableWithoutTypesFields(any(), any());
         Mockito.verify(viewer).write("Insert wrong number of parameters. Minimum 3 parameters " +
                 "are expected but 1 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
@@ -90,7 +90,7 @@ public class TestCreateCommand {
         boolean isExit = true;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|tab");
         // then
-        Mockito.verify(dBManager, never()).createTableWithoutTypesColumn(any(), any());
+        Mockito.verify(dBManager, never()).createTableWithoutTypesFields(any(), any());
         Mockito.verify(viewer).write("Insert wrong number of parameters. Minimum 3 parameters " +
                 "are expected but 2 parameters are entered");
         Mockito.verify(viewer).write("please, try again");

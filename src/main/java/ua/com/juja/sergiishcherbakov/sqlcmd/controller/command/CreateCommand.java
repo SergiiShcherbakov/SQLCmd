@@ -32,7 +32,7 @@ public class CreateCommand extends CommandSkeleton {
                 columns.add(parameters[i]);
                 columnsName.append(parameters[i]).append(", ");
             }
-            if(databaseManager.createTableWithoutTypesColumn(parameters[1], columns)){
+            if(databaseManager.createTableWithoutTypesFields(parameters[1], columns)){
                 columnsName.deleteCharAt(columnsName.length()-1);
                 columnsName.deleteCharAt(columnsName.length()-1);
                 viewer.write(

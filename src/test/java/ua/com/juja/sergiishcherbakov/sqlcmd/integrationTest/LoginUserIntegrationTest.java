@@ -4,9 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.StartController;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.JDBCPostgresSQLDatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.ConsoleViewer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +16,6 @@ import static org.junit.Assert.assertEquals;
 public class LoginUserIntegrationTest {
 
     private ConsoleMock consoleMock;
-    private StartController startController;
 
     private String wrongBaseName;
     private String baseName;
@@ -37,7 +33,6 @@ public class LoginUserIntegrationTest {
         wrongUserName = "postgres1";
         password = "z";
         wrongPassword = "zz";
-        startController = new StartController(new ConsoleViewer(), new JDBCPostgresSQLDatabaseManager());
     }
 
     @Test
@@ -234,7 +229,7 @@ public class LoginUserIntegrationTest {
         );
     }
 
-    private void assertOut(String expected, String... parameters) {
+    private void assertOut(String expected) {
         String string = expected.replaceAll("\\n", System.lineSeparator());
         assertEquals(string, consoleMock.getOut());
     }
