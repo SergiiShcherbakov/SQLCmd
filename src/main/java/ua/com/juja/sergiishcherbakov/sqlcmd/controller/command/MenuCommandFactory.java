@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  * Created by Sergii Shcherbakov on 01.05.2017.
+ * this tests short that enather tests
  */
 public class MenuCommandFactory {
 

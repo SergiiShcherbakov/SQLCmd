@@ -14,7 +14,7 @@ public class DeleteCommand extends CommandSkeleton implements Command {
 
     public DeleteCommand() {
         super("delete",
-                "\tdelete row from by table name and value specified by user "+ System.lineSeparator() +
+                "\tdelete row from table by name and value specified by user "+ System.lineSeparator() +
                         "\t\tformat the command:" + System.lineSeparator() +
                         "\t\t delete|tableName|column|value");
     }
