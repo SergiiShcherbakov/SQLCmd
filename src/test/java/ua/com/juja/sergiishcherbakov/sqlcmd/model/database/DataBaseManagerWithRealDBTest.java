@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
  */
-public class DataBaseManagerTest {
+public class DataBaseManagerWithRealDBTest {
 //SQLCmd|postgres|z
     private DatabaseManager dbm;
 

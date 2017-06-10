@@ -12,8 +12,8 @@ public class FirstTablePrinterTest {
     @Test
     public void PrintTable() {
         // given
-        ConsoleViewer consol = Mockito.mock(ConsoleViewer.class);
-        FirstTablePrinter printer = new FirstTablePrinter(consol);
+        ConsoleViewer console = Mockito.mock(ConsoleViewer.class);
+        FirstTablePrinter printer = new FirstTablePrinter(console);
 
         List<List<String>> tab = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
@@ -21,15 +21,21 @@ public class FirstTablePrinterTest {
             String add = "";
             for (int j = 0; j < 3; j++) {
                 add = "";
-                if(i % 2 == 0) add = "ttt";
-                row.add("testTab row " + (i+1) + " column " + (j+1) + add );
+                if(i % 2 == 0) {
+                    add = "ttt";
+                }
+                if(j == 0 && i == 3 ) {
+                    row.add(null);
+                } else {
+                    row.add("testTab row " + (i+1) + " column " + (j+1) + add );
+                }
             }
             tab.add(row);
         }
         // when
         printer.printTable(tab);
         // then
-        Mockito.verify(consol).write(
+        Mockito.verify(console).write(
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
         "|testTab row 1 column 1ttt|testTab row 1 column 2ttt|testTab row 1 column 3ttt|" + System.lineSeparator() +
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
@@ -37,7 +43,7 @@ public class FirstTablePrinterTest {
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
         "|testTab row 3 column 1ttt|testTab row 3 column 2ttt|testTab row 3 column 3ttt|" + System.lineSeparator() +
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|   testTab row 4 column 1|   testTab row 4 column 2|   testTab row 4 column 3|" + System.lineSeparator() +
+        "|                     null|   testTab row 4 column 2|   testTab row 4 column 3|" + System.lineSeparator() +
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
         "|testTab row 5 column 1ttt|testTab row 5 column 2ttt|testTab row 5 column 3ttt|" + System.lineSeparator() +
         "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator()  );
