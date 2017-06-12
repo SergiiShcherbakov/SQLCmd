@@ -17,6 +17,7 @@ import static org.junit.Assert.fail;
  */
 public class DataBaseManagerWithRealDBTest {
 //SQLCmd|postgres|z
+
     private DatabaseManager dbm;
 
     @Before
