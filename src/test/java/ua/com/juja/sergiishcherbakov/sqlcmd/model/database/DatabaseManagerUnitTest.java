@@ -146,4 +146,88 @@ public class DatabaseManagerUnitTest {
         Mockito.verify(statement).executeQuery(goodSQL);
         assertEquals(expectedTable, answerTable);
     }
+
+    @Test
+    public void goodCloseConnection() throws SQLException, ClassNotFoundException {
+        //given
+        //when
+         dbManager.closeConnection();
+        //then
+        Mockito.verify(connectionMock).closeConnection();
+    }
+
+    @Test
+    public void goodCreateTable() throws SQLException, ClassNotFoundException {
+        //given
+        Connection connection = Mockito.mock(Connection.class);
+        Statement statement = Mockito.mock(Statement.class);
+
+        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connection.createStatement()).thenReturn(statement);
+        String goodSql = "TRUNCATE TABLE  public.tt";
+        String tableName = "tt";
+        boolean ansewer = false;
+        //when
+         ansewer = dbManager.clearTable(tableName);
+        //then
+        Mockito.verify(statement).executeUpdate(goodSql);
+        assertTrue(ansewer);
+    }
+
+    @Test
+    public void goodDeleteRowFromTable_withStringValue() throws SQLException, ClassNotFoundException {
+        //given
+        Connection connection = Mockito.mock(Connection.class);
+        Statement statement = Mockito.mock(Statement.class);
+
+        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connection.createStatement()).thenReturn(statement);
+        String goodSql = "DELETE FROM public.tt  WHERE id= 'kkk' ;";
+        String tableName = "tt";
+        String field = "id";
+        String value = "kkk";
+        //when
+        dbManager.deleteRowFromTable(tableName, field, value);
+        //then
+        Mockito.verify(statement).execute(goodSql);
+    }
+
+    @Test
+    public void goodDeleteRowFromTable_withIntValue() throws SQLException, ClassNotFoundException {
+        //given
+        Connection connection = Mockito.mock(Connection.class);
+        Statement statement = Mockito.mock(Statement.class);
+
+        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connection.createStatement()).thenReturn(statement);
+        String goodSql = "DELETE FROM public.tt  WHERE id= 10 ;";
+        String tableName = "tt";
+        String field = "id";
+        String value = "10";
+        //when
+        dbManager.deleteRowFromTable(tableName, field, value);
+        //then
+        Mockito.verify(statement).execute(goodSql);
+    }
+
+    @Test
+    public void goodInsertRow() throws SQLException, ClassNotFoundException {
+        //given
+        Connection connection = Mockito.mock(Connection.class);
+        Statement statement = Mockito.mock(Statement.class);
+        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connection.createStatement()).thenReturn(statement);
+
+        Map<String, String> rows = new HashMap<>();
+        rows.put("id", "1");
+        rows.put("name", "vasya");
+        String tableName = "tt";
+        String goodSql = "INSERT INTO public.tt(name, id ) VALUES ('vasya', 1 )";
+        //when
+        dbManager.insertRow(tableName, rows);
+        //then
+        Mockito.verify(statement).execute(goodSql);
+    }
+
+
 }
