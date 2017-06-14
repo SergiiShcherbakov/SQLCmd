@@ -1,7 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.integrationTest;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
@@ -13,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  * SQLCmd|postgres|z good data for testing in local postgreSQL database
  */
 
-@Ignore
+
 public class LoginUserIntegrationTest {
 
     private ConsoleMock consoleMock;
@@ -205,7 +204,7 @@ public class LoginUserIntegrationTest {
                 "create\t\tcreate new table specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\tcreate|tableName|column1|column2|...|columnN\n" +
-                "delete\t\tdelete row from by table name and value specified by user \n" +
+                "delete\t\tdelete row from table by name and value specified by user \n" +
                 "\t\tformat the command:\n" +
                 "\t\t delete|tableName|column|value\n" +
                 "drop\t\tremove tables specified by user\n" +
