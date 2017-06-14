@@ -1,5 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
+import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public class PostgreSQLConnectionController implements ConnectionController {
     private String login;
     private String password;
 
-
+    @Resource
     private  Connection connection; // todo add connections pull
 
     @Override
