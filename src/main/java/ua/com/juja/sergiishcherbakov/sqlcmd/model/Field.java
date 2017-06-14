@@ -37,10 +37,6 @@ public class Field {
         return isUnique ? "UNIQUE" : "";
     }
 
-    public FieldType getFieldType() {
-        return fieldType;
-    }
-
     private String getSizeInText() {
         if (fieldType == FieldType.VARCHAR) {
             return "(" + size + ")";
