@@ -61,6 +61,11 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
+    public boolean isConnected() {
+        return connectionController.isConnected();
+    }
+
+    @Override
     public boolean deleteTable(String tableName) throws SQLException, ClassNotFoundException {
         Connection connection = connectionController.getConnection();
         if( connection != null) {

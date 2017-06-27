@@ -38,6 +38,17 @@ public class CorrectParameterChecker {
         }
     }
 
+    public static String[] getCorrectNumberOfParameters( String inputCommand, int countParameters)
+            throws IncorrectNumberOfParametersException {
+        String[] data = inputCommand.split("[|]");
+        if ( data.length != countParameters) {
+            throw new IncorrectNumberOfParametersException( countParameters+ " parameters are expected but " +
+                    data.length +
+                    " is entered");
+        }
+            return data;
+    }
+
     public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand, int countParameters)
             throws IncorrectNumberOfParametersException {
         String[] data = inputCommand.split("[|]");
@@ -58,6 +69,7 @@ public class CorrectParameterChecker {
             throws IncorrectNumberOfParametersException {
         return getCorrectNumberOfParameters(name, inputCommand, 1)[0];
     }
+
 
 
     public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand, int minCountParameters) throws IncorrectNumberOfParametersException {

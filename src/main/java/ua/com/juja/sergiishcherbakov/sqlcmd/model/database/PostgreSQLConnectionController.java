@@ -49,6 +49,9 @@ public class PostgreSQLConnectionController implements ConnectionController {
     @Override
     public void closeConnection() {
         try {
+            if(connection == null) {
+                return;
+            }
             connection.close();
             connection = null;
         } catch (SQLException e) {

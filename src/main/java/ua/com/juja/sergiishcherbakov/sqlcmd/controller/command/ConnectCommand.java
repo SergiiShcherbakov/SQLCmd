@@ -35,4 +35,21 @@ public class ConnectCommand extends CommandSkeleton implements Command {
         }
         return false;
     }
+
+    public boolean connectToDB(Viewer viewer, DatabaseManager databaseManager, String inputCommand){
+        try{
+            String [] parameters = CorrectParameterChecker.
+                    getCorrectNumberOfParameters( inputCommand, 3);
+            databaseManager.closeConnection();
+            if (databaseManager.setConnection(parameters[0], parameters[1], parameters[2])) {
+                viewer.write( "connection to database " + parameters[0] + " is successful" );
+                return true;
+            }
+        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+            viewer.write(e.getMessage());
+            viewer.write("please, try again");
+            return false;
+        }
+        return false;
+    }
 }

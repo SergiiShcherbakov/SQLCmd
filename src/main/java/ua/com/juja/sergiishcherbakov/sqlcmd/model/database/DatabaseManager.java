@@ -38,4 +38,6 @@ public interface DatabaseManager {
             throws SQLException, ClassNotFoundException;
 
     boolean createTableWithoutTypesFields(String tableName, List<String> addColumn) throws SQLException, ClassNotFoundException;
+
+    boolean isConnected();
 }

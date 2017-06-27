@@ -50,7 +50,6 @@ public class MainMenu {
     }
 
     private void welcome() {
-        viewer.write("Connection successful!");
         viewer.write("Main menu:");
     }
 }
