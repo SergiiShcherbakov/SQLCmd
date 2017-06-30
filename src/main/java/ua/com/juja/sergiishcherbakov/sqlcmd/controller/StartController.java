@@ -23,22 +23,21 @@ public class StartController {
 
     public void start() throws Exception {
         printWelcome();
-        while( true ){
+        viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
+        ConnectCommand connectCommand = new ConnectCommand();
+        String command =  viewer.read();
+        while(!connectCommand.connectToDB(viewer, databaseManager, command) ){
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
-
-            ConnectCommand connectCommand = new ConnectCommand();
-            String command =  viewer.read();
-            while(!connectCommand.connectToDB(viewer, databaseManager, command) ){
-                command =  viewer.read();
-            }
-            List<Command> menuCommandMap = new MenuCommandFactory().getMenuCommand();
-            new MainMenu(databaseManager, viewer, menuCommandMap).start();
-            return;
+            command =  viewer.read();
         }
+        List<Command> menuCommandMap = new MenuCommandFactory().getMenuCommand();
+        new MainMenu(databaseManager, viewer, menuCommandMap).start();
+        return;
+
     }
 
     private void printWelcome() {
         viewer.write("You started program SQLCmd from Sergii Shcherbakov");
-        viewer.write("the program can to connect to your localhost database");
+        viewer.write("the program can to connect to your local database");
     }
 }

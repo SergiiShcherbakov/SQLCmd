@@ -29,12 +29,11 @@ public class MainMenu {
     }
 
     private boolean isThisCommandLast() throws SQLException, ClassNotFoundException {
-        boolean isTheLastCommand = false;
-        boolean commandWasProcessed = false;
-        String inputCommand = "";
         viewer.write("Enter your command or type help to get help:");
-        inputCommand = viewer.read();
+        String inputCommand  = viewer.read();
 
+        boolean commandWasProcessed = false;
+        boolean isTheLastCommand = false;
         for (Command command: menuCommandList) {
             if(command.canProcess(inputCommand)){
                 isTheLastCommand = command.processAndExit(viewer, databaseManager, inputCommand);

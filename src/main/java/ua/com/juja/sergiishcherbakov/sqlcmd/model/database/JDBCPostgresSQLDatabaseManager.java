@@ -31,21 +31,14 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
 
     @Override
-    public boolean createNewTable(String tableName, Field[] fields) throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if(connection != null) {
-            StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
-            for (int i = 0; i < fields.length; i++) {
-                sql.append(fields[i].getSqlField());
-                if (i != fields.length - 1) sql.append(" ,");
-                else sql.append(" )");
-            }
-            try (Statement statement = connection.createStatement()) {
-                statement.execute(sql.toString());
-            }
-        } else {
-            throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
+    public boolean createNewTable(String tableName, Field[] fields) {
+        StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
+        for (int i = 0; i < fields.length; i++) {
+            sql.append(fields[i].getSqlField());
+            if (i != fields.length - 1) sql.append(" ,");
+            else sql.append(" )");
         }
+        executeQuery(sql.toString());
         return true;
     }
 
@@ -65,37 +58,29 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return connectionController.isConnected();
     }
 
+
+
     @Override
-    public boolean deleteTable(String tableName) throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if( connection != null) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = "Drop TABLE public." + tableName;
-                statement.executeUpdate(sql);
-            }
-        }else{
-            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
-        }
+    public boolean deleteTable(String tableName)  {
+        String sql = "Drop TABLE public." + tableName;
+        executeQuery(sql);
         return true;
     }
 
+
     @Override
     public List<String> getTablesNames() throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if(connection != null) {
-            LinkedList<String> result;
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery("SELECT table_name " +
-                         "FROM information_schema.tables WHERE table_schema='public'")){
-                result = new LinkedList<>();
-                while (rs.next() ){
-                    result.add( rs.getString(1));
-                }
+        Connection connection = getConnection();
+        LinkedList<String> result;
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT table_name " +
+                     "FROM information_schema.tables WHERE table_schema='public'")){
+            result = new LinkedList<>();
+            while (rs.next() ){
+                result.add( rs.getString(1));
             }
-            return result;
-        }else{
-            throw new RuntimeException("DatabaseManager.getTablesNames is fall! It haven`t connection");
         }
+        return result;
     }
 
     @Override
@@ -106,106 +91,95 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     @Override
     public List<List<String>> selectAllFromTable(String tableName) throws SQLException, ClassNotFoundException {
         List<List<String>> result = new LinkedList<>();
-        Connection connection = connectionController.getConnection();
-        if(connection != null) {
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery("SELECT * from public." + tableName)
-            ){
-                result.add(getTitles(rs));
-                while (rs.next() ){
-                    result.add(getDataFromRow(rs));
-                }
+        Connection connection = getConnection();
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * from public." + tableName)
+        ){
+            result.add(getTitles(rs));
+            while (rs.next() ){
+                result.add(getDataFromRow(rs));
             }
-            return result;
-        }else{
-            throw new RuntimeException("DatabaseManager.getTablesNames is fall! It haven`t connection");
         }
+        return result;
     }
 
     @Override
     public boolean clearTable(String tableName) throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if( connection != null) {
-            try (Statement statement = connection.createStatement()) {
-                String sql = "TRUNCATE TABLE  public." + tableName;
-                //todo check will it work with execute()
-                statement.executeUpdate(sql);
-            }
-        }else{
-            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
-        }
+        String sql = "TRUNCATE TABLE  public." + tableName;
+        executeQuery(sql);
         return true;
     }
 
     @Override
-    public String insertRow(String tableName, Map<String, String> addRowToTable)
-            throws SQLException, ClassNotFoundException {
+    public String insertRow(String tableName, Map<String, String> addRowToTable){
         String result = "Ok";
-        Connection connection = connectionController.getConnection();
-        if( connection != null) {
-            StringBuilder columns = new StringBuilder();
-            StringBuilder values = new StringBuilder();
-            for (Map.Entry<String, String> row : addRowToTable.entrySet()) {
-                columns.append(row.getKey() + ", ");
-                addDataByValues(values, row.getValue() );
-            }
-            columns.deleteCharAt(columns.length()-2);
-            values.deleteCharAt(values.length()-2);
-            String sql =  "INSERT INTO public."+ tableName + "(" +
-                    columns + ") VALUES (" + values + ")";
-            try (Statement statement = connection.createStatement()) {
-                statement.execute(sql);
-                // todo add insert answer about default values
-            }
-        }else{
-            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        StringBuilder columns = new StringBuilder();
+        StringBuilder values = new StringBuilder();
+        for (Map.Entry<String, String> row : addRowToTable.entrySet()) {
+            columns.append(row.getKey() + ", ");
+            addDataByValues(values, row.getValue() );
         }
+        columns.deleteCharAt(columns.length()-2);
+        values.deleteCharAt(values.length()-2);
+        String sql =  "INSERT INTO public."+ tableName + "(" +
+                columns + ") VALUES (" + values + ")";
+        executeQuery(sql);
         return result;
     }
 
     @Override
     public void deleteRowFromTable(String tableName, String fieldName, String value)
             throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if( connection != null) {
-            StringBuilder val = new StringBuilder();
-            addDataByValues(val, value);
-            val.deleteCharAt(val.length()-2);
-            String sql =  "DELETE FROM public." + tableName +
-                    "  WHERE " + fieldName + "= " + val + ";";
-            try (Statement statement = connection.createStatement()) {
-                statement.execute(sql);
-            }
-        }else{
-            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
-        }
+        StringBuilder val = new StringBuilder();
+        addDataByValues(val, value);
+        val.deleteCharAt(val.length()-2);
+        String sql =  "DELETE FROM public." + tableName +
+                "  WHERE " + fieldName + "= " + val + ";";
+        executeQuery(sql);
     }
 
     @Override
     public boolean updateTable(String tableName, Pair<String, String> whereColumnValue,
-                               Map<String, String> changeColumnValue) throws SQLException, ClassNotFoundException {
-        Connection connection = connectionController.getConnection();
-        if( connection != null) {
-            StringBuilder WhereValue = new StringBuilder();
-            addDataByValues(WhereValue, whereColumnValue.getValue());
-            WhereValue.deleteCharAt(WhereValue.length()-2);
-            StringBuilder changes = new StringBuilder();
-            for (Map.Entry<String, String> change : changeColumnValue.entrySet()) {
-                changes.append(change.getKey())
-                        .append('=');
-                addDataByValues(changes, change.getValue());
-            }
-            changes.deleteCharAt(changes.length()-2);
-            String sql =  "UPDATE public." + tableName +
-                    " SET " + changes +
-                    "WHERE " + whereColumnValue.getKey() + "=" + WhereValue + ";";
+                               Map<String, String> changeColumnValue) {
+        StringBuilder WhereValue = new StringBuilder();
+        addDataByValues(WhereValue, whereColumnValue.getValue());
+        WhereValue.deleteCharAt(WhereValue.length()-2);
+        StringBuilder changes = new StringBuilder();
+        for (Map.Entry<String, String> change : changeColumnValue.entrySet()) {
+            changes.append(change.getKey())
+                    .append('=');
+            addDataByValues(changes, change.getValue());
+        }
+        changes.deleteCharAt(changes.length()-2);
+        String sql =  "UPDATE public." + tableName +
+                " SET " + changes +
+                "WHERE " + whereColumnValue.getKey() + "=" + WhereValue + ";";
+        executeQuery(sql);
+        return true;
+    }
+
+    private void executeQuery(String sql)  {
+        Connection connection = getConnection();
+        try {
             try (Statement statement = connection.createStatement()) {
                 statement.execute(sql);
             }
-        }else{
-            throw new RuntimeException("DatabaseManager.deleteTable is fall! It haven`t connection");
+        } catch (SQLException e){
+            throw new RuntimeException(e.getCause());
         }
-        return true;
+    }
+
+    private Connection getConnection(){
+        try {
+            Connection connection = connectionController.getConnection();
+            if(connection != null || !connection.isClosed()) {
+                return connection;
+            } else {
+                throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
+            }
+        } catch (SQLException | ClassNotFoundException  e) {
+            throw  new RuntimeException(e.getCause());
+        }
     }
 
     private void addDataByValues(StringBuilder values, String value) {
@@ -243,12 +217,12 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             }
         } catch (SQLException e) {
             // do nothing
-        }
+            }
         return result;
     }
 
-    public  boolean isNumeric(String str)
-    {
+    private  boolean isNumeric(String str){
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
+
 }

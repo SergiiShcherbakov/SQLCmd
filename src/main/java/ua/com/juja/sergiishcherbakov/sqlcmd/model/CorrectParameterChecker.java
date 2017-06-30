@@ -49,12 +49,14 @@ public class CorrectParameterChecker {
             return data;
     }
 
-    public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand, int countParameters)
+    public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand,
+                                                              int countParameters)
             throws IncorrectNumberOfParametersException {
         String[] data = inputCommand.split("[|]");
         if ( data.length < countParameters) {
             throw new IncorrectNumberOfParametersException(
-                    String.format( "Insert wrong number of parameters. Minimum %s parameters are expected but %s parameters are entered"
+                    String.format( "Insert wrong number of parameters. " +
+                                    "Minimum %s parameters are expected but %s parameters are entered"
                             , countParameters , data.length));
         }
         if (isCorrectFirstParameter( goodParameter, data[0]))  {

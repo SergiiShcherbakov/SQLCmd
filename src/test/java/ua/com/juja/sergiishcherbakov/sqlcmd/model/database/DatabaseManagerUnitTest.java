@@ -157,7 +157,7 @@ public class DatabaseManagerUnitTest {
     }
 
     @Test
-    public void goodCreateTable() throws SQLException, ClassNotFoundException {
+    public void goodClearTable() throws SQLException, ClassNotFoundException {
         //given
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
@@ -170,7 +170,7 @@ public class DatabaseManagerUnitTest {
         //when
          ansewer = dbManager.clearTable(tableName);
         //then
-        Mockito.verify(statement).executeUpdate(goodSql);
+        Mockito.verify(statement).execute(goodSql);
         assertTrue(ansewer);
     }
 

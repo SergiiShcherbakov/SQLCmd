@@ -12,7 +12,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  * This class starts program SQLCmd
  */
 // data for tests
-//SQLCmd|postgres|z
+//SQLCmd|postgres|postgres
 public class Main {
     public static void main(String[] args) throws Exception {
         Viewer viewer = new ConsoleViewer();

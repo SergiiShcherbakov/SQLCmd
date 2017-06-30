@@ -13,7 +13,6 @@ public class ConsoleMock {
     public ConsoleMock() {
         out = new ByteArrayOutputStream();
         in = new ConfigurableInputStream();
-
         System.setIn(in);
         System.setOut(new PrintStream(out));
     }
@@ -50,7 +49,6 @@ public class ConsoleMock {
                 printInput();
                 return -1;
             }
-
             char ch = line.charAt(0);
             line = line.substring(1);
 
@@ -59,7 +57,6 @@ public class ConsoleMock {
             } else {
                 printed += ch;
             }
-
             return (int)ch;
         }
 

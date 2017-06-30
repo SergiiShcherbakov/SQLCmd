@@ -48,6 +48,7 @@ public class ConnectCommand extends CommandSkeleton implements Command {
         } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
+
             return false;
         }
         return false;

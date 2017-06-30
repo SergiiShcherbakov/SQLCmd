@@ -23,7 +23,7 @@ public class DataBaseManagerWithRealDBTest {
     @Before
     public void set() throws SQLException, ClassNotFoundException {
         dbm = new JDBCPostgresSQLDatabaseManager();
-        dbm.setConnection("SQLCmd", "postgres", "z");
+        dbm.setConnection("SQLCmd", "postgres", "postgres");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class DataBaseManagerWithRealDBTest {
         // when
         try {
             dbm.deleteTable(tableName);
-        } catch ( SQLException e){
+        } catch ( RuntimeException e){
             // do nothing
         }
         dbm.createNewTable(tableName , new Field[] {field, field1});
@@ -58,7 +58,7 @@ public class DataBaseManagerWithRealDBTest {
         try {
             dbm.deleteTable(tableName);
             fail("Expected exception");
-        } catch ( SQLException e){
+        } catch ( RuntimeException e){
             // do nothing
         }
         tablesNames = dbm.getTablesNames();
