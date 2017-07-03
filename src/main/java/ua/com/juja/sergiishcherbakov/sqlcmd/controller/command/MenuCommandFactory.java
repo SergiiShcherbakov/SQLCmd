@@ -13,17 +13,17 @@ import java.util.Set;
  */
 public class MenuCommandFactory {
 
-    public List <Command> getMenuCommand() {
-        List<Command> result = getCommands();
+    public List <Command> getMenuCommand(Class classs) {
+        List<Command> result = getCommands(classs);
         setHelpClass(result);
         return result;
 }
 
-    private List<Command> getCommands() {
+    private List<Command> getCommands(Class classs ) {
         List<Command> result = new LinkedList<>();
 
         Reflections reflections = new Reflections( this.getClass().getPackage() );
-        Set<Class<? extends Command>> allClasses = reflections.getSubTypesOf(Command.class);
+        Set<Class<? extends Command>> allClasses = reflections.getSubTypesOf(classs);
 
         for (Class<? extends Command> classCommand : allClasses) {
                 try {

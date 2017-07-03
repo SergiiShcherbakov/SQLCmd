@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class MenuCommandFactoryTest {
         MenuCommandFactory factory = new MenuCommandFactory();
-        List<Command> commmandList = factory.getMenuCommand();
+        List<Command> commmandList = factory.getMenuCommand(Command.class);
 
     @Test
     public void countOfCommandsTest(){

@@ -1,10 +1,10 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
+import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.MenuCommandFactory;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,19 +16,21 @@ public class MainMenu {
     private Viewer viewer;
     private List <Command> menuCommandList;
 
-    public MainMenu(DatabaseManager databaseManager, Viewer viewer, List<Command> menuCommandList) {
+    public MainMenu(DatabaseManager databaseManager, Viewer viewer, Class classs) {
         this.databaseManager = databaseManager;
         this.viewer = viewer;
-        this.menuCommandList = menuCommandList;
+        this.menuCommandList = new MenuCommandFactory().getMenuCommand(classs);
     }
 
-    void start() throws Exception {
-        welcome();
-        while(!isThisCommandLast()) { }
+    void start()  {
+        mainMenuWelcome();
+        while(!isThisCommandLast()) {
+            // do nothing
+        }
         return ;
     }
 
-    private boolean isThisCommandLast() throws SQLException, ClassNotFoundException {
+    private boolean isThisCommandLast()  {
         viewer.write("Enter your command or type help to get help:");
         String inputCommand  = viewer.read();
 
@@ -48,7 +50,7 @@ public class MainMenu {
         return isTheLastCommand;
     }
 
-    private void welcome() {
+    private void mainMenuWelcome() {
         viewer.write("Main menu:");
     }
 }

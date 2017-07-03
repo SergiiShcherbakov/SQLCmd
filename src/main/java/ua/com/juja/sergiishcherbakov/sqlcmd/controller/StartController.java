@@ -16,12 +16,14 @@ public class StartController {
     private Viewer viewer;
     private DatabaseManager databaseManager;
 
-    public StartController(Viewer viewer , DatabaseManager databaseManager ) {
+    public StartController(Viewer viewer , DatabaseManager databaseManager, Class classs ) {
         this.viewer = viewer;
         this.databaseManager = databaseManager;
     }
 
-    public void start() throws Exception {
+    public void start(){
+
+
         printWelcome();
         viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
         ConnectCommand connectCommand = new ConnectCommand();
@@ -30,10 +32,8 @@ public class StartController {
             viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
             command =  viewer.read();
         }
-        List<Command> menuCommandMap = new MenuCommandFactory().getMenuCommand();
-        new MainMenu(databaseManager, viewer, menuCommandMap).start();
+        new MainMenu(databaseManager, viewer, Command.class).start();
         return;
-
     }
 
     private void printWelcome() {
