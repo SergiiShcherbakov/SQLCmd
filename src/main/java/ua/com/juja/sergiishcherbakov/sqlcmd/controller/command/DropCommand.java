@@ -26,7 +26,7 @@ public class DropCommand extends CommandSkeleton implements Command {
             databaseManager.deleteTable(parameters[1]);
             viewer.write(parameters[1] + " was removed" );
             return false;
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

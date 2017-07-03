@@ -39,7 +39,7 @@ public class CreateCommand extends CommandSkeleton {
                         String.format("table with name \"%s\" and with column \"%s\" was added to current database",
                                 parameters[1], columnsName) );
             }
-        } catch (SQLException | IncorrectNumberOfParametersException | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

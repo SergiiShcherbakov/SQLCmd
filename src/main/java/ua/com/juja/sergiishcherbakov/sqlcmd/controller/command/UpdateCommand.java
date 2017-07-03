@@ -40,7 +40,7 @@ public class UpdateCommand extends CommandSkeleton implements Command {
                     "\"=\"" + parameters[3] + "\"" );
             List<List <String>> table = databaseManager.selectAllFromTable(parameters[1]);
             viewer.printTable(table);
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

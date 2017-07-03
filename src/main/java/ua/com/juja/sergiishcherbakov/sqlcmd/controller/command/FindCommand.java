@@ -29,7 +29,7 @@ public class FindCommand extends CommandSkeleton implements Command {
             List<List<String>> table = databaseManager.selectAllFromTable(parameters[1]);
             viewer.printTable(table);
             return false;
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

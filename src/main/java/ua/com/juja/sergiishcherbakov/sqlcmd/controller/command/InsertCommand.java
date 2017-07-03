@@ -36,7 +36,7 @@ public class InsertCommand extends CommandSkeleton implements Command {
             row.deleteCharAt(row.length()-1);
             row.deleteCharAt(row.length()-1);
             viewer.write("row \"" +  row + "\" was added to table \"" + parameters[1] + "\"" );
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  |  RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

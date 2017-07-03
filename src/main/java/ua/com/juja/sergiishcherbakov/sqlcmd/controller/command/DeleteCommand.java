@@ -29,7 +29,7 @@ public class DeleteCommand extends CommandSkeleton implements Command {
                     "\" in field \""+ parameters[2] +"\" was removed from table \""
                     + parameters[1] + "\"" );
             databaseManager.selectAllFromTable(parameters[1]);
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }

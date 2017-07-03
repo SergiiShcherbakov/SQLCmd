@@ -43,8 +43,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public boolean createTableWithoutTypesFields(String tableName, List<String> addColumn)
-            throws SQLException, ClassNotFoundException {
+    public boolean createTableWithoutTypesFields(String tableName, List<String> addColumn){
         Field[] fields = new Field[addColumn.size()] ;
         int index = 0;
         for (String columnName : addColumn) {
@@ -52,12 +51,6 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         }
         return createNewTable(tableName, fields );
     }
-
-    @Override
-    public boolean isConnected() {
-        return connectionController.isConnected();
-    }
-
 
 
     @Override
@@ -67,18 +60,20 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return true;
     }
 
-
     @Override
-    public List<String> getTablesNames() throws SQLException, ClassNotFoundException {
-        Connection connection = getConnection();
+    public List<String> getTablesNames() {
         LinkedList<String> result;
+        String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema='public'";
+        Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("SELECT table_name " +
-                     "FROM information_schema.tables WHERE table_schema='public'")){
+             ResultSet rs = statement.executeQuery(sql)
+        ){
             result = new LinkedList<>();
             while (rs.next() ){
                 result.add( rs.getString(1));
             }
+        } catch (SQLException e ){
+            throw new RuntimeException(e.getCause());
         }
         return result;
     }
@@ -89,7 +84,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public List<List<String>> selectAllFromTable(String tableName) throws SQLException, ClassNotFoundException {
+    public List<List<String>> selectAllFromTable(String tableName){
         List<List<String>> result = new LinkedList<>();
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
@@ -99,12 +94,14 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             while (rs.next() ){
                 result.add(getDataFromRow(rs));
             }
+        } catch (SQLException e ){
+            throw new RuntimeException(e.getCause());
         }
         return result;
     }
 
     @Override
-    public boolean clearTable(String tableName) throws SQLException, ClassNotFoundException {
+    public boolean clearTable(String tableName) {
         String sql = "TRUNCATE TABLE  public." + tableName;
         executeQuery(sql);
         return true;
@@ -128,8 +125,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     }
 
     @Override
-    public void deleteRowFromTable(String tableName, String fieldName, String value)
-            throws SQLException, ClassNotFoundException {
+    public void deleteRowFromTable(String tableName, String fieldName, String value) {
         StringBuilder val = new StringBuilder();
         addDataByValues(val, value);
         val.deleteCharAt(val.length()-2);

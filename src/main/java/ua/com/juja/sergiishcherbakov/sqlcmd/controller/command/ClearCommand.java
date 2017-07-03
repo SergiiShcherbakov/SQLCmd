@@ -28,9 +28,9 @@ public class ClearCommand extends CommandSkeleton implements Command {
             if( databaseManager.clearTable(parameters[1])){
                 viewer.write("table was cleared");
             }else{
-                throw new SQLException("Table " + parameters[1] + " was not cleared.");
+                throw new RuntimeException("Table " + parameters[1] + " was not cleared.");
             }
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
         }
