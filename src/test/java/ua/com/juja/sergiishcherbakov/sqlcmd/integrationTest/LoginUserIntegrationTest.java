@@ -1,17 +1,20 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.integrationTest;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
+import ua.com.juja.sergiishcherbakov.sqlcmd.DBSetupForTests;
 import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
+
+import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sergii Shcherbakov on 27.04.2017.
- * SQLCmd|postgres|z good data for testing in local postgreSQL database
  */
-
 
 public class LoginUserIntegrationTest {
 
@@ -24,14 +27,24 @@ public class LoginUserIntegrationTest {
     private String password;
     private String wrongPassword;
 
+    @BeforeClass
+    public static void setDatabase() throws SQLException, ClassNotFoundException {
+        DBSetupForTests.createTestDatabase();
+    }
+
+    @AfterClass
+    public static void cleanDatabase() throws SQLException, ClassNotFoundException {
+        DBSetupForTests.deleteTestDatabase();
+    }
+
     @Before
     public void set(){
+        baseName = DBSetupForTests.TEST_DB;
+        userName = DBSetupForTests.DB_LOGIN;
+        password = DBSetupForTests.DB_LOGIN;
 
         wrongBaseName = "SQLCmd1";
-        baseName = "SQLCmd";
-        userName = "postgres";
         wrongUserName = "postgres1";
-        password = "postgres";
         wrongPassword = "zz";
     }
 
@@ -41,16 +54,14 @@ public class LoginUserIntegrationTest {
         consoleMock = new ConsoleMock();
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
-
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-               "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+               "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n"+
@@ -65,19 +76,18 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( wrongBaseName+ "|" + userName + "|" + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd1|postgres|postgres\n" +
-                "FATAL: database \"SQLCmd1\" does not exist\n" +
+                wrongBaseName + "|" + userName + "|" + password + "\n" +
+                "FATAL: database \"" + wrongBaseName + "\" does not exist\n" +
                 "please, try again\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-               "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+               "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n"+
@@ -92,20 +102,18 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( baseName+ "|" + wrongUserName + "|" + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
-
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres1|postgres\n" +
-                "FATAL: password authentication failed for user \"postgres1\"\n" +
+                baseName + "|" + wrongUserName + "|" + password + "\n" +
+                "FATAL: password authentication failed for user \"" + wrongUserName + "\"\n" +
                 "please, try again\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-                "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+                "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n"+
@@ -120,20 +128,18 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( baseName+ "|" + userName + "|" + wrongPassword);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
-
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|zz\n" +
-                "FATAL: password authentication failed for user \"postgres\"\n" +
+                baseName + "|" + userName + "|" + wrongPassword + "\n" +
+                "FATAL: password authentication failed for user \"" + userName + "\"\n" +
                 "please, try again\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-                "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+                "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n"+
@@ -148,20 +154,18 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( wrongBaseName+ "|"  + password);
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
-
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd1|postgres\n" +
+                wrongBaseName+ "|"  + password + "\n" +
                 "3 parameters are expected but 2 is entered\n" +
                 "please, try again\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-               "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+                "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "exit\n"+
@@ -176,15 +180,14 @@ public class LoginUserIntegrationTest {
         consoleMock.addIn( baseName+ "|" + userName + "|" + password);
         consoleMock.addIn( "help");
         consoleMock.addIn( "exit");
-
         // when
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
                 "the program can to connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
-                "SQLCmd|postgres|postgres\n" +
-                "connection to database SQLCmd is successful\n" +
+                baseName + "|" + userName + "|" + password + "\n" +
+                "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
                 "Enter your command or type help to get help:\n" +
                 "help\n" +
