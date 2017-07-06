@@ -1,7 +1,10 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.com.juja.sergiishcherbakov.sqlcmd.DBSetupForTests;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.FieldType;
 
@@ -16,14 +19,22 @@ import static org.junit.Assert.fail;
  * Created by Sergii Shcherbakov on 23.04.2017.
  */
 public class DataBaseManagerWithRealDBTest {
-//SQLCmd|postgres|z
 
-    private DatabaseManager dbm;
+    private JDBCPostgresSQLDatabaseManager dbm;
 
+
+    @BeforeClass
+    public static void  setDBAndStructure() throws SQLException, ClassNotFoundException {
+        DBSetupForTests.createTestDatabase();
+    }
+    @AfterClass
+    public static void  cleanDBAndStructure() throws SQLException, ClassNotFoundException {
+        DBSetupForTests.deleteTestDatabase();
+    }
     @Before
     public void set() throws SQLException, ClassNotFoundException {
         dbm = new JDBCPostgresSQLDatabaseManager();
-        dbm.setConnection("SQLCmd", "postgres", "postgres");
+        dbm.setConnection(DBSetupForTests.TEST_DB, DBSetupForTests.DB_LOGIN, DBSetupForTests.DB_PASSWORD);
     }
 
     @Test
@@ -47,7 +58,6 @@ public class DataBaseManagerWithRealDBTest {
 
     @Test
     public void deleteNotExistTable() throws SQLException, ClassNotFoundException {
-
         // given
         String tableName = "tab"  + Math.abs( new Random().nextInt(10));
         List<String> tablesNames = dbm.getTablesNames();
@@ -62,11 +72,8 @@ public class DataBaseManagerWithRealDBTest {
             // do nothing
         }
         tablesNames = dbm.getTablesNames();
-
         // then
         assertEquals( tablesNames.contains(tableName), false );
     }
 }
-    // given
-    // when
-    // then
+

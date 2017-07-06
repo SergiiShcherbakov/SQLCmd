@@ -154,7 +154,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return true;
     }
 
-    private void executeQuery(String sql)  {
+    public void executeQuery(String sql)  {
         Connection connection = getConnection();
         try {
             try (Statement statement = connection.createStatement()) {

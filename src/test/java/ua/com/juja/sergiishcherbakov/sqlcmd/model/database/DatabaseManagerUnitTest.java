@@ -25,6 +25,7 @@ public class DatabaseManagerUnitTest {
 
     @InjectMocks
     JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
+
     @Test
     public void goodUpdateCommandByIdwWith2Parameters() throws SQLException, ClassNotFoundException {
         //given
