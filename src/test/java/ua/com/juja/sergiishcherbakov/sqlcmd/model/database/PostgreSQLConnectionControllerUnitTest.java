@@ -39,6 +39,5 @@ public class PostgreSQLConnectionControllerUnitTest {
         //when
         connectionController.closeConnection();
         //then
-
     }
 }

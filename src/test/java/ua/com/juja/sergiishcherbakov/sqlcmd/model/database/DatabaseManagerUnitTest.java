@@ -229,6 +229,4 @@ public class DatabaseManagerUnitTest {
         //then
         Mockito.verify(statement).execute(goodSql);
     }
-
-
 }
