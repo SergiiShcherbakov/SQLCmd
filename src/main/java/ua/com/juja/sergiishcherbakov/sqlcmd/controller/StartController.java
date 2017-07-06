@@ -2,11 +2,9 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.Command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.ConnectCommand;
-import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.MenuCommandFactory;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.util.List;
 
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
@@ -16,14 +14,12 @@ public class StartController {
     private Viewer viewer;
     private DatabaseManager databaseManager;
 
-    public StartController(Viewer viewer , DatabaseManager databaseManager, Class classs ) {
+    public StartController(Viewer viewer , DatabaseManager databaseManager ) {
         this.viewer = viewer;
         this.databaseManager = databaseManager;
     }
 
     public void start(){
-
-
         printWelcome();
         viewer.write("please enter your data in format:\"databaseName|userName|password\": ");
         ConnectCommand connectCommand = new ConnectCommand();

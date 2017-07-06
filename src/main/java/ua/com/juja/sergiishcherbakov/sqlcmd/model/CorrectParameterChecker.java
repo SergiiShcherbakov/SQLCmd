@@ -40,13 +40,13 @@ public class CorrectParameterChecker {
 
     public static String[] getCorrectNumberOfParameters( String inputCommand, int countParameters)
             throws IncorrectNumberOfParametersException {
-        String[] data = inputCommand.split("[|]");
-        if ( data.length != countParameters) {
+        String[] parameters = inputCommand.split("[|]");
+        if ( parameters.length != countParameters) {
             throw new IncorrectNumberOfParametersException( countParameters+ " parameters are expected but " +
-                    data.length +
+                    parameters.length +
                     " is entered");
         }
-            return data;
+            return parameters;
     }
 
     public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand,
