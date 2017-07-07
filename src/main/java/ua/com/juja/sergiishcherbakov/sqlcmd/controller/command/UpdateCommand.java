@@ -25,25 +25,27 @@ public class UpdateCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getGetOddParameters(this.getName(), inputCommand, 6);
-            Map updateColumnValues = new HashMap();
-            StringBuilder row = new StringBuilder();
-            for (int i = 4; i <parameters.length ; i+=2) {
-                updateColumnValues.put(parameters[i], parameters[i+1]);
-            }
-            databaseManager.updateTable(parameters[1], new Pair<>(parameters[2], parameters[3]), updateColumnValues);
-            viewer.write("in table \"" + parameters[1]
-                    + "\" was updated row(s) with column \"" + parameters[2] +
-                    "\"=\"" + parameters[3] + "\"" );
-            List<List <String>> table = databaseManager.selectAllFromTable(parameters[1]);
-            viewer.printTable(table);
-        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getGetOddParameters(this.getName(), inputCommand, 6);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        Map updateColumnValues = new HashMap();
+        StringBuilder row = new StringBuilder();
+        for (int i = 4; i <parameters.length ; i+=2) {
+            updateColumnValues.put(parameters[i], parameters[i+1]);
         }
-        return false;
+        databaseManager.updateTable(parameters[1], new Pair<>(parameters[2], parameters[3]), updateColumnValues);
+        viewer.write("in table \"" + parameters[1]
+                + "\" was updated row(s) with column \"" + parameters[2] +
+                "\"=\"" + parameters[3] + "\"" );
+        List<List <String>> table = databaseManager.selectAllFromTable(parameters[1]);
+        return table;
+    }
+
+    @Override
+    protected void viewResult(Object result) {
+        viewer.printTable((List<List <String>>) result);
     }
 }

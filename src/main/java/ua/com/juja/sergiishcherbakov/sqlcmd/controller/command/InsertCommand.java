@@ -16,30 +16,27 @@ public class InsertCommand extends CommandSkeleton implements Command {
 
     public InsertCommand() {
         super("insert",
-                "\tinsert row into table specified by user"+ System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"");
+    "\tinsert row into table specified by user"+ System.lineSeparator() +
+            "\t\tformat the command:" + System.lineSeparator() +
+            "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"");
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getGetOddParameters(this.getName(), inputCommand, 4);
-            Map addRowToTable = new HashMap();
-            StringBuilder row = new StringBuilder();
-            for (int i = 2; i <parameters.length ; i+=2) {
-                addRowToTable.put(parameters[i], parameters[i+1]);
-                row.append(parameters[i] + "=" + parameters[i+1] + ", ");
-            }
-            databaseManager.insertRow(parameters[1], addRowToTable);
-            row.deleteCharAt(row.length()-1);
-            row.deleteCharAt(row.length()-1);
-            viewer.write("row \"" +  row + "\" was added to table \"" + parameters[1] + "\"" );
-        } catch ( IncorrectNumberOfParametersException  |  RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getGetOddParameters(this.getName(), inputCommand, 4);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        Map addRowToTable = new HashMap();
+        StringBuilder row = new StringBuilder();
+        for (int i = 2; i <parameters.length ; i+=2) {
+            addRowToTable.put(parameters[i], parameters[i+1]);
+            row.append(parameters[i] + "=" + parameters[i+1] + ", ");
         }
-        return false;
+        databaseManager.insertRow(parameters[1], addRowToTable);
+        row.deleteCharAt(row.length()-1);
+        row.deleteCharAt(row.length()-1);
+        return "row \"" +  row + "\" was added to table \"" + parameters[1] + "\"" ;
     }
 }

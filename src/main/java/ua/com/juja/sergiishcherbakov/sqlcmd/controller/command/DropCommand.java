@@ -19,17 +19,13 @@ public class DropCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
-            databaseManager.deleteTable(parameters[1]);
-            viewer.write(parameters[1] + " was removed" );
-            return false;
-        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
-        }
-        return false;
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        databaseManager.deleteTable(parameters[1]);
+        return  parameters[1] + " was removed";
     }
 }

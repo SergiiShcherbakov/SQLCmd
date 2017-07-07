@@ -22,27 +22,26 @@ public class CreateCommand extends CommandSkeleton {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParametersOrMore(this.getName(), inputCommand, 3);
-            StringBuilder columnsName = new StringBuilder();
-            List<String> columns = new LinkedList<>();
-            for (int i = 2; i <parameters.length ; i++) {
-                columns.add(parameters[i]);
-                columnsName.append(parameters[i]).append(", ");
-            }
-            if(databaseManager.createTableWithoutTypesFields(parameters[1], columns)){
-                columnsName.deleteCharAt(columnsName.length()-1);
-                columnsName.deleteCharAt(columnsName.length()-1);
-                viewer.write(
-                        String.format("table with name \"%s\" and with column \"%s\" was added to current database",
-                                parameters[1], columnsName) );
-            }
-        } catch ( IncorrectNumberOfParametersException | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getCorrectNumberOfParametersOrMore(this.getName(), inputCommand, 3);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        StringBuilder columnsName = new StringBuilder();
+        List<String> columns = new LinkedList<>();
+        for (int i = 2; i <parameters.length ; i++) {
+            columns.add(parameters[i]);
+            columnsName.append(parameters[i]).append(", ");
         }
-        return false;
+        if(databaseManager.createTableWithoutTypesFields(parameters[1], columns)){
+            columnsName.deleteCharAt(columnsName.length()-1);
+            columnsName.deleteCharAt(columnsName.length()-1);
+            return  String.format("table with name \"%s\" and with column \"%s\" added to current database",
+                    parameters[1], columnsName);
+        } else {
+            throw new RuntimeException(String.format("table with name \"%s\" and with column \"%s\" was not add to current database",
+                    parameters[1], columnsName));
+        }
     }
 }

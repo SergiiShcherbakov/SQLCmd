@@ -75,8 +75,7 @@ public class TestTablesCommand {
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tabless");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
-        Mockito.verify(viewer).write("tables can`t be printed because \"tables\" " +
-                "parameter are expected but \"tabless\" is entered");
+        Mockito.verify(viewer).write("\"tables\" parameter are expected but \"tabless\" is entered");
         assertFalse(isExit);
     }
 
@@ -89,7 +88,7 @@ public class TestTablesCommand {
         isExit = tablesCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
-        Mockito.verify(viewer).write("tables can`t be printed because \"tables\" parameter are expected but \"\" is entered");
+        Mockito.verify(viewer).write("\"tables\" parameter are expected but \"\" is entered");
         assertFalse(isExit);
     }
 

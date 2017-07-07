@@ -22,17 +22,17 @@ public class FindCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
-            List<List<String>> table = databaseManager.selectAllFromTable(parameters[1]);
-            viewer.printTable(table);
-            return false;
-        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
-        }
-        return false;
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        return  databaseManager.selectAllFromTable(parameters[1]);
+    }
+
+    @Override
+    protected void viewResult(Object result) {
+        viewer.printTable( (List<List<String>>) result);
     }
 }

@@ -14,25 +14,29 @@ public class DeleteCommand extends CommandSkeleton implements Command {
 
     public DeleteCommand() {
         super("delete",
-                "\tdelete row from table by name and value specified by user "+ System.lineSeparator() +
+                "\tdelete row from table by name and value specified by user " + System.lineSeparator() +
                         "\t\tformat the command:" + System.lineSeparator() +
                         "\t\t delete|tableName|column|value");
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters(this.getName(), inputCommand, 4);
-            databaseManager.deleteRowFromTable(parameters[1], parameters[2], parameters[3]);
-            viewer.write("row with  value \"" +  parameters[3] +
-                    "\" in field \""+ parameters[2] +"\" was removed from table \""
-                    + parameters[1] + "\"" );
-            databaseManager.selectAllFromTable(parameters[1]);
-        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
-        }
-        return false;
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.
+                getCorrectNumberOfParameters(this.getName(), inputCommand, 4);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        databaseManager.deleteRowFromTable(parameters[1], parameters[2], parameters[3]);
+        String print = "row with  value \"" + parameters[3] +
+                "\" in field \"" + parameters[2] + "\" was removed from table \""
+                + parameters[1] + "\"";
+        return new String[]{print, parameters[1]};
+    }
+
+    @Override
+    protected void viewResult(Object result) {
+        super.viewResult(((String[]) result)[0]);
+        databaseManager.selectAllFromTable(((String[]) result)[1]);
     }
 }

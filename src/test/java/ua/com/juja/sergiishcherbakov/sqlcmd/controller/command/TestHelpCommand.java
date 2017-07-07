@@ -60,8 +60,7 @@ public class TestHelpCommand {
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "helpp");
         // then
-        Mockito.verify(viewer).write("help can`t be printed because \"help\" " +
-                "parameter are expected but \"helpp\" is entered");
+        Mockito.verify(viewer).write("\"help\" parameter are expected but \"helpp\" is entered");
         assertFalse(isExit);
     }
 
@@ -73,7 +72,7 @@ public class TestHelpCommand {
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "");
         // then
-        Mockito.verify(viewer).write("help can`t be printed because \"help\" parameter are expected but \"\" is entered");
+        Mockito.verify(viewer).write("\"help\" parameter are expected but \"\" is entered");
         assertFalse(isExit);
     }
 

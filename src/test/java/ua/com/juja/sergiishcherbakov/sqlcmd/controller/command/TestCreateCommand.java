@@ -48,7 +48,7 @@ public class TestCreateCommand {
         // then
         Mockito.verify(dBManager).createTableWithoutTypesFields("tab", addColumn);
         Mockito.verify(viewer).write("table with name \"tab\" and with column \"column1, column2, columnN\" " +
-                "was added to current database");
+                "added to current database");
         assertFalse(isExit);
     }
 

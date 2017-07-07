@@ -11,8 +11,7 @@ import java.util.Map;
  * Created by Sergii Shcherbakov on 23.04.2017.
  */
 public interface DatabaseManager {
-    boolean setConnection(String databaseName, String login, String password)
-            throws SQLException, ClassNotFoundException;
+    boolean setConnection(String databaseName, String login, String password);
 
     boolean createNewTable(String tableName, Field[] fields);
 

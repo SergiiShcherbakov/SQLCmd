@@ -44,7 +44,7 @@ public class TestClearCommand {
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab");
         // then
         Mockito.verify(dBManager).clearTable("tab");
-        Mockito.verify(viewer).write("table was cleared");
+        Mockito.verify(viewer).write("table tab was cleared");
         assertFalse(isExit);
     }
 

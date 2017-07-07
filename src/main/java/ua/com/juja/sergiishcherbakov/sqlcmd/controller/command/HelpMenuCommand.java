@@ -31,17 +31,22 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try {
-            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
-            viewer.write("The program support next command:");
-            for (String pointOfMenu : programDescription ) {
-                viewer.write( pointOfMenu );
-            }
-        } catch (IncorrectNumberOfParametersException e) {
-            viewer.write("help can`t be printed because " + e.getMessage());
+    String[] prepareParameters(String inputCommand) {
+        CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
+        return new String[]{getName()};
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        return null;
+    }
+
+    @Override
+    protected void viewResult(Object result) {
+        viewer.write("The program support next command:");
+        for (String pointOfMenu : programDescription ) {
+            viewer.write( pointOfMenu );
         }
-        return false;
     }
 
     @Override

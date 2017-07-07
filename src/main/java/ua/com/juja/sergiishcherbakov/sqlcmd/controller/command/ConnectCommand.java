@@ -20,21 +20,17 @@ public class ConnectCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters(this.getName(), inputCommand, 4);
-            databaseManager.closeConnection();
-            if (databaseManager.setConnection(parameters[1], parameters[2], parameters[3])) {
-                viewer.write( "connection to database " + parameters[1] + " is successful" );
-                return false;
-            }
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
-        }
-        return false;
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getCorrectNumberOfParameters(this.getName(), inputCommand, 4);
     }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        databaseManager.closeConnection();
+        databaseManager.setConnection(parameters[1], parameters[2], parameters[3]);
+        return  "connection to database " + parameters[1] + " is successful";
+    }
+
 
     public boolean connectToDB(Viewer viewer, DatabaseManager databaseManager, String inputCommand){
         try{
@@ -45,10 +41,10 @@ public class ConnectCommand extends CommandSkeleton implements Command {
                 viewer.write( "connection to database " + parameters[0] + " is successful" );
                 return true;
             }
-        } catch (SQLException | IncorrectNumberOfParametersException  | ClassNotFoundException e ) {
+
+        } catch ( RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
-
             return false;
         }
         return false;

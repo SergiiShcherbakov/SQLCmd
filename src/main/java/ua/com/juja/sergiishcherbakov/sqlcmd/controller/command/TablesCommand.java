@@ -17,15 +17,14 @@ public class TablesCommand extends CommandSkeleton implements Command  {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager,
-                                  String inputCommand) {
-        try {
-            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
-            viewer.write(databaseManager.getTablesNames().toString());
-        } catch ( IncorrectNumberOfParametersException | RuntimeException e) {
-            viewer.write("tables can`t be printed because " + e.getMessage());
-        }
-        return false;
+    String[] prepareParameters(String inputCommand) {
+        CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
+        return new String[0];
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        return databaseManager.getTablesNames().toString();
     }
 
     @Override

@@ -29,6 +29,18 @@ public class ExitCommand extends CommandSkeleton implements Command {
     }
 
     @Override
+    String[] prepareParameters(String inputCommand) {
+        CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
+        databaseManager.closeConnection();
+        return new String[]{ this.getName()};
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        return "Good by. See you soon.";
+    }
+
+    @Override
     public boolean canProcess(String command) {
         return canProcessWithoutParameters(command);
     }

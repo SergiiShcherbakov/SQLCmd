@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class ClearCommand extends CommandSkeleton implements Command {
+public class ClearCommand extends CommandSkeleton  {
 
     public ClearCommand() {
         super("clear",
@@ -21,19 +21,16 @@ public class ClearCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try{
-            String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
-            if( databaseManager.clearTable(parameters[1])){
-                viewer.write("table was cleared");
-            }else{
-                throw new RuntimeException("Table " + parameters[1] + " was not cleared.");
-            }
-        } catch ( IncorrectNumberOfParametersException  | RuntimeException e ) {
-            viewer.write(e.getMessage());
-            viewer.write("please, try again");
+    String[] prepareParameters(String inputCommand) {
+        return CorrectParameterChecker.getCorrectNumberOfParameters(this.getName(), inputCommand, 2);
+    }
+
+    @Override
+    Object prepareDataToViewer(String[] parameters) {
+        if( databaseManager.clearTable(parameters[1])){
+            return  "table " + parameters[1] + " was cleared";
+        }else{
+            throw new RuntimeException("Table " + parameters[1] + " was not cleared.");
         }
-        return false;
     }
 }
