@@ -27,7 +27,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             connectionController.setParameters(databaseName,  login,  password);
             connectionController.getConnection();
         } catch (SQLException | ClassNotFoundException | RuntimeException e) {
-          throw  new RuntimeException(e.getMessage());
+            throw  new RuntimeException(e.getMessage());
         }
         return connectionController.isConnected();
     }
@@ -76,7 +76,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                 result.add( rs.getString(1));
             }
         } catch (SQLException e ){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
         return result;
     }
@@ -98,7 +98,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                 result.add(getDataFromRow(rs));
             }
         } catch (SQLException e ){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
         return result;
     }
@@ -164,7 +164,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                 statement.execute(sql);
             }
         } catch (SQLException e){
-            throw new RuntimeException(e.getCause());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -177,7 +177,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
                 throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
             }
         } catch (SQLException | ClassNotFoundException  e) {
-            throw  new RuntimeException(e.getCause());
+            throw  new RuntimeException(e.getMessage());
         }
     }
 
@@ -216,7 +216,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             }
         } catch (SQLException e) {
             // do nothing
-            }
+        }
         return result;
     }
 

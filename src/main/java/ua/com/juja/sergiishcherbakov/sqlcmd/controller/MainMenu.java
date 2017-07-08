@@ -40,7 +40,7 @@ public class MainMenu {
             if(command.canProcess(inputCommand)){
                 isTheLastCommand = command.processAndExit(viewer, databaseManager, inputCommand);
                 commandWasProcessed = true;
-                continue;
+                break;
             }
         }
         if (!commandWasProcessed) {

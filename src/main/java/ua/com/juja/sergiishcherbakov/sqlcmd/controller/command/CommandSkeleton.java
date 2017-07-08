@@ -69,5 +69,5 @@ public abstract class CommandSkeleton implements Command {
 
     protected void viewResult(Object result){
          viewer.write((String) result);
-     };
+     }
 }

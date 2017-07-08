@@ -3,7 +3,7 @@ This is my educational project. It has MVC architecture. It are used JDBC, Maven
 Reflections. The program in console work with database.
 
 ## Tests
-For tests you must have installed PostgreSQL in your computer with some database,
+For tests you have to have installed PostgreSQL in your computer with some database,
 and configured class DBSetupForTest with your parameters:
 - REAL_DB = "some_database";
 - DB_LOGIN = "login_for_the_database";

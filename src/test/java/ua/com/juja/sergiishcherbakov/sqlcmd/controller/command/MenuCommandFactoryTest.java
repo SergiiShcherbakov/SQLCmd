@@ -12,15 +12,15 @@ import static org.junit.Assert.assertTrue;
  * Created by Sergii Shcherbakov on 14.06.2017.
  */
 public class MenuCommandFactoryTest {
-        MenuCommandFactory factory = new MenuCommandFactory();
-        List<Command> commmandList = factory.getMenuCommand(Command.class);
+     private    MenuCommandFactory factory = new MenuCommandFactory();
+     private   List<Command> commandList = factory.getMenuCommand(Command.class);
 
     @Test
     public void countOfCommandsTest(){
         //given
         int expectedCountOfCommands = 11;
         //when
-        int size = commmandList.size();
+        int size = commandList.size();
         //then
         assertEquals(expectedCountOfCommands, size);
     }
@@ -31,7 +31,7 @@ public class MenuCommandFactoryTest {
         String testString = "help";
         boolean canProcess = false;
         //when
-        for (Command command : commmandList) {
+        for (Command command : commandList) {
            if( command.canProcess(testString)) {
                canProcess = true;
            }
@@ -46,7 +46,7 @@ public class MenuCommandFactoryTest {
         String testString = "exit";
         boolean canProcess = false;
         //when
-        for (Command command : commmandList) {
+        for (Command command : commandList) {
            if( command.canProcess(testString)) {
                canProcess = true;
            }

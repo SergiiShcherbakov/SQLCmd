@@ -1,9 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.integrationTest;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import ua.com.juja.sergiishcherbakov.sqlcmd.ConsoleMock;
 import ua.com.juja.sergiishcherbakov.sqlcmd.DBSetupForTests;
 import ua.com.juja.sergiishcherbakov.sqlcmd.Main;
@@ -15,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Sergii Shcherbakov on 27.04.2017.
  */
-
 public class LoginUserIntegrationTest {
 
     private ConsoleMock consoleMock;

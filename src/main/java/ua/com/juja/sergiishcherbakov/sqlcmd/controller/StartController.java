@@ -5,7 +5,6 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.controller.command.ConnectCommand;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
  * The class provide user registration and starts main menu

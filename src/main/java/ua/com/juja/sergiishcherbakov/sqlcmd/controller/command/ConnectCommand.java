@@ -41,7 +41,6 @@ public class ConnectCommand extends CommandSkeleton implements Command {
                 viewer.write( "connection to database " + parameters[0] + " is successful" );
                 return true;
             }
-
         } catch ( RuntimeException e ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
