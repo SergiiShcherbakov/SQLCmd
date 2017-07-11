@@ -14,7 +14,7 @@ public class PostgreSQLConnectionController implements ConnectionController {
     private String password;
 
     @Resource
-    private  Connection connection; // todo add connections pull
+    private  Connection connection;
 
     @Override
     public void setParameters(String databaseName, String login, String password) throws SQLException, ClassNotFoundException {
@@ -45,7 +45,6 @@ public class PostgreSQLConnectionController implements ConnectionController {
          return connection;
     }
 
-    // todo realize connection pull and after using connection return it to connection pul
     @Override
     public void closeConnection() {
         try {
