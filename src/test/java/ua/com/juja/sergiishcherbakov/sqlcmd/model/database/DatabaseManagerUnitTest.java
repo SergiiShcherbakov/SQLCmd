@@ -42,9 +42,8 @@ public class DatabaseManagerUnitTest {
         Map<String, String> changes = new HashMap<>();
         changes.put("login", "petya");
         changes.put("password", "tttt");
-        boolean answer = false;
         //when
-        answer = dbManager.updateTable(table, idColumn, changes);
+        boolean answer = dbManager.updateTable(table, idColumn, changes);
         //then
         Mockito.verify(statement).execute(goodSQL);
         assertTrue(answer);
