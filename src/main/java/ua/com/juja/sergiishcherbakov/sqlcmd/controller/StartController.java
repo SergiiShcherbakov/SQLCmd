@@ -33,6 +33,6 @@ public class StartController {
 
     private void printWelcome() {
         viewer.write("You started program SQLCmd from Sergii Shcherbakov");
-        viewer.write("the program can to connect to your local database");
+        viewer.write("the program can connect to your local database");
     }
 }

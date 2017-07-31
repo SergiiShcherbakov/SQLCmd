@@ -54,12 +54,12 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 baseName + "|" + userName + "|" + password + "\n" +
                "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
                 "Good by. See you soon.\n"
         );
@@ -76,7 +76,7 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 wrongBaseName + "|" + userName + "|" + password + "\n" +
                 "FATAL: database \"" + wrongBaseName + "\" does not exist\n" +
@@ -85,7 +85,7 @@ public class LoginUserIntegrationTest {
                 baseName + "|" + userName + "|" + password + "\n" +
                "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
                 "Good by. See you soon.\n"
         );
@@ -102,7 +102,7 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 baseName + "|" + wrongUserName + "|" + password + "\n" +
                 "FATAL: password authentication failed for user \"" + wrongUserName + "\"\n" +
@@ -111,7 +111,7 @@ public class LoginUserIntegrationTest {
                 baseName + "|" + userName + "|" + password + "\n" +
                 "connection to database " + baseName + " is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
                 "Good by. See you soon.\n"
         );
@@ -128,7 +128,7 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 baseName + "|" + userName + "|" + wrongPassword + "\n" +
                 "FATAL: password authentication failed for user \"" + userName + "\"\n" +
@@ -137,7 +137,7 @@ public class LoginUserIntegrationTest {
                 baseName + "|" + userName + "|" + password + "\n" +
                 "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
                 "Good by. See you soon.\n"
         );
@@ -154,7 +154,7 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 wrongBaseName+ "|"  + password + "\n" +
                 "3 parameters are expected but 2 is entered\n" +
@@ -163,7 +163,7 @@ public class LoginUserIntegrationTest {
                 baseName + "|" + userName + "|" + password + "\n" +
                 "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
                 "Good by. See you soon.\n"
         );
@@ -180,23 +180,23 @@ public class LoginUserIntegrationTest {
         Main.main(new String[]{});
         // then
         assertOut("You started program SQLCmd from Sergii Shcherbakov\n" +
-                "the program can to connect to your local database\n" +
+                "the program can connect to your local database\n" +
                 "please enter your data in format:\"databaseName|userName|password\": \n" +
                 baseName + "|" + userName + "|" + password + "\n" +
                 "connection to database " + baseName +" is successful\n" +
                 "Main menu:\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "help\n" +
                 "The program support next command:\n" +
-                "clear\t\tclear table specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t clear|\"table name\"\n" +
                 "connect\t\tconnect to database specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\t connect|database|user|password\n" +
                 "create\t\tcreate new table specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\tcreate|tableName|column1|column2|...|columnN\n" +
+                "clear\t\tclear table specified by user\n" +
+                "\t\tformat the command:\n" +
+                "\t\t clear|\"table name\"\n" +
                 "delete\t\tdelete row from table by name and value specified by user \n" +
                 "\t\tformat the command:\n" +
                 "\t\t delete|tableName|column|value\n" +
@@ -216,7 +216,7 @@ public class LoginUserIntegrationTest {
                 "\t\twith values 2 ... value n in column 2 - column n specified by user\n" +
                 "\t\tformat the command:\n" +
                 "\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
-                "Enter your command or type help to get help:\n" +
+                "Enter your command or type help to get list commands:\n" +
                 "exit\n" +
                 "Good by. See you soon.\n"
         );

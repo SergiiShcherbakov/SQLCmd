@@ -6,6 +6,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfPar
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
         for (Command c : menuCommand) {
             programDescription.add( c.getDescription() );
         }
-        Collections.sort(programDescription);
+        Collections.sort(programDescription, (o1, o2) -> o1.charAt(0) - o2.charAt(0));
     }
 
     @Override

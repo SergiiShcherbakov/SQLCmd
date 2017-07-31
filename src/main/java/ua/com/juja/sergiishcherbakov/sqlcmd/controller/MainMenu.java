@@ -31,7 +31,7 @@ public class MainMenu {
     }
 
     private boolean isThisCommandLast()  {
-        viewer.write("Enter your command or type help to get help:");
+        viewer.write("Enter your command or type help to get list commands:");
         String inputCommand  = viewer.read();
 
         boolean commandWasProcessed = false;
