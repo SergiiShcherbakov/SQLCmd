@@ -3,10 +3,11 @@ This is my educational project. It has MVC architecture. It are used JDBC, Maven
 Reflections. The program in console work with database.
 
 ## Tests
-For tests you have to have installed PostgreSQL in your computer with some database,
-and configured class DBSetupForTest with your parameters:
-- REAL_DB = "some_database";
-- DB_LOGIN = "login_for_the_database";
-- DB_PASSWORD = "password_for_the_database";
+For tests you have mast have
+- installed PostgreSQL in your computer with some database,
+- and configure sqlcmd.properties with your parameters:
+        - REAL_DB = "some_database";
+        - DB_LOGIN = "login_for_the_database";
+        - DB_PASSWORD = "password_for_the_database";
 
 database REAL_DB will not be used in tests.

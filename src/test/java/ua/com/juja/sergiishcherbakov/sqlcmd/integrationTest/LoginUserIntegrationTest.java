@@ -35,9 +35,9 @@ public class LoginUserIntegrationTest {
 
     @Before
     public void set(){
-        baseName = DBSetupForTests.TEST_DB;
-        userName = DBSetupForTests.DB_LOGIN;
-        password = DBSetupForTests.DB_LOGIN;
+        baseName = DBSetupForTests.getDBName();
+        userName = DBSetupForTests.getDBLogin();
+        password = DBSetupForTests.getDBPassword();
 
         wrongBaseName = "SQLCmd1";
         wrongUserName = "postgres1";

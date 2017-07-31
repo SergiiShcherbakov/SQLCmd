@@ -34,7 +34,7 @@ public class DataBaseManagerWithRealDBTest {
     @Before
     public void set() throws SQLException, ClassNotFoundException {
         dbm = new JDBCPostgresSQLDatabaseManager();
-        dbm.setConnection(DBSetupForTests.TEST_DB, DBSetupForTests.DB_LOGIN, DBSetupForTests.DB_PASSWORD);
+        dbm.setConnection(DBSetupForTests.TEST_DB, DBSetupForTests.getDBLogin(), DBSetupForTests.getDBPassword());
     }
 
     @Test
