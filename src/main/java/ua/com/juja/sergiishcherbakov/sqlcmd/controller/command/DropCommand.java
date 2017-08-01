@@ -14,8 +14,8 @@ public class DropCommand extends CommandSkeleton implements Command {
     public DropCommand() {
         super("drop",
                 "\tremove tables specified by user"+ System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\t drop|\"table name\"");
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tdrop|tableName");
     }
 
     @Override

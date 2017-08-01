@@ -113,8 +113,8 @@ public class TestCreateCommand {
         String name = createCommand.getDescription();
         // then
         assertEquals("create\t\tcreate new table specified by user" + System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\tcreate|tableName|column1|column2|...|columnN"
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tcreate|tableName|column1|column2|...|columnN"
                 , name);
     }
 

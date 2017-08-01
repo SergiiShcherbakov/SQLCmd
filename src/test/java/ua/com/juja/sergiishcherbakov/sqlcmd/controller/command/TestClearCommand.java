@@ -120,8 +120,8 @@ public class TestClearCommand {
         String name = clearCommand.getDescription();
         // then
         assertEquals("clear\t\tclear table specified by user" + System.lineSeparator() +
-                "\t\tformat the command:" + System.lineSeparator() +
-                "\t\t clear|\"table name\"" , name);
+                "\t\t\tformat the command:" + System.lineSeparator() +
+                "\t\t\tclear|tableName" , name);
     }
 
     @Test

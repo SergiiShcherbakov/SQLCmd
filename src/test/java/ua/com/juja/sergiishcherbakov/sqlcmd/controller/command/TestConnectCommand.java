@@ -139,8 +139,8 @@ public class TestConnectCommand {
         String name = connectCommand.getDescription();
         // then
         assertEquals("connect\t	connect to database specified by user"+ System.lineSeparator() +
-                "\t\tformat the command:" + System.lineSeparator() +
-                "\t\t connect|database|user|password", name);
+                "\t\t\tformat the command:" + System.lineSeparator() +
+                "\t\t\tconnect|database|user|password", name);
     }
 
     @Test

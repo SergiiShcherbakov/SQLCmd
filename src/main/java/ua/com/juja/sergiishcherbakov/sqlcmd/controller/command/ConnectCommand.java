@@ -15,8 +15,8 @@ public class ConnectCommand extends CommandSkeleton implements Command {
     public ConnectCommand() {
         super("connect",
                 "\tconnect to database specified by user"+ System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\t connect|database|user|password");
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tconnect|database|user|password");
     }
 
     @Override

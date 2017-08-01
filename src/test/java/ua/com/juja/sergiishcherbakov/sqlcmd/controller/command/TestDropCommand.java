@@ -120,8 +120,8 @@ public class TestDropCommand {
         String name = dropCommand.getDescription();
         // then
         assertEquals("drop\t\tremove tables specified by user" + System.lineSeparator()+
-                "\t\tformat the command:" + System.lineSeparator()+
-                "\t\t drop|\"table name\"", name);
+                "\t\t\tformat the command:" + System.lineSeparator()+
+                "\t\t\tdrop|tableName", name);
     }
 
     @Test

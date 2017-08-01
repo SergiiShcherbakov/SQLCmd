@@ -19,9 +19,9 @@ public class UpdateCommand extends CommandSkeleton implements Command {
     public UpdateCommand() {
         super("update",
                 "\tupdate table where column 1 = value1 " + System.lineSeparator() +
-                        "\t\twith values 2 ... value n in column 2 - column n specified by user" + System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN");
+                        "\t\t\twith values 2 ... value n in column 2 - column n specified by user" + System.lineSeparator() +
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN");
     }
 
     @Override

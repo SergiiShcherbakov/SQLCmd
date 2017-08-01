@@ -17,8 +17,8 @@ public class InsertCommand extends CommandSkeleton implements Command {
     public InsertCommand() {
         super("insert",
     "\tinsert row into table specified by user"+ System.lineSeparator() +
-            "\t\tformat the command:" + System.lineSeparator() +
-            "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"");
+            "\t\t\tformat the command:" + System.lineSeparator() +
+            "\t\t\tinsert|tableName|column1|value1|column2|value2|...|columnN|ValueN");
     }
 
     @Override

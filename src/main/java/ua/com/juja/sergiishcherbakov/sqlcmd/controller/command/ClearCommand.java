@@ -16,8 +16,8 @@ public class ClearCommand extends CommandSkeleton  {
     public ClearCommand() {
         super("clear",
                 "\tclear table specified by user"+ System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\t clear|\"table name\"");
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tclear|tableName");
     }
 
     @Override

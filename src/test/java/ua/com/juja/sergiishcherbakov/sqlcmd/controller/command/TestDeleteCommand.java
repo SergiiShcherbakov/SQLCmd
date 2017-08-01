@@ -116,8 +116,8 @@ public class TestDeleteCommand {
         String name = deleteCommand.getDescription();
         // then
         assertEquals("delete\t\tdelete row from table by name and value specified by user "+ System.lineSeparator() +
-                "\t\tformat the command:"+ System.lineSeparator() +
-                "\t\t delete|tableName|column|value" , name);
+                "\t\t\tformat the command:"+ System.lineSeparator() +
+                "\t\t\tdelete|tableName|column|value" , name);
     }
 
     @Test

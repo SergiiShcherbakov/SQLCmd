@@ -188,34 +188,34 @@ public class LoginUserIntegrationTest {
                 "Enter your command or type help to get list commands:\n" +
                 "help\n" +
                 "The program support next command:\n" +
-                "connect\t\tconnect to database specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t connect|database|user|password\n" +
                 "create\t\tcreate new table specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\tcreate|tableName|column1|column2|...|columnN\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tcreate|tableName|column1|column2|...|columnN\n" +
+                "connect\t\tconnect to database specified by user\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tconnect|database|user|password\n" +
                 "clear\t\tclear table specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t clear|\"table name\"\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tclear|tableName\n" +
                 "delete\t\tdelete row from table by name and value specified by user \n" +
-                "\t\tformat the command:\n" +
-                "\t\t delete|tableName|column|value\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tdelete|tableName|column|value\n" +
                 "drop\t\tremove tables specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t drop|\"table name\"\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tdrop|tableName\n" +
                 "exit\t\texit from the program\n" +
                 "find\t\tfind and print tables specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t find|\"table name\"\n"+
+                "\t\t\tformat the command:\n" +
+                "\t\t\tfind|tableName\n"+
                 "help\t\tget name and description of command that support the program\n" +
                 "insert\t\tinsert row into table specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\t insert|\"table name\"|\"column1\"|\"value1\"|\"column2\"|\"value2\"|...|\"columnN\"|\"ValueN\"\n"+
+                "\t\t\tformat the command:\n" +
+                "\t\t\tinsert|tableName|column1|value1|column2|value2|...|columnN|ValueN\n"+
                 "tables\t\tdisplays all tables in the database\n" +
                 "update\t\tupdate table where column 1 = value1 \n" +
-                "\t\twith values 2 ... value n in column 2 - column n specified by user\n" +
-                "\t\tformat the command:\n" +
-                "\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
+                "\t\t\twith values 2 ... value n in column 2 - column n specified by user\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n" +
                 "Good by. See you soon.\n"

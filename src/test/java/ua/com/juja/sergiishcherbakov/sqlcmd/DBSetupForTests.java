@@ -40,10 +40,10 @@ public class DBSetupForTests {
     public static final String TEST_DB = "testdbforsqlcmd87097235outw";
 
     public static void createTestDatabase() throws SQLException, ClassNotFoundException {
-        JDBCPostgresSQLDatabaseManager dbm = new JDBCPostgresSQLDatabaseManager();
-        dbm.setConnection(real_db, db_login, db_password);
-        dbm.executeQuery("CREATE DATABASE " + TEST_DB);
-        dbm.closeConnection();
+        JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
+        dbManager.setConnection(real_db, db_login, db_password);
+        dbManager.executeQuery("CREATE DATABASE " + TEST_DB);
+        dbManager.closeConnection();
     }
 
     public static void  deleteTestDatabase() throws SQLException, ClassNotFoundException {

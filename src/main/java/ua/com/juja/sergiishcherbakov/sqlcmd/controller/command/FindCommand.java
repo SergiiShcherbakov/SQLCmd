@@ -17,8 +17,8 @@ public class FindCommand extends CommandSkeleton implements Command {
     public FindCommand() {
         super("find",
                 "\tfind and print tables specified by user"+ System.lineSeparator() +
-                        "\t\tformat the command:" + System.lineSeparator() +
-                        "\t\t find|\"table name\"");
+                        "\t\t\tformat the command:" + System.lineSeparator() +
+                        "\t\t\tfind|tableName");
     }
 
     @Override

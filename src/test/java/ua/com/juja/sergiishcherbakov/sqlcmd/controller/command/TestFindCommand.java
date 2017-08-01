@@ -122,8 +122,8 @@ public class TestFindCommand {
         String name = findCommand.getDescription();
         // then
         assertEquals("find\t\tfind and print tables specified by user"+ System.lineSeparator() +
-                "\t\tformat the command:"+ System.lineSeparator() +
-                "\t\t find|\"table name\"" , name);
+                "\t\t\tformat the command:"+ System.lineSeparator() +
+                "\t\t\tfind|tableName" , name);
     }
 
     @Test
