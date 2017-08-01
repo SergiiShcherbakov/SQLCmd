@@ -2,11 +2,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import javafx.util.Pair;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +11,10 @@ import java.util.Map;
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
 public class UpdateCommand extends CommandSkeleton implements Command {
+
+    public static final int TABLE_NAME = 1;
+    public static final int COLUMN = 2;
+    public static final int VALUE = 3;
 
     public UpdateCommand() {
         super("update",
@@ -32,15 +32,15 @@ public class UpdateCommand extends CommandSkeleton implements Command {
     @Override
     Object prepareDataToViewer(String[] parameters) {
         Map updateColumnValues = new HashMap();
-        StringBuilder row = new StringBuilder();
-        for (int i = 4; i <parameters.length ; i+=2) {
-            updateColumnValues.put(parameters[i], parameters[i+1]);
+        for (int i = 4; i <parameters.length ; i+= 2) {
+            updateColumnValues.put(parameters[i], parameters[i+ 1]);
         }
-        databaseManager.updateTable(parameters[1], new Pair<>(parameters[2], parameters[3]), updateColumnValues);
-        viewer.write("in table \"" + parameters[1]
+        databaseManager.updateTable(parameters[TABLE_NAME],
+                new Pair<>(parameters[COLUMN], parameters[VALUE]), updateColumnValues);
+        viewer.write("in table \"" + parameters[TABLE_NAME]
                 + "\" was updated row(s) with column \"" + parameters[2] +
-                "\"=\"" + parameters[3] + "\"" );
-        List<List <String>> table = databaseManager.selectAllFromTable(parameters[1]);
+                "\"=\"" + parameters[VALUE] + "\"" );
+        List<List <String>> table = databaseManager.selectAllFromTable(parameters[TABLE_NAME]);
         return table;
     }
 

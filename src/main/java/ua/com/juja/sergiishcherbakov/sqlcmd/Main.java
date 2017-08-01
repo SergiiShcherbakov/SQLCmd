@@ -11,8 +11,6 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  * Created by Sergii Shcherbakov on 19.04.2017.
  * This class starts program SQLCmd
  */
-// data for tests
-//SQLCmd|postgres|postgres
 public class Main {
     public static void main(String[] args) throws Exception {
         Viewer viewer = new ConsoleViewer();

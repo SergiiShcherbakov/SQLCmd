@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class ClearCommand extends CommandSkeleton  {
 
+    public static final int TABLE_NAME = 1;
+
     public ClearCommand() {
         super("clear",
                 "\tclear table specified by user"+ System.lineSeparator() +
@@ -27,10 +29,10 @@ public class ClearCommand extends CommandSkeleton  {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        if( databaseManager.clearTable(parameters[1])){
-            return  "table " + parameters[1] + " was cleared";
+        if( databaseManager.clearTable(parameters[TABLE_NAME])){
+            return  "table " + parameters[TABLE_NAME] + " was cleared";
         }else{
-            throw new RuntimeException("Table " + parameters[1] + " was not cleared.");
+            throw new RuntimeException("Table " + parameters[TABLE_NAME] + " was not cleared.");
         }
     }
 }

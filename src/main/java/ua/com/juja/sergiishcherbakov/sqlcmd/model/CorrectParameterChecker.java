@@ -9,6 +9,8 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfPar
 
 public class CorrectParameterChecker {
 
+    public static final int FIRST_PARAM = 0;
+
     /**
      * The method checks is correct parameters in input command.
      * @param goodParameter - right first parameter.
@@ -30,7 +32,7 @@ public class CorrectParameterChecker {
                     data.length +
                     " is entered");
         }
-        if (isCorrectFirstParameter( goodParameter, data[0]))  {
+        if (isCorrectFirstParameter( goodParameter, data[FIRST_PARAM]))  {
             return data;
         } else {
             //newer
@@ -59,7 +61,7 @@ public class CorrectParameterChecker {
                                     "Minimum %s parameters are expected but %s parameters are entered"
                             , countParameters , data.length));
         }
-        if (isCorrectFirstParameter( goodParameter, data[0]))  {
+        if (isCorrectFirstParameter( goodParameter, data[FIRST_PARAM]))  {
             return data;
         } else {
             //newer
@@ -69,14 +71,14 @@ public class CorrectParameterChecker {
 
     public static String getCorrectParameter(String name, String inputCommand)
             throws IncorrectNumberOfParametersException {
-        return getCorrectNumberOfParameters(name, inputCommand, 1)[0];
+        return getCorrectNumberOfParameters(name, inputCommand, 1)[FIRST_PARAM];
     }
 
 
 
     public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand, int minCountParameters) throws IncorrectNumberOfParametersException {
         String[] data = inputCommand.split("[|]");
-        isCorrectFirstParameter(goodFirstParameter, data[0]);
+        isCorrectFirstParameter(goodFirstParameter, data[FIRST_PARAM]);
         if(data.length < minCountParameters){
             throw new IncorrectNumberOfParametersException(
                     "insert wrong number of parameters. Minimum " + minCountParameters + " parameters are expected and " +

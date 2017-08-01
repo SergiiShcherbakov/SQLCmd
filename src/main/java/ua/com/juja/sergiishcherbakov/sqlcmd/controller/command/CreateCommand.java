@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class CreateCommand extends CommandSkeleton {
 
+    public static final int TABLE_NAME = 1;
+
     public CreateCommand() {
         super("create",
                 "\tcreate new table specified by user"+ System.lineSeparator() +
@@ -34,14 +36,14 @@ public class CreateCommand extends CommandSkeleton {
             columns.add(parameters[i]);
             columnsName.append(parameters[i]).append(", ");
         }
-        if(databaseManager.createTableWithoutTypesFields(parameters[1], columns)){
-            columnsName.deleteCharAt(columnsName.length()-1);
-            columnsName.deleteCharAt(columnsName.length()-1);
+        if(databaseManager.createTableWithoutTypesFields(parameters[TABLE_NAME], columns)){
+            columnsName.deleteCharAt(columnsName.length()- 1);
+            columnsName.deleteCharAt(columnsName.length()- 1);
             return  String.format("table with name \"%s\" and with column \"%s\" added to current database",
-                    parameters[1], columnsName);
+                    parameters[TABLE_NAME], columnsName);
         } else {
             throw new RuntimeException(String.format("table with name \"%s\" and with column \"%s\" was not add to current database",
-                    parameters[1], columnsName));
+                    parameters[TABLE_NAME], columnsName));
         }
     }
 }

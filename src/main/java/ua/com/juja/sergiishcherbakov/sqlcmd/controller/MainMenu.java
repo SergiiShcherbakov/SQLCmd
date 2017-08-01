@@ -24,10 +24,9 @@ public class MainMenu {
 
     void start()  {
         mainMenuWelcome();
-        while(!isThisCommandLast()) {
-            // do nothing
+        while(true) {
+            if(isThisCommandLast()) return;
         }
-        return ;
     }
 
     private boolean isThisCommandLast()  {

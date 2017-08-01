@@ -12,6 +12,10 @@ import java.sql.SQLException;
  */
 public class DeleteCommand extends CommandSkeleton implements Command {
 
+    public static final int TABLE_NAME = 1;
+    public static final int COLUMN = 2;
+    public static final int VALUE = 3;
+
     public DeleteCommand() {
         super("delete",
                 "\tdelete row from table by name and value specified by user " + System.lineSeparator() +
@@ -27,11 +31,11 @@ public class DeleteCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        databaseManager.deleteRowFromTable(parameters[1], parameters[2], parameters[3]);
-        String print = "row with  value \"" + parameters[3] +
-                "\" in field \"" + parameters[2] + "\" was removed from table \""
-                + parameters[1] + "\"";
-        return new String[]{print, parameters[1]};
+        databaseManager.deleteRowFromTable(parameters[TABLE_NAME], parameters[COLUMN], parameters[VALUE]);
+        String print = "row with  value \"" + parameters[VALUE] +
+                "\" in field \"" + parameters[COLUMN] + "\" was removed from table \""
+                + parameters[TABLE_NAME] + "\"";
+        return new String[]{print, parameters[TABLE_NAME]};
     }
 
     @Override

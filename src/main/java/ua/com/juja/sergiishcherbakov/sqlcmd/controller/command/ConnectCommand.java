@@ -12,6 +12,11 @@ import java.sql.SQLException;
  */
 public class ConnectCommand extends CommandSkeleton implements Command {
 
+    public static final int DBName = 1;
+    public static final int LOGIN = 2;
+    public static final int PASSWORD = 3;
+    public static final int COMMAND_NAME = 0;
+
     public ConnectCommand() {
         super("connect",
                 "\tconnect to database specified by user"+ System.lineSeparator() +
@@ -27,18 +32,18 @@ public class ConnectCommand extends CommandSkeleton implements Command {
     @Override
     Object prepareDataToViewer(String[] parameters) {
         databaseManager.closeConnection();
-        databaseManager.setConnection(parameters[1], parameters[2], parameters[3]);
-        return  "connection to database " + parameters[1] + " is successful";
+        databaseManager.setConnection(parameters[DBName], parameters[LOGIN], parameters[PASSWORD]);
+        return  "connection to database " + parameters[DBName] + " is successful";
     }
 
 
     public boolean connectToDB(Viewer viewer, DatabaseManager databaseManager, String inputCommand){
         try{
             String [] parameters = CorrectParameterChecker.
-                    getCorrectNumberOfParameters( inputCommand, 3);
+                    getCorrectNumberOfParameters( inputCommand, PASSWORD);
             databaseManager.closeConnection();
-            if (databaseManager.setConnection(parameters[0], parameters[1], parameters[2])) {
-                viewer.write( "connection to database " + parameters[0] + " is successful" );
+            if (databaseManager.setConnection(parameters[COMMAND_NAME], parameters[DBName], parameters[LOGIN])) {
+                viewer.write( "connection to database " + parameters[COMMAND_NAME] + " is successful" );
                 return true;
             }
         } catch ( RuntimeException e ) {
