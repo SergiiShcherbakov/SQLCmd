@@ -39,30 +39,6 @@ public class DBSetupForTests {
 
     public static final String TEST_DB = "testdbforsqlcmd87097235outw";
 
-    public static void createTestDatabase() throws SQLException, ClassNotFoundException {
-        JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
-        dbManager.setConnection(real_db, db_login, db_password);
-        dbManager.executeQuery("CREATE DATABASE " + TEST_DB);
-        dbManager.closeConnection();
-    }
-
-    public static void  deleteTestDatabase() throws SQLException, ClassNotFoundException {
-        PostgreSQLConnectionController connectionController = new PostgreSQLConnectionController();
-        connectionController.setParameters(real_db, db_login, db_password);
-        Connection connection = connectionController.getConnection();
-        Statement stmt = connection.createStatement();
-        stmt.executeQuery("SELECT  pg_terminate_backend (pg_stat_activity.pid) " +
-                "FROM pg_stat_activity WHERE pg_stat_activity.datname = '" + TEST_DB + "';" );
-        stmt.execute("DROP DATABASE if exists " + TEST_DB + " ;");
-        stmt.close();
-        connection.close();
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        createTestDatabase();
-        deleteTestDatabase();
-    }
-
     public static String getDBName() {
         return real_db;
     }
@@ -73,5 +49,25 @@ public class DBSetupForTests {
 
     public static String getDBPassword() {
         return db_password;
+    }
+
+    public static void createTestDatabase() throws SQLException, ClassNotFoundException {
+        JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
+        dbManager.setConnection(real_db, db_login, db_password);
+        dbManager.executeQuery("CREATE DATABASE " + TEST_DB);
+        dbManager.closeConnection();
+    }
+
+    public static void  deleteTestDatabase() throws SQLException, ClassNotFoundException {
+        PostgreSQLConnectionController connectionController = new PostgreSQLConnectionController();
+        connectionController.setParameters(real_db, db_login, db_password);
+        try(
+                Connection connection = connectionController.getConnection();
+                Statement stmt = connection.createStatement()
+        ){
+            stmt.executeQuery("SELECT  pg_terminate_backend (pg_stat_activity.pid) " +
+                    "FROM pg_stat_activity WHERE pg_stat_activity.datname = '" + TEST_DB + "';" );
+            stmt.execute("DROP DATABASE if exists " + TEST_DB + " ;");
+        }
     }
 }
