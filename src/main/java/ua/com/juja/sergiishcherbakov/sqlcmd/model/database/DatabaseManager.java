@@ -3,7 +3,6 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model.database;
 import javafx.util.Pair;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.Field;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 

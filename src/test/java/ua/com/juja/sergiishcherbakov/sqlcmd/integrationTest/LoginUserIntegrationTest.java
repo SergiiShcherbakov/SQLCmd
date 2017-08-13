@@ -61,7 +61,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 
@@ -87,7 +87,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 
@@ -113,7 +113,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 
@@ -139,7 +139,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 
@@ -165,7 +165,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n"+
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 
@@ -187,13 +187,13 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "help\n" +
-                "The program support next command:\n" +
-                "create\t\tcreate new table specified by user\n" +
-                "\t\t\tformat the command:\n" +
-                "\t\t\tcreate|tableName|column1|column2|...|columnN\n" +
+                "the program support next command:\n" +
                 "connect\t\tconnect to database specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tconnect|database|user|password\n" +
+                "create\t\tcreate new table specified by user\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tcreate|tableName|column1|column2|...|columnN\n" +
                 "clear\t\tclear table specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tclear|tableName\n" +
@@ -218,7 +218,7 @@ public class LoginUserIntegrationTest {
                 "\t\t\tupdate|tableName|column1|value1|column2|value2|...|columnN|valueN\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "exit\n" +
-                "Good by. See you soon.\n"
+                "good by, see you soon.\n"
         );
     }
 

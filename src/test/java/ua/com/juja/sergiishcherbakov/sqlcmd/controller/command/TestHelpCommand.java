@@ -47,7 +47,7 @@ public class TestHelpCommand {
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "help");
         // then
-        Mockito.verify(viewer).write("The program support next command:");
+        Mockito.verify(viewer).write("the program support next command:");
         Mockito.verify(viewer, times(5)).write("test description");
         assertFalse(isExit);
     }

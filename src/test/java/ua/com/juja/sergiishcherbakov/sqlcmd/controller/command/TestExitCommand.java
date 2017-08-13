@@ -39,7 +39,7 @@ public class TestExitCommand {
         isExit = exitCommand.processAndExit(viewer, dBManager, "exit");
         // then
         Mockito.verify(dBManager).closeConnection();
-        Mockito.verify(viewer).write("Good by. See you soon.");
+        Mockito.verify(viewer).write("good by, see you soon.");
         assertTrue(isExit);
     }
 

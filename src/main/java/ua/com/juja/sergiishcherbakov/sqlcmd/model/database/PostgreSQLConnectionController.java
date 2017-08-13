@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Created by StrannikFujitsu on 21.04.2017.
+ * Created by Sergii Shcherbakov on 21.04.2017.
  */
 public class PostgreSQLConnectionController implements ConnectionController {
     private  String databaseName;

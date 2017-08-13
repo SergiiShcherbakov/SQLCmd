@@ -18,7 +18,7 @@ public class ExitCommand extends CommandSkeleton implements Command {
     public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         try {
             CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
-            viewer.write("Good by. See you soon.");
+            viewer.write("good by, see you soon.");
             databaseManager.closeConnection();
             return true;
         } catch ( IncorrectNumberOfParametersException  e) {
@@ -36,7 +36,7 @@ public class ExitCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        return "Good by. See you soon.";
+        return "good by, see you soon.";
     }
 
     @Override
