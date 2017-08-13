@@ -49,7 +49,7 @@ public class DataBaseManagerWithRealDBTest {
         } catch ( RuntimeException e){
             // do nothing
         }
-        dbm.createNewTable(tableName , new Field[] {field, field1});
+        dbm.createTable(tableName , new Field[] {field, field1});
         List<String> tablesNames = dbm.getTablesNames();
         // then
         assertEquals( tablesNames.contains(tableName), true );

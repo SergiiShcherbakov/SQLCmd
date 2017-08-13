@@ -41,7 +41,7 @@ public class TestDeleteCommand {
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1");
         // then
-        Mockito.verify(dBManager).deleteRowFromTable("tab", "row1", "Value1") ;
+        Mockito.verify(dBManager).deleteRow("tab", "row1", "Value1") ;
         Mockito.verify(viewer).write("row with  value \"Value1\" in field \"row1\" was removed from table \"tab\"");
         assertFalse(isExit);
     }
@@ -54,7 +54,7 @@ public class TestDeleteCommand {
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "deletee|tab|row1|Value1");
         // then
-        Mockito.verify(dBManager, never()).deleteRowFromTable(any(), any(), any()) ;
+        Mockito.verify(dBManager, never()).deleteRow(any(), any(), any()) ;
         Mockito.verify(viewer).write("\"delete\" parameter are expected but \"deletee\" is entered");
         assertFalse(isExit);
     }
@@ -67,7 +67,7 @@ public class TestDeleteCommand {
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1|Value2");
         // then
-        Mockito.verify(dBManager, never()).deleteRowFromTable(any(), any(), any()) ;
+        Mockito.verify(dBManager, never()).deleteRow(any(), any(), any()) ;
         Mockito.verify(viewer).write("4 parameters are expected but 5 is entered");
         assertFalse(isExit);
     }

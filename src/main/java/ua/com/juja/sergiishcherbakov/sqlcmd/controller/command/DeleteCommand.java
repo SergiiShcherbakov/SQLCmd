@@ -1,11 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
-import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfParametersException;
-import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
-
-import java.sql.SQLException;
 
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
@@ -31,7 +26,7 @@ public class DeleteCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        databaseManager.deleteRowFromTable(parameters[TABLE_NAME], parameters[COLUMN], parameters[VALUE]);
+        databaseManager.deleteRow(parameters[TABLE_NAME], parameters[COLUMN], parameters[VALUE]);
         String print = "row with  value \"" + parameters[VALUE] +
                 "\" in field \"" + parameters[COLUMN] + "\" was removed from table \""
                 + parameters[TABLE_NAME] + "\"";

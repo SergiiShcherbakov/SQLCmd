@@ -14,6 +14,7 @@ import java.util.Map;
  * Created by Sergii Shcherbakov on 21.04.2017.
  */
 public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
+    public static final int MAX_STRING_SIZE = 50;
     @Resource
     private ConnectionController connectionController;
 
@@ -32,10 +33,9 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return connectionController.isConnected();
     }
 
-
     @Override
-    public boolean createNewTable(String tableName, Field[] fields) {
-        StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS public." + tableName + "( ");
+    public boolean createTable(String tableName, Field[] fields) {
+        StringBuilder sql = new StringBuilder("create table if not exists public.").append( tableName).append("( ");
         for (int i = 0; i < fields.length; i++) {
             sql.append(fields[i].getSqlField());
             if (i != fields.length - 1) sql.append(" ,");
@@ -50,15 +50,15 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         Field[] fields = new Field[addColumn.size()] ;
         int index = 0;
         for (String columnName : addColumn) {
-            fields[index++] = new Field(columnName, FieldType.VARCHAR, false, true, false, 50  );
+            fields[index++] = new Field(columnName, FieldType.VARCHAR, false,
+                    true, false, MAX_STRING_SIZE);
         }
-        return createNewTable(tableName, fields );
+        return createTable(tableName, fields );
     }
-
 
     @Override
     public boolean deleteTable(String tableName)  {
-        String sql = "Drop TABLE public." + tableName;
+        String sql = String.format( "drop table public.%s" , tableName);
         executeQuery(sql);
         return true;
     }
@@ -66,7 +66,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     @Override
     public List<String> getTablesNames() {
         LinkedList<String> result;
-        String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema='public'";
+        String sql = "select table_name from information_schema.tables where table_schema='public'";
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(sql)
@@ -91,7 +91,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         List<List<String>> result = new LinkedList<>();
         Connection connection = getConnection();
         try (Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("SELECT * from public." + tableName)
+             ResultSet rs = statement.executeQuery( String.format("select * from public.%s", tableName))
         ){
             result.add(getTitles(rs));
             while (rs.next() ){
@@ -105,7 +105,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
     @Override
     public boolean clearTable(String tableName) {
-        String sql = "TRUNCATE TABLE  public." + tableName;
+        String sql = String.format( "truncate table  public.%s", tableName);
         executeQuery(sql);
         return true;
     }
@@ -121,28 +121,26 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         }
         columns.deleteCharAt(columns.length()-2);
         values.deleteCharAt(values.length()-2);
-        String sql =  "INSERT INTO public."+ tableName + "(" +
-                columns + ") VALUES (" + values + ")";
+        String sql =  String.format( "insert into public.%s(%s) values (%s)", tableName , columns, values);
         executeQuery(sql);
         return result;
     }
 
     @Override
-    public void deleteRowFromTable(String tableName, String fieldName, String value) {
+    public void deleteRow(String tableName, String fieldName, String value) {
         StringBuilder val = new StringBuilder();
         addDataByValues(val, value);
         val.deleteCharAt(val.length()-2);
-        String sql =  "DELETE FROM public." + tableName +
-                "  WHERE " + fieldName + "= " + val + ";";
+        String sql = String.format( "delete from public.%s  where %s= %s;",tableName, fieldName, val);
         executeQuery(sql);
     }
 
     @Override
     public boolean updateTable(String tableName, Pair<String, String> whereColumnValue,
                                Map<String, String> changeColumnValue) {
-        StringBuilder WhereValue = new StringBuilder();
-        addDataByValues(WhereValue, whereColumnValue.getValue());
-        WhereValue.deleteCharAt(WhereValue.length()-2);
+        StringBuilder whereValue = new StringBuilder();
+        addDataByValues(whereValue, whereColumnValue.getValue());
+        whereValue.deleteCharAt(whereValue.length()-2);
         StringBuilder changes = new StringBuilder();
         for (Map.Entry<String, String> change : changeColumnValue.entrySet()) {
             changes.append(change.getKey())
@@ -150,9 +148,8 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             addDataByValues(changes, change.getValue());
         }
         changes.deleteCharAt(changes.length()-2);
-        String sql =  "UPDATE public." + tableName +
-                " SET " + changes +
-                "WHERE " + whereColumnValue.getKey() + "=" + WhereValue + ";";
+        String sql =  String.format( "update public.%s set %s where %s=%s;", tableName, changes,
+                whereColumnValue.getKey(),whereValue) ;
         executeQuery(sql);
         return true;
     }
@@ -174,7 +171,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
             if(connection != null || !connection.isClosed()) {
                 return connection;
             } else {
-                throw new RuntimeException("DatabaseManager.createNewTable is fall! It haven`t connection");
+                throw new RuntimeException("DatabaseManager.createTable is fall! It haven`t connection");
             }
         } catch (SQLException | ClassNotFoundException  e) {
             throw  new RuntimeException(e.getMessage());

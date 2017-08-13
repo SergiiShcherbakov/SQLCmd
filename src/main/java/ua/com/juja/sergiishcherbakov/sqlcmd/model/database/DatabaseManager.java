@@ -13,7 +13,7 @@ import java.util.Map;
 public interface DatabaseManager {
     boolean setConnection(String databaseName, String login, String password);
 
-    boolean createNewTable(String tableName, Field[] fields);
+    boolean createTable(String tableName, Field[] fields);
 
     boolean createTableWithoutTypesFields(String tableName, List<String> addColumn);
 
@@ -23,13 +23,13 @@ public interface DatabaseManager {
 
     void closeConnection();
 
-   List<List<String>> selectAllFromTable(String parameter);
+    List<List<String>> selectAllFromTable(String parameter);
 
     boolean clearTable(String parameter);
 
     String insertRow(String tableName, Map<String, String> addRowToTable);
 
-    void deleteRowFromTable(String tableName, String fieldName, String value);
+    void deleteRow(String tableName, String fieldName, String value);
 
     boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue);
 

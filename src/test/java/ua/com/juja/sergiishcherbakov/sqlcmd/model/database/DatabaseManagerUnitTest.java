@@ -34,7 +34,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSQL = "UPDATE public.user SET password='tttt', login='petya' WHERE id=1 ;";
+        String goodSQL = "update public.user set password='tttt', login='petya'  where id=1 ;";
         when(statement.execute(goodSQL)).thenReturn(true);
 
         String table = "user";
@@ -57,7 +57,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSQL = "UPDATE public.temppp SET login='stiven' WHERE id=7 ;";
+        String goodSQL = "update public.temppp set login='stiven'  where id=7 ;";
         when(statement.execute(goodSQL)).thenReturn(true);
 
         String table = "temppp";
@@ -83,7 +83,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSQL = "CREATE TABLE IF NOT EXISTS public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  )";
+        String goodSQL = "create table if not exists public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  )";
         when(statement.execute(goodSQL)).thenReturn(true);
         boolean answer;
         //when
@@ -104,7 +104,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSQL = "CREATE TABLE IF NOT EXISTS public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  ,ks VARCHAR(50)  NULL  )";
+        String goodSQL = "create table if not exists public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  ,ks VARCHAR(50)  NULL  )";
         when(statement.execute(goodSQL)).thenReturn(true);
         boolean answer;
         //when
@@ -130,7 +130,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSQL = "SELECT * from public.tt";
+        String goodSQL = "select * from public.tt";
         when(statement.executeQuery(goodSQL)).thenReturn(resultSet);
         when(resultSet.getMetaData()).thenReturn(metaData);
         when(metaData.getColumnName(1)).thenReturn("ONE");
@@ -164,7 +164,7 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSql = "TRUNCATE TABLE  public.tt";
+        String goodSql = "truncate table  public.tt";
         String tableName = "tt";
         boolean ansewer = false;
         //when
@@ -182,12 +182,12 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSql = "DELETE FROM public.tt  WHERE id= 'kkk' ;";
+        String goodSql = "delete from public.tt  where id= 'kkk' ;";
         String tableName = "tt";
         String field = "id";
         String value = "kkk";
         //when
-        dbManager.deleteRowFromTable(tableName, field, value);
+        dbManager.deleteRow(tableName, field, value);
         //then
         Mockito.verify(statement).execute(goodSql);
     }
@@ -200,12 +200,12 @@ public class DatabaseManagerUnitTest {
 
         when(connectionMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
-        String goodSql = "DELETE FROM public.tt  WHERE id= 10 ;";
+        String goodSql = "delete from public.tt  where id= 10 ;";
         String tableName = "tt";
         String field = "id";
         String value = "10";
         //when
-        dbManager.deleteRowFromTable(tableName, field, value);
+        dbManager.deleteRow(tableName, field, value);
         //then
         Mockito.verify(statement).execute(goodSql);
     }
@@ -222,7 +222,7 @@ public class DatabaseManagerUnitTest {
         rows.put("id", "1");
         rows.put("name", "vasya");
         String tableName = "tt";
-        String goodSql = "INSERT INTO public.tt(name, id ) VALUES ('vasya', 1 )";
+        String goodSql = "insert into public.tt(name, id ) values ('vasya', 1 )";
         //when
         dbManager.insertRow(tableName, rows);
         //then
