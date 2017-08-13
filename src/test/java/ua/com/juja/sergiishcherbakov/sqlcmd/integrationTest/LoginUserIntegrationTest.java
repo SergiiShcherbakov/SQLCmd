@@ -187,7 +187,7 @@ public class LoginUserIntegrationTest {
                 "Main menu:\n" +
                 "Enter your command or type help to get list commands:\n" +
                 "help\n" +
-                "the program support next command:\n" +
+                "the program supports next command:\n" +
                 "connect\t\tconnect to database specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tconnect|database|user|password\n" +

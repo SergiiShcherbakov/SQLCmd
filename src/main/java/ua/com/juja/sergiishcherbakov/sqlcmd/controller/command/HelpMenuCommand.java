@@ -39,7 +39,7 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
 
     @Override
     protected void viewResult(Object result) {
-        viewer.write("the program support next command:");
+        viewer.write("the program supports next command:");
         for (String pointOfMenu : programDescription ) {
             viewer.write( pointOfMenu );
         }

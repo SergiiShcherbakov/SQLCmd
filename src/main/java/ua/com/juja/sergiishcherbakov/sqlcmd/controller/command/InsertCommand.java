@@ -26,13 +26,13 @@ public class InsertCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        Map addRowToTable = new HashMap();
+        Map newRow = new HashMap();
         StringBuilder row = new StringBuilder();
         for (int i = 2; i <parameters.length ; i+=2) {
-            addRowToTable.put(parameters[i], parameters[i+ 1]);
+            newRow.put(parameters[i], parameters[i+ 1]);
             row.append(parameters[i] + "=" + parameters[i+ 1] + ", ");
         }
-        databaseManager.insertRow(parameters[TABLE_NAME], addRowToTable);
+        databaseManager.insertRow(parameters[TABLE_NAME], newRow);
         row.deleteCharAt(row.length()- 1);
         row.deleteCharAt(row.length()- 1);
         return String.format( "row \"%s\" was added to table \"%s\"", row, parameters[TABLE_NAME] ) ;
