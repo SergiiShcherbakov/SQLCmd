@@ -11,8 +11,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
 public class ExitCommand extends CommandSkeleton implements Command {
 
     public ExitCommand() {
-        super("exit",
-         "\texit from the program");
+        super("exit",  "\texit from the program");
     }
 
     @Override

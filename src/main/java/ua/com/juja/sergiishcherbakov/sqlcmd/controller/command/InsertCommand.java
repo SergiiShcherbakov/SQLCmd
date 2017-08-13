@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class InsertCommand extends CommandSkeleton implements Command {
 
+    public static final int TABLE_NAME = 1;
+
     public InsertCommand() {
         super("insert",
     "\tinsert row into table specified by user"+ System.lineSeparator() +
@@ -31,12 +33,12 @@ public class InsertCommand extends CommandSkeleton implements Command {
         Map addRowToTable = new HashMap();
         StringBuilder row = new StringBuilder();
         for (int i = 2; i <parameters.length ; i+=2) {
-            addRowToTable.put(parameters[i], parameters[i+1]);
-            row.append(parameters[i] + "=" + parameters[i+1] + ", ");
+            addRowToTable.put(parameters[i], parameters[i+ 1]);
+            row.append(parameters[i] + "=" + parameters[i+ 1] + ", ");
         }
-        databaseManager.insertRow(parameters[1], addRowToTable);
-        row.deleteCharAt(row.length()-1);
-        row.deleteCharAt(row.length()-1);
-        return "row \"" +  row + "\" was added to table \"" + parameters[1] + "\"" ;
+        databaseManager.insertRow(parameters[TABLE_NAME], addRowToTable);
+        row.deleteCharAt(row.length()- 1);
+        row.deleteCharAt(row.length()- 1);
+        return String.format( "row \"%s\" was added to table \"%s\"", row, parameters[TABLE_NAME] ) ;
     }
 }

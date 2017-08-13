@@ -12,8 +12,7 @@ import java.sql.SQLException;
 public class TablesCommand extends CommandSkeleton implements Command  {
 
     public TablesCommand() {
-        super("tables",
-                "\tdisplays all tables in the database");
+        super("tables", "\tdisplays all tables in the database");
     }
 
     @Override

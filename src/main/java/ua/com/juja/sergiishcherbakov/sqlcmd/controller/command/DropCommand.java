@@ -11,6 +11,8 @@ import java.sql.SQLException;
  */
 public class DropCommand extends CommandSkeleton implements Command {
 
+    public static final int TABLE_NAME = 1;
+
     public DropCommand() {
         super("drop",
                 "\tremove tables specified by user"+ System.lineSeparator() +
@@ -25,7 +27,7 @@ public class DropCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        databaseManager.deleteTable(parameters[1]);
-        return  parameters[1] + " was removed";
+        databaseManager.deleteTable(parameters[TABLE_NAME]);
+        return  String.format( "%s was removed",  parameters[TABLE_NAME]);
     }
 }

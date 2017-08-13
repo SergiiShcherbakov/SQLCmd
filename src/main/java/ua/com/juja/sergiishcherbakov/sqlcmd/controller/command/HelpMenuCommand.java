@@ -18,8 +18,7 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
     private List<String> programDescription;
 
     public HelpMenuCommand(){
-        super("help",
-                "\tget name and description of command that support the program");
+        super("help", "\tget name and description of command that support the program");
     }
 
     @Override

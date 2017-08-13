@@ -27,9 +27,8 @@ public class DeleteCommand extends CommandSkeleton implements Command {
     @Override
     Object prepareDataToViewer(String[] parameters) {
         databaseManager.deleteRow(parameters[TABLE_NAME], parameters[COLUMN], parameters[VALUE]);
-        String print = "row with  value \"" + parameters[VALUE] +
-                "\" in field \"" + parameters[COLUMN] + "\" was removed from table \""
-                + parameters[TABLE_NAME] + "\"";
+        String print = String.format("row with  value \"%s\" in field \"%s\" was removed from table \"%s\"",
+                parameters[VALUE] , parameters[COLUMN], parameters[TABLE_NAME] );
         return new String[]{print, parameters[TABLE_NAME]};
     }
 

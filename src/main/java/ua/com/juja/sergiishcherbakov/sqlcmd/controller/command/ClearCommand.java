@@ -30,9 +30,9 @@ public class ClearCommand extends CommandSkeleton  {
     @Override
     Object prepareDataToViewer(String[] parameters) {
         if( databaseManager.clearTable(parameters[TABLE_NAME])){
-            return  "table " + parameters[TABLE_NAME] + " was cleared";
+            return  String.format( "table %s was cleared",  parameters[TABLE_NAME]) ;
         }else{
-            throw new RuntimeException("Table " + parameters[TABLE_NAME] + " was not cleared.");
+            throw new RuntimeException(String.format( "Table %s was not cleared.", parameters[TABLE_NAME]) );
         }
     }
 }

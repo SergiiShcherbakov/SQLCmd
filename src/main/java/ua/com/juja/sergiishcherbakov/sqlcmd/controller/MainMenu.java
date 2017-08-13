@@ -43,7 +43,7 @@ public class MainMenu {
             }
         }
         if (!commandWasProcessed) {
-            viewer.write(inputCommand + " does not supported.");
+            viewer.write( String.format( "%s does not supported.", inputCommand));
             return false;
         }
         return isTheLastCommand;

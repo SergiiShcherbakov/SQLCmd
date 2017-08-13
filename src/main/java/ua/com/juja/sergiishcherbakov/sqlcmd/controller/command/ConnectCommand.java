@@ -33,7 +33,7 @@ public class ConnectCommand extends CommandSkeleton implements Command {
     Object prepareDataToViewer(String[] parameters) {
         databaseManager.closeConnection();
         databaseManager.setConnection(parameters[DBName], parameters[LOGIN], parameters[PASSWORD]);
-        return  "connection to database " + parameters[DBName] + " is successful";
+        return String.format( "connection to database %s is successful", parameters[DBName]);
     }
 
 
@@ -43,7 +43,7 @@ public class ConnectCommand extends CommandSkeleton implements Command {
                     getCorrectNumberOfParameters( inputCommand, PASSWORD);
             databaseManager.closeConnection();
             if (databaseManager.setConnection(parameters[COMMAND_NAME], parameters[DBName], parameters[LOGIN])) {
-                viewer.write( "connection to database " + parameters[COMMAND_NAME] + " is successful" );
+                viewer.write( String.format("connection to database %s is successful", parameters[COMMAND_NAME] ));
                 return true;
             }
         } catch ( RuntimeException e ) {

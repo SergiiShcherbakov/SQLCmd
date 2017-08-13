@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class FindCommand extends CommandSkeleton implements Command {
 
+    public static final int TABLE_NAME = 1;
+
     public FindCommand() {
         super("find",
                 "\tfind and print tables specified by user"+ System.lineSeparator() +
@@ -28,7 +30,7 @@ public class FindCommand extends CommandSkeleton implements Command {
 
     @Override
     Object prepareDataToViewer(String[] parameters) {
-        return  databaseManager.selectAllFromTable(parameters[1]);
+        return  databaseManager.selectAllFromTable(parameters[TABLE_NAME]);
     }
 
     @Override

@@ -80,13 +80,13 @@ public class CorrectParameterChecker {
         String[] data = inputCommand.split("[|]");
         isCorrectFirstParameter(goodFirstParameter, data[FIRST_PARAM]);
         if(data.length < minCountParameters){
-            throw new IncorrectNumberOfParametersException(
-                    "insert wrong number of parameters. Minimum " + minCountParameters + " parameters are expected and " +
-                            + data.length + " parameters are entered");
+            throw new IncorrectNumberOfParametersException( String.format(
+                "insert wrong number of parameters. Minimum %d parameters are expected and %d parameters are entered",
+                    minCountParameters, data.length));
         }
         if ( data.length % 2 != 0 ) {
             throw new IncorrectNumberOfParametersException(
-                    "insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
+                "insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
         }
         return data;
     }

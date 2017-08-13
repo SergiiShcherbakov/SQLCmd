@@ -36,7 +36,7 @@ public abstract class CommandSkeleton implements Command {
 
     @Override
     public String getDescription() {
-        return name + "\t" + description;
+        return String.format("%s\t%s", name , description);
     }
 
     @Override
