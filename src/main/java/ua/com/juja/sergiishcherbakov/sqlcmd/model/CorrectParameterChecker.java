@@ -24,8 +24,7 @@ public class CorrectParameterChecker {
      *       "@param goodParameter" parameters are expected but "bad first parameter"  is entered"
      *       if input bad first parameter
      */
-    public static String[] getCorrectNumberOfParameters(String goodParameter, String inputCommand, int countParameters)
-            throws IncorrectNumberOfParametersException {
+    public static String[] getCorrectNumberOfParameters(String goodParameter, String inputCommand, int countParameters){
         String[] data = inputCommand.split("[|]");
         if ( data.length != countParameters) {
             throw new IncorrectNumberOfParametersException( countParameters+ " parameters are expected but " +
@@ -40,26 +39,21 @@ public class CorrectParameterChecker {
         }
     }
 
-    public static String[] getCorrectNumberOfParameters( String inputCommand, int countParameters)
-            throws IncorrectNumberOfParametersException {
+    public static String[] getCorrectNumberOfParameters( String inputCommand, int countParameters){
         String[] parameters = inputCommand.split("[|]");
         if ( parameters.length != countParameters) {
-            throw new IncorrectNumberOfParametersException( countParameters+ " parameters are expected but " +
-                    parameters.length +
-                    " is entered");
+            throw new IncorrectNumberOfParametersException( String.format(
+                    "%s parameters are expected but %s is entered", countParameters, parameters.length ));
         }
             return parameters;
     }
 
-    public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand,
-                                                              int countParameters)
-            throws IncorrectNumberOfParametersException {
+    public static String[] getCorrectNumberOfParametersOrMore(String goodParameter, String inputCommand, int countParameters){
         String[] data = inputCommand.split("[|]");
         if ( data.length < countParameters) {
-            throw new IncorrectNumberOfParametersException(
-                    String.format( "Insert wrong number of parameters. " +
-                                    "Minimum %s parameters are expected but %s parameters are entered"
-                            , countParameters , data.length));
+            throw new IncorrectNumberOfParametersException( String.format(
+                    "Insert wrong number of parameters. Minimum %s parameters are expected but %s parameters are entered"
+                     , countParameters , data.length));
         }
         if (isCorrectFirstParameter( goodParameter, data[FIRST_PARAM]))  {
             return data;
@@ -69,14 +63,13 @@ public class CorrectParameterChecker {
         }
     }
 
-    public static String getCorrectParameter(String name, String inputCommand)
-            throws IncorrectNumberOfParametersException {
+    public static String getCorrectParameter(String name, String inputCommand){
         return getCorrectNumberOfParameters(name, inputCommand, 1)[FIRST_PARAM];
     }
 
 
 
-    public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand, int minCountParameters) throws IncorrectNumberOfParametersException {
+    public static String[] getGetOddParameters(String goodFirstParameter, String inputCommand, int minCountParameters){
         String[] data = inputCommand.split("[|]");
         isCorrectFirstParameter(goodFirstParameter, data[FIRST_PARAM]);
         if(data.length < minCountParameters){
@@ -91,12 +84,10 @@ public class CorrectParameterChecker {
         return data;
     }
 
-    private static boolean isCorrectFirstParameter(String goodFirstParameter, String parameter) throws IncorrectNumberOfParametersException {
+    private static boolean isCorrectFirstParameter(String goodFirstParameter, String parameter){
         if (!parameter.toLowerCase().equals(goodFirstParameter)) {
-            throw new IncorrectNumberOfParametersException("\"" + goodFirstParameter +
-                    "\" parameter are expected but \"" +
-                    parameter +
-                    "\" is entered");
+            throw new IncorrectNumberOfParametersException( String.format(
+                    "\"%s\" parameter are expected but \"%s\" is entered" ,goodFirstParameter , parameter ) );
         } else {
             return true;
         }

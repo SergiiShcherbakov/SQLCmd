@@ -39,7 +39,7 @@ public class Field {
 
     private String getSizeInText() {
         if (fieldType == FieldType.VARCHAR) {
-            return "(" + size + ")";
+            return String.format( "(%d)", size);
         } else {
             return "";
         }

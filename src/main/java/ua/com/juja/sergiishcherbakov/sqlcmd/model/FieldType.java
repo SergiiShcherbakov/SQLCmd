@@ -6,7 +6,4 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model;
 public enum FieldType {
     INTEGER,
     VARCHAR,
-    BIT,
-    REAL,
-    BIGINT
 }
