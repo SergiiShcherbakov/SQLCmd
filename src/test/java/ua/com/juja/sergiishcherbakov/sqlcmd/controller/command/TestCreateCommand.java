@@ -23,7 +23,7 @@ public class TestCreateCommand {
     Viewer viewer;
     Command createCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -36,7 +36,7 @@ public class TestCreateCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         List<String> addColumn = new LinkedList<>();
         addColumn.add("column1");
@@ -55,7 +55,7 @@ public class TestCreateCommand {
     @Test
     public void canProcessAndExitWithBadCommandName() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = createCommand.processAndExit(viewer, dBManager, "createe|tab|column1|column2|columnN");
@@ -70,7 +70,7 @@ public class TestCreateCommand {
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|");
@@ -85,7 +85,7 @@ public class TestCreateCommand {
     @Test
     public void canProcessAndExitWithStringWithoutColumns() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|tab");

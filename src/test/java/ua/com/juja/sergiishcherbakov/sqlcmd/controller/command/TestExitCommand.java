@@ -21,7 +21,7 @@ public class TestExitCommand {
     Viewer viewer;
     Command exitCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -33,39 +33,44 @@ public class TestExitCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exit");
         // then
         Mockito.verify(dBManager).closeConnection();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("good by, see you soon.");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertTrue(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
         // then
-        Mockito.verify(dBManager, never()).closeConnection();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

@@ -12,6 +12,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 
@@ -23,7 +24,7 @@ public class TestDeleteCommand {
     Viewer viewer;
     Command deleteCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -34,71 +35,53 @@ public class TestDeleteCommand {
     }
 
     @Test
-    public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException, SQLException {
+    public void canProcessAndExitWithGoodString() throws ClassNotFoundException, SQLException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1");
         // then
         Mockito.verify(dBManager).deleteRow("tab", "row1", "Value1") ;
+        Mockito.verify(dBManager, atLeastOnce()).selectAllFromTable("tab") ;
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("row with  value \"Value1\" in field \"row1\" was removed from table \"tab\"");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "deletee|tab|row1|Value1");
         // then
         Mockito.verify(dBManager, never()).deleteRow(any(), any(), any()) ;
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"delete\" parameter are expected but \"deletee\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1|Value2");
         // then
         Mockito.verify(dBManager, never()).deleteRow(any(), any(), any()) ;
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("4 parameters are expected but 5 is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
-//    @Test
-//    public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
-//        // given
-//        setMoks();
-//        boolean isExit = true;
-//        // when
-//        isExit = deleteCommand.processAndExit(viewer, dBManager, "find|");
-//        // then
-//        Mockito.verify(dBManager, never()).selectAllFromTable("");
-//        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
-//        Mockito.verify(viewer).write("please, try again");
-//        assertFalse(isExit);
-//    }
-//
-//    @Test
-//    public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
-//        // given
-//        setMoks();
-//        boolean isExit = true;
-//        // when
-//        isExit = deleteCommand.processAndExit(viewer, dBManager, "find");
-//        // then
-//        Mockito.verify(dBManager, never()).selectAllFromTable("");
-//        Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
-//        Mockito.verify(viewer).write("please, try again");
-//        assertFalse(isExit);
-//    }
 
     @Test
     public void getName(){

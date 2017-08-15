@@ -3,6 +3,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
         for (Command c : menuCommand) {
             programDescription.add( c.getDescription() );
         }
-        Collections.sort(programDescription, (o1, o2) -> o1.charAt(0) - o2.charAt(0));
+        Collections.sort(programDescription, Comparator.naturalOrder());
     }
 
     @Override

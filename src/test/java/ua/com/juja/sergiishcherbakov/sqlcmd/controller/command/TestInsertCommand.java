@@ -23,7 +23,7 @@ public class TestInsertCommand {
     Viewer viewer;
     Command insertCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -36,7 +36,7 @@ public class TestInsertCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         Map addRowToTable = new HashMap();
@@ -47,21 +47,25 @@ public class TestInsertCommand {
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|column1|value1|column2|value2|columnN|valueN");
         // then
         Mockito.verify(dBManager).insertRow("tab", addRowToTable);
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("row \"column1=value1, column2=value2, columnN=valueN\" was added to table \"tab\"");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insertt|tab|column1|value1|column2|value2|columnN|valueN");
         // then
+        Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"insert\" parameter are expected but \"insertt\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
 
     }
@@ -69,58 +73,66 @@ public class TestInsertCommand {
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|tab|column1|value1|column2|value2|columnN|valueN");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. An even number of parameters are expected and an odd are entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. " +
                 "Minimum 4 parameters are expected and 1 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutRows() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. Minimum 4 parameters are expected and 2 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. " +
                 "Minimum 4 parameters are expected and 1 parameters are entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

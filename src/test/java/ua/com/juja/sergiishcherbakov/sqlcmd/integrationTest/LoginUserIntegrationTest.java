@@ -188,15 +188,15 @@ public class LoginUserIntegrationTest {
                 "Enter your command or type help to get list commands:\n" +
                 "help\n" +
                 "the program supports next command:\n" +
+                "clear\t\tclear table specified by user\n" +
+                "\t\t\tformat the command:\n" +
+                "\t\t\tclear|tableName\n" +
                 "connect\t\tconnect to database specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tconnect|database|user|password\n" +
                 "create\t\tcreate new table specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tcreate|tableName|column1|column2|...|columnN\n" +
-                "clear\t\tclear table specified by user\n" +
-                "\t\t\tformat the command:\n" +
-                "\t\t\tclear|tableName\n" +
                 "delete\t\tdelete row from table by name and value specified by user \n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tdelete|tableName|column|value\n" +

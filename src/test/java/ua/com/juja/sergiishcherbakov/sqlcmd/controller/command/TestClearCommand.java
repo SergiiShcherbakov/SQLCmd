@@ -11,9 +11,7 @@ import java.sql.SQLException;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 /**
@@ -24,7 +22,7 @@ public class TestClearCommand {
     Viewer viewer;
     Command clearCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -37,70 +35,76 @@ public class TestClearCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         when(dBManager.clearTable("tab")).thenReturn(true);
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab");
         // then
         Mockito.verify(dBManager).clearTable("tab");
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("table tab was cleared");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear1|tab");
         // then
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"clear\" parameter are expected but \"clear1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).clearTable(any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab|tab");
         // then
-        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|");
         // then
-        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear");
         // then
-        Mockito.verify(dBManager, never()).clearTable(any());
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

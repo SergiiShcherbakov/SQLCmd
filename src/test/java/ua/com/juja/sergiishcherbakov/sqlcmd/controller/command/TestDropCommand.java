@@ -23,7 +23,7 @@ public class TestDropCommand {
     Viewer viewer;
     Command dropCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -36,13 +36,15 @@ public class TestDropCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab");
         // then
         Mockito.verify(dBManager).deleteTable("tab");
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("tab was removed");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
 
     }
@@ -50,14 +52,16 @@ public class TestDropCommand {
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
         // then
+        Mockito.verify(dBManager, never()).deleteTable(any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"drop\" parameter are expected but \"drop1\" is entered");
         Mockito.verify(viewer).write("please, try again");
-        Mockito.verify(dBManager, never()).deleteTable(any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
 
     }
@@ -65,42 +69,48 @@ public class TestDropCommand {
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

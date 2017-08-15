@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
 import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
+
 import java.sql.SQLException;
 
 import static junit.framework.TestCase.assertFalse;
@@ -22,7 +23,7 @@ public class TestConnectCommand {
     Viewer viewer;
     Command connectCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -35,7 +36,7 @@ public class TestConnectCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         Mockito.when(dBManager.setConnection("SQLCmd", "postgres" ,"z")).thenReturn(true);
@@ -43,22 +44,24 @@ public class TestConnectCommand {
         // then
         Mockito.verify(dBManager).closeConnection();
         Mockito.verify(dBManager).setConnection("SQLCmd", "postgres" ,"z");
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("connection to database SQLCmd is successful");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connectt|SQLCmd|postgres|z");
         // then
-        Mockito.verify(dBManager, never()).closeConnection();
-        Mockito.verify(dBManager, never()).setConnection(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"connect\" parameter are expected but \"connectt\" is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
 
     }
@@ -66,60 +69,68 @@ public class TestConnectCommand {
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|SQLCmd|postgres|z|z");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verify(dBManager, never()).setConnection(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("4 parameters are expected but 5 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutOneParameter() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|postgres|z");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verify(dBManager, never()).setConnection(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("4 parameters are expected but 3 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verify(dBManager, never()).setConnection(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("4 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = connectCommand.processAndExit(viewer, dBManager, "drop");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verify(dBManager, never()).setConnection(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("4 parameters are expected but 1 is entered");
         Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

@@ -22,7 +22,7 @@ public class TestHelpCommand {
     Viewer viewer;
     HelpMenuCommand helpCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
 
@@ -42,37 +42,45 @@ public class TestHelpCommand {
     @Test
     public void canProcessAndExitWithGoodStringAndFiveCommands() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "help");
         // then
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("the program supports next command:");
         Mockito.verify(viewer, times(5)).write("test description");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "helpp");
         // then
         Mockito.verify(viewer).write("\"help\" parameter are expected but \"helpp\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = helpCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(viewer).write("\"help\" parameter are expected but \"\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

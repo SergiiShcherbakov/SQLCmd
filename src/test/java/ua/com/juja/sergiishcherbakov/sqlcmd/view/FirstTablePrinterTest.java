@@ -9,6 +9,7 @@ import java.util.*;
  * Created by Sergii Shcherbakov on 14.05.2017.
  */
 public class FirstTablePrinterTest {
+
     @Test
     public void PrintTable() {
         // given
@@ -35,17 +36,18 @@ public class FirstTablePrinterTest {
         // when
         printer.printTable(tab);
         // then
+        String lineSeparator = System.lineSeparator();
         Mockito.verify(console).write(
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|testTab row 1 column 1ttt|testTab row 1 column 2ttt|testTab row 1 column 3ttt|" + System.lineSeparator() +
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|   testTab row 2 column 1|   testTab row 2 column 2|   testTab row 2 column 3|" + System.lineSeparator() +
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|testTab row 3 column 1ttt|testTab row 3 column 2ttt|testTab row 3 column 3ttt|" + System.lineSeparator() +
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|                     null|   testTab row 4 column 2|   testTab row 4 column 3|" + System.lineSeparator() +
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator() +
-        "|testTab row 5 column 1ttt|testTab row 5 column 2ttt|testTab row 5 column 3ttt|" + System.lineSeparator() +
-        "+-------------------------+-------------------------+-------------------------+" + System.lineSeparator()  );
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator +
+        "|testTab row 1 column 1ttt|testTab row 1 column 2ttt|testTab row 1 column 3ttt|" + lineSeparator +
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator +
+        "|   testTab row 2 column 1|   testTab row 2 column 2|   testTab row 2 column 3|" + lineSeparator +
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator +
+        "|testTab row 3 column 1ttt|testTab row 3 column 2ttt|testTab row 3 column 3ttt|" + lineSeparator +
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator +
+        "|                     null|   testTab row 4 column 2|   testTab row 4 column 3|" + lineSeparator +
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator +
+        "|testTab row 5 column 1ttt|testTab row 5 column 2ttt|testTab row 5 column 3ttt|" + lineSeparator +
+        "+-------------------------+-------------------------+-------------------------+" + lineSeparator);
     }
 }

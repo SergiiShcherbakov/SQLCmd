@@ -26,7 +26,7 @@ public class TestUpdateCommand {
     Viewer viewer;
     Command updateCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -39,7 +39,7 @@ public class TestUpdateCommand {
     @Test
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         Pair<String, String> where = new Pair<>("id", "1");
         HashMap<String, String> change = new HashMap<>();
@@ -54,61 +54,69 @@ public class TestUpdateCommand {
         Mockito.verify(dBManager).updateTable("tab", where, change);
         Mockito.verify(viewer).write("in table \"tab\" was updated row(s) with column \"id\"=\"1\"");
         Mockito.verify(dBManager).selectAllFromTable("tab");
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).printTable(table);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"updatee|tab|id|1|login|vasya" );
         // then
         Mockito.verify(dBManager, never()).updateTable(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"update\" parameter are expected but \"updatee\" is entered");
-        Mockito.verify(dBManager, never()).selectAllFromTable(any());
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verify(viewer, never()).printTable(any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutOneParameterWhenNeedChange() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update|tab|id|1|login|vasya|password" );
         // then
         Mockito.verify(dBManager, never()).updateTable(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. " +
                 "An even number of parameters are expected and an odd are entered");
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verify(dBManager, never()).selectAllFromTable(any());
         Mockito.verify(viewer, never()).printTable(any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParametersToChangeData() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update|tab|id|1" );
         // then
         Mockito.verify(dBManager, never()).updateTable(any(), any(), any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("insert wrong number of parameters. " +
                 "Minimum 6 parameters are expected and 4 parameters are entered");
-        Mockito.verify(dBManager, never()).selectAllFromTable(any());
-        Mockito.verify(viewer, never()).printTable(any());
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         boolean isExit = true;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update" );
@@ -116,8 +124,11 @@ public class TestUpdateCommand {
         Mockito.verify(dBManager, never()).updateTable(any(), any(), any());
         Mockito.verify(viewer).write("insert wrong number of parameters. " +
                 "Minimum 6 parameters are expected and 1 parameters are entered");
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verify(dBManager, never()).selectAllFromTable(any());
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer, never()).printTable(any());
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

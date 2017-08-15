@@ -16,8 +16,9 @@ import static org.mockito.Mockito.mock;
  */
 public class ConsoleViewerTest {
 
-    ConsoleMock consoleMock;
-    Viewer viewer;
+    private ConsoleMock consoleMock;
+    private Viewer viewer;
+
     @Before
     public void set(){
          consoleMock = new ConsoleMock();

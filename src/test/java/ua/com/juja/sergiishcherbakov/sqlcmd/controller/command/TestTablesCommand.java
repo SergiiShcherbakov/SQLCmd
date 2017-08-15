@@ -24,7 +24,7 @@ public class TestTablesCommand {
     Viewer viewer;
     Command tablesCommand;
 
-    private void setMoks() {
+    private void setMocks() {
         dBManager = mock(DatabaseManager.class);
         viewer = mock(Viewer.class);
     }
@@ -37,7 +37,7 @@ public class TestTablesCommand {
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         tablesCommand = new TablesCommand();
-        setMoks();
+        setMocks();
         List<String> response = new LinkedList<>();
         response.add("User");
         response.add("Bugs");
@@ -47,14 +47,16 @@ public class TestTablesCommand {
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
         Mockito.verify(dBManager).getTablesNames();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("[User, Bugs]");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
     @Test
     public void canProcessAndExitWithGoodStringAndWithoutTables() throws SQLException, ClassNotFoundException {
         // given
         tablesCommand = new TablesCommand();
-        setMoks();
+        setMocks();
         List<String> response = new LinkedList<>();
         // when
         boolean isExit = true;
@@ -62,33 +64,41 @@ public class TestTablesCommand {
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
         Mockito.verify(dBManager).getTablesNames();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("[]");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tabless");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verify(viewer).write("\"tables\" parameter are expected but \"tabless\" is entered");
+        Mockito.verifyNoMoreInteractions(dBManager);
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 
     @Test
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
-        setMoks();
+        setMocks();
         // when
         boolean isExit = true;
         isExit = tablesCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
+        Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"tables\" parameter are expected but \"\" is entered");
+        Mockito.verify(viewer).write("please, try again");
+        Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
 

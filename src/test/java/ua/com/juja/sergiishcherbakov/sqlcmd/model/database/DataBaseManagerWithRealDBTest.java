@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
  */
 public class DataBaseManagerWithRealDBTest {
 
-    private JDBCPostgresSQLDatabaseManager dbm;
+    private JDBCPostgresSQLDatabaseManager dbManager;
 
 
     @BeforeClass
@@ -33,8 +33,8 @@ public class DataBaseManagerWithRealDBTest {
     }
     @Before
     public void set() throws SQLException, ClassNotFoundException {
-        dbm = new JDBCPostgresSQLDatabaseManager();
-        dbm.setConnection(DBSetupForTests.TEST_DB, DBSetupForTests.getDBLogin(), DBSetupForTests.getDBPassword());
+        dbManager = new JDBCPostgresSQLDatabaseManager();
+        dbManager.setConnection(DBSetupForTests.TEST_DB, DBSetupForTests.getDBLogin(), DBSetupForTests.getDBPassword());
     }
 
     @Test
@@ -45,33 +45,33 @@ public class DataBaseManagerWithRealDBTest {
         String tableName = "tab"  + Math.abs( new Random().nextInt(100));
         // when
         try {
-            dbm.deleteTable(tableName);
+            dbManager.deleteTable(tableName);
         } catch ( RuntimeException e){
             // do nothing
         }
-        dbm.createTable(tableName , new Field[] {field, field1});
-        List<String> tablesNames = dbm.getTablesNames();
+        dbManager.createTable(tableName , new Field[] {field, field1});
+        List<String> tablesNames = dbManager.getTablesNames();
         // then
         assertEquals( tablesNames.contains(tableName), true );
-        dbm.deleteTable(tableName);
+        dbManager.deleteTable(tableName);
     }
 
     @Test
     public void deleteNotExistTable() throws SQLException, ClassNotFoundException {
         // given
         String tableName = "tab"  + Math.abs( new Random().nextInt(10));
-        List<String> tablesNames = dbm.getTablesNames();
+        List<String> tablesNames = dbManager.getTablesNames();
         while (tablesNames.contains(tableName)){
             tableName += Math.abs( new Random().nextInt(10));
         }
         // when
         try {
-            dbm.deleteTable(tableName);
+            dbManager.deleteTable(tableName);
             fail("Expected exception");
         } catch ( RuntimeException e){
             // do nothing
         }
-        tablesNames = dbm.getTablesNames();
+        tablesNames = dbManager.getTablesNames();
         // then
         assertEquals( tablesNames.contains(tableName), false );
     }

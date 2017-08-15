@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseManagerUnitTest {
     @Mock
-    ConnectionController connectionMock = Mockito.mock(ConnectionController.class);
+    ConnectionController connectionControllerMock = Mockito.mock(ConnectionController.class);
 
     @InjectMocks
     JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
@@ -32,7 +32,7 @@ public class DatabaseManagerUnitTest {
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSQL = "update public.user set password='tttt', login='petya'  where id=1 ;";
         when(statement.execute(goodSQL)).thenReturn(true);
@@ -55,7 +55,7 @@ public class DatabaseManagerUnitTest {
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSQL = "update public.temppp set login='stiven'  where id=7 ;";
         when(statement.execute(goodSQL)).thenReturn(true);
@@ -81,7 +81,7 @@ public class DatabaseManagerUnitTest {
         List<String> fields = Arrays.asList("id", "br");
         String table = "tt";
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSQL = "create table if not exists public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  )";
         when(statement.execute(goodSQL)).thenReturn(true);
@@ -102,7 +102,7 @@ public class DatabaseManagerUnitTest {
         List<String> fields = Arrays.asList("id", "br", "ks");
         String table = "tt";
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSQL = "create table if not exists public.tt( id VARCHAR(50)  NULL  ,br VARCHAR(50)  NULL  ,ks VARCHAR(50)  NULL  )";
         when(statement.execute(goodSQL)).thenReturn(true);
@@ -128,7 +128,7 @@ public class DatabaseManagerUnitTest {
         expectedTable.add(Arrays.asList("one", "two"));
         String table = "tt";
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSQL = "select * from public.tt";
         when(statement.executeQuery(goodSQL)).thenReturn(resultSet);
@@ -153,7 +153,7 @@ public class DatabaseManagerUnitTest {
         //when
          dbManager.closeConnection();
         //then
-        Mockito.verify(connectionMock).closeConnection();
+        Mockito.verify(connectionControllerMock).closeConnection();
     }
 
     @Test
@@ -162,7 +162,7 @@ public class DatabaseManagerUnitTest {
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSql = "truncate table  public.tt";
         String tableName = "tt";
@@ -180,7 +180,7 @@ public class DatabaseManagerUnitTest {
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSql = "delete from public.tt  where id= 'kkk' ;";
         String tableName = "tt";
@@ -198,7 +198,7 @@ public class DatabaseManagerUnitTest {
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
 
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
         String goodSql = "delete from public.tt  where id= 10 ;";
         String tableName = "tt";
@@ -215,7 +215,7 @@ public class DatabaseManagerUnitTest {
         //given
         Connection connection = Mockito.mock(Connection.class);
         Statement statement = Mockito.mock(Statement.class);
-        when(connectionMock.getConnection()).thenReturn(connection);
+        when(connectionControllerMock.getConnection()).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
 
         Map<String, String> rows = new HashMap<>();
