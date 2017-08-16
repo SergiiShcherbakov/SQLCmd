@@ -40,8 +40,7 @@ public class UpdateCommand extends CommandSkeleton implements Command {
         viewer.write("in table \"" + parameters[TABLE_NAME]
                 + "\" was updated row(s) with column \"" + parameters[2] +
                 "\"=\"" + parameters[VALUE] + "\"" );
-        List<List <String>> table = databaseManager.selectAllFromTable(parameters[TABLE_NAME]);
-        return table;
+        return databaseManager.selectAllFromTable(parameters[TABLE_NAME]);
     }
 
     @Override
