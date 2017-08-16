@@ -188,6 +188,7 @@ public class LoginUserIntegrationTest {
                 "Enter your command or type help to get list commands:\n" +
                 "help\n" +
                 "the program supports next command:\n" +
+                "\t\n" +
                 "clear\t\tclear table specified by user\n" +
                 "\t\t\tformat the command:\n" +
                 "\t\t\tclear|tableName\n" +

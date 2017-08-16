@@ -3,6 +3,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Modifier;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class MenuCommandFactory {
                     throw new RuntimeException(e.getCause());
                 }
         }
+        result.sort(Comparator.comparing(Command::getName).reversed());
         return result;
     }
 

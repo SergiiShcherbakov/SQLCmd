@@ -33,18 +33,12 @@ public class MainMenu {
         viewer.write("Enter your command or type help to get list commands:");
         String inputCommand  = viewer.read();
 
-        boolean commandWasProcessed = false;
         boolean isTheLastCommand = false;
         for (Command command: menuCommandList) {
             if(command.canProcess(inputCommand)){
                 isTheLastCommand = command.processAndExit(viewer, databaseManager, inputCommand);
-                commandWasProcessed = true;
                 break;
             }
-        }
-        if (!commandWasProcessed) {
-            viewer.write( String.format( "%s does not supported.", inputCommand));
-            return false;
         }
         return isTheLastCommand;
     }

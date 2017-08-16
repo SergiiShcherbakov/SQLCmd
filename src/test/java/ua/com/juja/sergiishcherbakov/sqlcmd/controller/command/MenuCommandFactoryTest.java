@@ -18,7 +18,7 @@ public class MenuCommandFactoryTest {
     @Test
     public void countOfCommandsTest(){
         //given
-        int expectedCountOfCommands = 11;
+        int expectedCountOfCommands = 12;
         //when
         int size = commandList.size();
         //then
