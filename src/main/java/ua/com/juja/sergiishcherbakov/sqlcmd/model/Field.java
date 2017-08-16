@@ -12,10 +12,10 @@ public class Field {
     final private FieldType fieldType;
     final private int size;
 
-    public Field(String name, FieldType fieldType, boolean isPrimaryKey, boolean inNull, boolean isUnique, int size) {
+    public Field(String name, FieldType fieldType, boolean isPrimaryKey, boolean isNull, boolean isUnique, int size) {
         this.name = name;
         this.isPrimaryKey = isPrimaryKey;
-        this.isNull = inNull;
+        this.isNull = isNull;
         this.isUnique = isUnique;
         this.fieldType = fieldType;
         this.size = size;

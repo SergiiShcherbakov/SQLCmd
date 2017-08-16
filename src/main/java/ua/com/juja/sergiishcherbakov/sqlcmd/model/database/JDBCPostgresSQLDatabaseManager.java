@@ -193,6 +193,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         try {
             metadata = rs.getMetaData();
             int i=1;
+            //noinspection InfiniteLoopStatement
             while (true){
                 String name = metadata.getColumnName(i++);
                 result.add(name);
@@ -203,10 +204,12 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return result;
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     private List<String> getDataFromRow(ResultSet rs) {
         List<String> result = new LinkedList<>();
         try {
             int i=1;
+            //noinspection InfiniteLoopStatement
             while (true){
                 String data = rs.getString(i++);
                 result.add(data);

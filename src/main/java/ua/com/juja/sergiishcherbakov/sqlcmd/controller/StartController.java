@@ -28,7 +28,6 @@ public class StartController {
             command =  viewer.read();
         }
         new MainMenu(databaseManager, viewer, Command.class).start();
-        return;
     }
 
     private void printWelcome() {

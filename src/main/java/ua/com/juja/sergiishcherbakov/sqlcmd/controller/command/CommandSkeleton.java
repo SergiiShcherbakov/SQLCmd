@@ -8,10 +8,10 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  */
 public abstract class CommandSkeleton implements Command {
 
-    String name;
-    String description;
-    Viewer viewer;
-    DatabaseManager databaseManager;
+    protected String name;
+    protected String description;
+    protected Viewer viewer;
+    protected DatabaseManager databaseManager;
 
     private void setViewer(Viewer viewer) {
         this.viewer = viewer;
