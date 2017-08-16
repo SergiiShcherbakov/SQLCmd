@@ -16,7 +16,7 @@ import static org.junit.Assert.assertFalse;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PostgreSQLConnectionControllerUnitTest {
-    private Connection connection = Mockito.mock(Connection.class);
+    private final Connection connection = Mockito.mock(Connection.class);
 
     @InjectMocks
     private ConnectionController connectionController =  new PostgreSQLConnectionController();

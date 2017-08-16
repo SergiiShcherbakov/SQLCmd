@@ -10,8 +10,8 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  * The class provide user registration and starts main menu
  */
 public class StartController {
-    private Viewer viewer;
-    private DatabaseManager databaseManager;
+    private final Viewer viewer;
+    private final DatabaseManager databaseManager;
 
     public StartController(Viewer viewer , DatabaseManager databaseManager ) {
         this.viewer = viewer;

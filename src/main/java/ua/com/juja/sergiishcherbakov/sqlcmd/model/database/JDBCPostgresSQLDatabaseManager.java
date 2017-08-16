@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     private static final int MAX_STRING_SIZE = 50;
+    @SuppressWarnings("CanBeFinal")
     @Resource
     private  ConnectionController connectionController;
 

@@ -15,8 +15,11 @@ import java.util.Properties;
  */
 public class DBSetupForTests {
 
+    @SuppressWarnings("CanBeFinal")
     private static  String real_db;
+    @SuppressWarnings("CanBeFinal")
     private  static String db_login;
+    @SuppressWarnings("CanBeFinal")
     private static  String db_password ;
 
     static  {

@@ -21,10 +21,12 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DatabaseManagerUnitTest {
     @Mock
-     ConnectionController connectionControllerMock = Mockito.mock(ConnectionController.class);
+    private
+    ConnectionController connectionControllerMock = Mockito.mock(ConnectionController.class);
 
     @InjectMocks
-     JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
+    private
+    JDBCPostgresSQLDatabaseManager dbManager = new JDBCPostgresSQLDatabaseManager();
 
     @Test
     public void goodUpdateCommandByIdwWith2Parameters() throws SQLException, ClassNotFoundException {
