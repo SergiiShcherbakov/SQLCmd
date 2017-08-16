@@ -4,7 +4,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.model;
  * Created by Sergii Shcherbakov  on 21.04.2017.
  */
 public class Field {
-    private String name;
+    private final String name;
 
     final private boolean isPrimaryKey;
     final private boolean isNull;

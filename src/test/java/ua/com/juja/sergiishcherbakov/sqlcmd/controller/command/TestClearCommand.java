@@ -18,9 +18,9 @@ import static org.mockito.Mockito.when;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestClearCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command clearCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command clearCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

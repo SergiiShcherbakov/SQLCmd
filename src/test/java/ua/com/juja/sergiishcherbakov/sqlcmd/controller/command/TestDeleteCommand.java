@@ -20,9 +20,9 @@ import static org.mockito.Mockito.never;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestDeleteCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command deleteCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command deleteCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

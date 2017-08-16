@@ -5,9 +5,9 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class ClearCommand extends CommandSkeleton  {
+class ClearCommand extends CommandSkeleton  {
 
-    public static final int TABLE_NAME = 1;
+    private static final int TABLE_NAME = 1;
 
     public ClearCommand() {
         super("clear",

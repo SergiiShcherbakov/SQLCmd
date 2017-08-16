@@ -7,8 +7,8 @@ import java.io.*;
  */
 public class ConsoleMock {
 
-    private ConfigurableInputStream in;
-    private ByteArrayOutputStream out;
+    private final ConfigurableInputStream in;
+    private final ByteArrayOutputStream out;
 
     public ConsoleMock() {
         out = new ByteArrayOutputStream();

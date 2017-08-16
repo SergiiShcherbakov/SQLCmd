@@ -19,9 +19,9 @@ import static org.mockito.Mockito.*;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestInsertCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command insertCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command insertCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

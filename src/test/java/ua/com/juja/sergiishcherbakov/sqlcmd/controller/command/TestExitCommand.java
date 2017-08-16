@@ -17,9 +17,9 @@ import static org.mockito.Mockito.never;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestExitCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command exitCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command exitCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

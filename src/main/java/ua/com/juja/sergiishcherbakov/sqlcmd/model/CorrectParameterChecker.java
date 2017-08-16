@@ -9,7 +9,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.exeptions.IncorrectNumberOfPar
 
 public class CorrectParameterChecker {
 
-    public static final int FIRST_PARAM = 0;
+    private static final int FIRST_PARAM = 0;
 
     /**
      * The method checks is correct parameters in input command.

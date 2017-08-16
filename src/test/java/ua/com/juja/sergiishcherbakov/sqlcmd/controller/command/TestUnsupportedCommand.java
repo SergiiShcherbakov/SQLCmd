@@ -15,9 +15,9 @@ import static org.mockito.Mockito.mock;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestUnsupportedCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command updateCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command updateCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

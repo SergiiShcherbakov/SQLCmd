@@ -8,10 +8,10 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  */
 public abstract class CommandSkeleton implements Command {
 
-    protected String name;
-    protected String description;
-    protected Viewer viewer;
-    protected DatabaseManager databaseManager;
+    private final String name;
+    private final String description;
+    Viewer viewer;
+    DatabaseManager databaseManager;
 
     private void setViewer(Viewer viewer) {
         this.viewer = viewer;
@@ -21,7 +21,7 @@ public abstract class CommandSkeleton implements Command {
         this.databaseManager = databaseManager;
     }
 
-    public CommandSkeleton(String name, String description) {
+    CommandSkeleton(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -56,7 +56,7 @@ public abstract class CommandSkeleton implements Command {
         return false;
     }
 
-    protected boolean canProcessWithoutParameters(String command) {
+    boolean canProcessWithoutParameters(String command) {
         return command.toLowerCase().equals(name);
     }
 
@@ -64,7 +64,7 @@ public abstract class CommandSkeleton implements Command {
 
     abstract  Object prepareDataToViewer(String [] parameters);
 
-    protected void viewResult(Object result){
+    void viewResult(Object result){
          viewer.write((String) result);
      }
 }

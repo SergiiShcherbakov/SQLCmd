@@ -14,9 +14,9 @@ import java.util.Map;
  * Created by Sergii Shcherbakov on 21.04.2017.
  */
 public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
-    public static final int MAX_STRING_SIZE = 50;
+    private static final int MAX_STRING_SIZE = 50;
     @Resource
-    private ConnectionController connectionController;
+    private  ConnectionController connectionController;
 
     public JDBCPostgresSQLDatabaseManager() {
         this.connectionController =  new PostgreSQLConnectionController( );

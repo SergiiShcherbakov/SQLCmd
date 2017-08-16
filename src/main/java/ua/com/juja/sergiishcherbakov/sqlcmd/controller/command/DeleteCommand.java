@@ -5,11 +5,11 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class DeleteCommand extends CommandSkeleton implements Command {
+class DeleteCommand extends CommandSkeleton implements Command {
 
-    public static final int TABLE_NAME = 1;
-    public static final int COLUMN = 2;
-    public static final int VALUE = 3;
+    private static final int TABLE_NAME = 1;
+    private static final int COLUMN = 2;
+    private static final int VALUE = 3;
 
     public DeleteCommand() {
         super("delete",

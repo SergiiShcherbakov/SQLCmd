@@ -18,9 +18,9 @@ import static org.mockito.Mockito.*;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestHelpCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    HelpMenuCommand helpCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private HelpMenuCommand helpCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

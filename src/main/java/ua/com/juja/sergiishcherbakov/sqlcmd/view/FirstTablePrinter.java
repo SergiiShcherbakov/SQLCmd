@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Sergii Shcherbakov on 13.05.2017.
  */
 public class FirstTablePrinter implements TablePrinter {
-    private Viewer viewer;
+    private final Viewer viewer;
 
     public FirstTablePrinter(Viewer viewer) {
         this.viewer = viewer;

@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 30.05.2017.
  */
-public class CreateCommand extends CommandSkeleton {
+class CreateCommand extends CommandSkeleton {
 
-    public static final int TABLE_NAME = 1;
+    private static final int TABLE_NAME = 1;
 
     public CreateCommand() {
         super("create",

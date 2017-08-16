@@ -10,11 +10,11 @@ import java.util.Map;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class UpdateCommand extends CommandSkeleton implements Command {
+class UpdateCommand extends CommandSkeleton implements Command {
 
-    public static final int TABLE_NAME = 1;
-    public static final int COLUMN = 2;
-    public static final int VALUE = 3;
+    private static final int TABLE_NAME = 1;
+    private static final int COLUMN = 2;
+    private static final int VALUE = 3;
 
     public UpdateCommand() {
         super("update",

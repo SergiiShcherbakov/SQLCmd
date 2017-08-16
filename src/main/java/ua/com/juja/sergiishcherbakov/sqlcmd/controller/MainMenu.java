@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 23.04.2017.
  */
-public class MainMenu {
+class MainMenu {
 
-    private DatabaseManager databaseManager;
-    private Viewer viewer;
-    private List <Command> menuCommandList;
+    private final DatabaseManager databaseManager;
+    private final Viewer viewer;
+    private final List <Command> menuCommandList;
 
     public MainMenu(DatabaseManager databaseManager, Viewer viewer, Class classs) {
         this.databaseManager = databaseManager;

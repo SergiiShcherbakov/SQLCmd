@@ -16,10 +16,10 @@ import static org.junit.Assert.assertFalse;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PostgreSQLConnectionControllerUnitTest {
-    Connection connection = Mockito.mock(Connection.class);
+    private Connection connection = Mockito.mock(Connection.class);
 
     @InjectMocks
-    ConnectionController connectionController =  new PostgreSQLConnectionController();
+    private ConnectionController connectionController =  new PostgreSQLConnectionController();
 
     @Test
     public void isWorkCloseConnection_Test() throws SQLException, ClassNotFoundException {

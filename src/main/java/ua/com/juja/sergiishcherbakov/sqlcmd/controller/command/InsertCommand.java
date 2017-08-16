@@ -8,9 +8,9 @@ import java.util.Map;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class InsertCommand extends CommandSkeleton implements Command {
+class InsertCommand extends CommandSkeleton implements Command {
 
-    public static final int TABLE_NAME = 1;
+    private static final int TABLE_NAME = 1;
 
     public InsertCommand() {
         super("insert",

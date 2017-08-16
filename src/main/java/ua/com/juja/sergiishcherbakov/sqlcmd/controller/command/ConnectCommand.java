@@ -9,10 +9,10 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  */
 public class ConnectCommand extends CommandSkeleton implements Command {
 
-    public static final int DBName = 1;
-    public static final int LOGIN = 2;
-    public static final int PASSWORD = 3;
-    public static final int COMMAND_NAME = 0;
+    private static final int DBName = 1;
+    private static final int LOGIN = 2;
+    private static final int PASSWORD = 3;
+    private static final int COMMAND_NAME = 0;
 
     public ConnectCommand() {
         super("connect",

@@ -5,9 +5,9 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class DropCommand extends CommandSkeleton implements Command {
+class DropCommand extends CommandSkeleton implements Command {
 
-    public static final int TABLE_NAME = 1;
+    private static final int TABLE_NAME = 1;
 
     public DropCommand() {
         super("drop",

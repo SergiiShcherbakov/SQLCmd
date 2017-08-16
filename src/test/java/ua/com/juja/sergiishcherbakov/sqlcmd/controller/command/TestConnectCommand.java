@@ -19,9 +19,9 @@ import static org.mockito.Mockito.never;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestConnectCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command connectCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command connectCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

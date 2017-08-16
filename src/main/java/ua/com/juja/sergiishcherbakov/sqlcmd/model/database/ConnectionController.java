@@ -6,7 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by Sergii Shcherbakov on 21.04.2017.
  */
-public interface ConnectionController {
+interface ConnectionController {
 
     void setParameters(String databaseName, String login, String password)
             throws SQLException, ClassNotFoundException;

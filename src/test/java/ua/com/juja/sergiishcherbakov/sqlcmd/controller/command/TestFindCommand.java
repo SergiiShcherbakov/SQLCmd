@@ -21,9 +21,9 @@ import static org.mockito.Mockito.never;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestFindCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command findCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command findCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

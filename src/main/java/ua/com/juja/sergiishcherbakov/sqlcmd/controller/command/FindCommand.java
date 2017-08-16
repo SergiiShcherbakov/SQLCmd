@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * Created by Sergii Shcherbakov on 06.05.2017.
  */
-public class FindCommand extends CommandSkeleton implements Command {
+class FindCommand extends CommandSkeleton implements Command {
 
-    public static final int TABLE_NAME = 1;
+    private static final int TABLE_NAME = 1;
 
     public FindCommand() {
         super("find",

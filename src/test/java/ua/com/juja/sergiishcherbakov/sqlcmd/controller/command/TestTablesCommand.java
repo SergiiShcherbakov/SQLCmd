@@ -20,9 +20,9 @@ import static org.mockito.Mockito.when;
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
 public class TestTablesCommand {
-    DatabaseManager dBManager;
-    Viewer viewer;
-    Command tablesCommand;
+    private DatabaseManager dBManager;
+    private Viewer viewer;
+    private Command tablesCommand;
 
     private void setMocks() {
         dBManager = mock(DatabaseManager.class);

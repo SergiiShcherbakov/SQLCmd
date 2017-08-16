@@ -5,7 +5,7 @@ package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
  */
 public class UnsupportedCommand extends CommandSkeleton  {
 
-    public static final int INPUT_WRONG_COMMAND = 0;
+    private static final int INPUT_WRONG_COMMAND = 0;
 
     public UnsupportedCommand() {
         super("", "");
