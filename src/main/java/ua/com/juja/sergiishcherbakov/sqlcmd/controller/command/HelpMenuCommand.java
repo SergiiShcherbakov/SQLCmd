@@ -1,5 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import com.google.common.collect.Lists;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 
 import java.util.Collections;
@@ -24,7 +25,7 @@ public class HelpMenuCommand extends CommandSkeleton implements  HelpMenu, Comma
         for (Command c : menuCommand) {
             programDescription.add( c.getDescription() );
         }
-        Collections.sort(programDescription, Comparator.naturalOrder());
+         programDescription.sort(Comparator.naturalOrder());
     }
 
     @Override

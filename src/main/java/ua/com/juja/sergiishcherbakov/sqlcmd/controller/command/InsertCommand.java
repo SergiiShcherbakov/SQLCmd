@@ -30,7 +30,7 @@ public class InsertCommand extends CommandSkeleton implements Command {
         StringBuilder row = new StringBuilder();
         for (int i = 2; i <parameters.length ; i+=2) {
             newRow.put(parameters[i], parameters[i+ 1]);
-            row.append(parameters[i] + "=" + parameters[i+ 1] + ", ");
+            row.append(parameters[i]).append("=").append(parameters[i + 1]).append(", ");
         }
         databaseManager.insertRow(parameters[TABLE_NAME], newRow);
         row.deleteCharAt(row.length()- 1);

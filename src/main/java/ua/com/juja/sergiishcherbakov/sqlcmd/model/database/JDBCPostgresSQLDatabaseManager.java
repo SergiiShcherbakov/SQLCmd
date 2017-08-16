@@ -116,7 +116,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         StringBuilder columns = new StringBuilder();
         StringBuilder values = new StringBuilder();
         for (Map.Entry<String, String> row : addRowToTable.entrySet()) {
-            columns.append(row.getKey() + ", ");
+            columns.append(row.getKey()).append(", ");
             addDataByValues(values, row.getValue() );
         }
         columns.deleteCharAt(columns.length()-2);
@@ -168,6 +168,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
     private Connection getConnection(){
         try {
             Connection connection = connectionController.getConnection();
+            //noinspection ConstantConditions
             if(connection != null || !connection.isClosed()) {
                 return connection;
             } else {
@@ -180,9 +181,9 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
     private void addDataByValues(StringBuilder values, String value) {
         if (isNumeric(value)) {
-            values.append(value + ", ");
+            values.append(value).append(", ");
         } else {
-            values.append("'" + value + "', ");
+            values.append("'").append(value).append("', ");
         }
     }
 

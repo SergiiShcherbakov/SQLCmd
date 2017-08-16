@@ -64,7 +64,7 @@ public class DatabaseManagerUnitTest {
         Pair<String, String> idColumn = new Pair<>("id", "7");
         Map<String, String> changes = new HashMap<>();
         changes.put("login", "stiven");
-        boolean answer = false;
+        boolean answer;
         //when
         answer = dbManager.updateTable(table, idColumn, changes);
         //then
@@ -166,12 +166,12 @@ public class DatabaseManagerUnitTest {
         when(connection.createStatement()).thenReturn(statement);
         String goodSql = "truncate table  public.tt";
         String tableName = "tt";
-        boolean ansewer = false;
+        boolean answer;
         //when
-         ansewer = dbManager.clearTable(tableName);
+         answer = dbManager.clearTable(tableName);
         //then
         Mockito.verify(statement).execute(goodSql);
-        assertTrue(ansewer);
+        assertTrue(answer);
     }
 
     @Test
