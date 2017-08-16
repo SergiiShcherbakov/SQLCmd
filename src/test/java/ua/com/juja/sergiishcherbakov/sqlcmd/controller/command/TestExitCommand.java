@@ -35,7 +35,7 @@ public class TestExitCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exit");
         // then
         Mockito.verify(dBManager).closeConnection();
@@ -50,7 +50,7 @@ public class TestExitCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
@@ -65,7 +65,7 @@ public class TestExitCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = exitCommand.processAndExit(viewer, dBManager, "exitt");
         // then
         Mockito.verifyNoMoreInteractions(dBManager);

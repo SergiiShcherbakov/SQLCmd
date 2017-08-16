@@ -33,7 +33,7 @@ public class TestUnsupportedCommand {
     public void canProcessAndExitWithBadString() {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"khaksfhlahsf" );
         // then

@@ -38,7 +38,7 @@ public class TestDropCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab");
         // then
         Mockito.verify(dBManager).deleteTable("tab");
@@ -54,7 +54,7 @@ public class TestDropCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop1|tab");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
@@ -71,7 +71,7 @@ public class TestDropCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|tab|tab");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
@@ -87,7 +87,7 @@ public class TestDropCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop|");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());
@@ -103,7 +103,7 @@ public class TestDropCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = dropCommand.processAndExit(viewer, dBManager, "drop");
         // then
         Mockito.verify(dBManager, never()).deleteTable(any());

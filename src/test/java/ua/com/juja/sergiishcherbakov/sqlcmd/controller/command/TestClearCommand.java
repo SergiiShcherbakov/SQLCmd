@@ -37,7 +37,7 @@ public class TestClearCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         when(dBManager.clearTable("tab")).thenReturn(true);
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab");
         // then
@@ -53,7 +53,7 @@ public class TestClearCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear1|tab");
         // then
         Mockito.verifyNoMoreInteractions(dBManager);
@@ -68,7 +68,7 @@ public class TestClearCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|tab|tab");
         // then
         Mockito.verify(viewer).write("2 parameters are expected but 3 is entered");
@@ -83,7 +83,7 @@ public class TestClearCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear|");
         // then
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");
@@ -98,7 +98,7 @@ public class TestClearCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = clearCommand.processAndExit(viewer, dBManager, "clear");
         // then
         Mockito.verify(viewer).write("2 parameters are expected but 1 is entered");

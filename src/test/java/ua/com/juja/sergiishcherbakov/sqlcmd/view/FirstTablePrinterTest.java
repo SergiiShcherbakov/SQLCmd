@@ -19,7 +19,7 @@ public class FirstTablePrinterTest {
         List<List<String>> tab = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             List<String> row = new ArrayList<>();
-            String add = "";
+            String add ;
             for (int j = 0; j < 3; j++) {
                 add = "";
                 if(i % 2 == 0) {

@@ -38,7 +38,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         Mockito.when(dBManager.setConnection("SQLCmd", "postgres" ,"z")).thenReturn(true);
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|SQLCmd|postgres|z");
         // then
@@ -55,7 +55,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connectt|SQLCmd|postgres|z");
         // then
         Mockito.verifyNoMoreInteractions(dBManager);
@@ -71,7 +71,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|SQLCmd|postgres|z|z");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
@@ -88,7 +88,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|postgres|z");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
@@ -105,7 +105,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = connectCommand.processAndExit(viewer, dBManager, "connect|");
         // then
         Mockito.verify(dBManager, never()).closeConnection();
@@ -122,7 +122,7 @@ public class TestConnectCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = connectCommand.processAndExit(viewer, dBManager, "drop");
         // then
         Mockito.verify(dBManager, never()).closeConnection();

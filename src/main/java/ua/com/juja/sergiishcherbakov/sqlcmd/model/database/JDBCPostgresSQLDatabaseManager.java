@@ -189,7 +189,7 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
 
     private List<String> getTitles(ResultSet rs) {
         LinkedList<String> result = new LinkedList<>();
-        ResultSetMetaData metadata = null;
+        ResultSetMetaData metadata;
         try {
             metadata = rs.getMetaData();
             int i=1;

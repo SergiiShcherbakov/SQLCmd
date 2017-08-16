@@ -44,7 +44,7 @@ public class TestHelpCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = helpCommand.processAndExit(viewer, dBManager, "help");
         // then
         Mockito.verifyNoMoreInteractions(dBManager);
@@ -59,7 +59,7 @@ public class TestHelpCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = helpCommand.processAndExit(viewer, dBManager, "helpp");
         // then
         Mockito.verify(viewer).write("\"help\" parameter are expected but \"helpp\" is entered");
@@ -74,7 +74,7 @@ public class TestHelpCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = helpCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(viewer).write("\"help\" parameter are expected but \"\" is entered");

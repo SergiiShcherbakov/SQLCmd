@@ -39,7 +39,7 @@ public class TestUpdateCommand {
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         Pair<String, String> where = new Pair<>("id", "1");
         HashMap<String, String> change = new HashMap<>();
         change.put("login" , "vasya");
@@ -63,7 +63,7 @@ public class TestUpdateCommand {
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"updatee|tab|id|1|login|vasya" );
         // then
@@ -80,7 +80,7 @@ public class TestUpdateCommand {
     public void canProcessAndExitWithoutOneParameterWhenNeedChange() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update|tab|id|1|login|vasya|password" );
         // then
@@ -99,7 +99,7 @@ public class TestUpdateCommand {
     public void canProcessAndExitWithStringWithoutParametersToChangeData() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update|tab|id|1" );
         // then
@@ -116,7 +116,7 @@ public class TestUpdateCommand {
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = updateCommand.processAndExit(viewer, dBManager,"update" );
         // then

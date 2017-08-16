@@ -37,7 +37,7 @@ public class TestCreateCommand {
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         List<String> addColumn = new LinkedList<>();
         addColumn.add("column1");
         addColumn.add("column2");
@@ -56,7 +56,7 @@ public class TestCreateCommand {
     public void canProcessAndExitWithBadCommandName() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = createCommand.processAndExit(viewer, dBManager, "createe|tab|column1|column2|columnN");
         // then
@@ -72,7 +72,7 @@ public class TestCreateCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|");
         // then
         Mockito.verify(dBManager, never()).createTableWithoutTypesFields(any(), any());
@@ -87,7 +87,7 @@ public class TestCreateCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = createCommand.processAndExit(viewer, dBManager, "create|tab");
         // then
         Mockito.verify(dBManager, never()).createTableWithoutTypesFields(any(), any());

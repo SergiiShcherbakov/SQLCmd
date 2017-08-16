@@ -42,7 +42,7 @@ public class TestTablesCommand {
         response.add("User");
         response.add("Bugs");
         // when
-        boolean isExit = true;
+        boolean isExit;
         when(dBManager.getTablesNames()).thenReturn(response);
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
@@ -59,7 +59,7 @@ public class TestTablesCommand {
         setMocks();
         List<String> response = new LinkedList<>();
         // when
-        boolean isExit = true;
+        boolean isExit;
         when(dBManager.getTablesNames()).thenReturn(response);
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tables");
         // then
@@ -75,7 +75,7 @@ public class TestTablesCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = tablesCommand.processAndExit(viewer, dBManager, "tabless");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();
@@ -91,7 +91,7 @@ public class TestTablesCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = tablesCommand.processAndExit(viewer, dBManager, "");
         // then
         Mockito.verify(dBManager, never()).getTablesNames();

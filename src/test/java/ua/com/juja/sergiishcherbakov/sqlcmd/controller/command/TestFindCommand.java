@@ -39,7 +39,7 @@ public class TestFindCommand {
     public void canProcessAndExitWithGoodString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         List<List<String>> table = new LinkedList<>();
         // when
         Mockito.when(dBManager.selectAllFromTable("tab")).thenReturn(table);
@@ -56,7 +56,7 @@ public class TestFindCommand {
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find1|tab");
         // then
@@ -72,7 +72,7 @@ public class TestFindCommand {
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find|tab|tab");
         // then
@@ -88,7 +88,7 @@ public class TestFindCommand {
     public void canProcessAndExitWithStringWithoutParameters() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find|");
         // then
@@ -104,7 +104,7 @@ public class TestFindCommand {
     public void canProcessAndExitWithoutAllParameters() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = findCommand.processAndExit(viewer, dBManager, "find");
         // then

@@ -17,19 +17,19 @@ public class FirstTablePrinter implements TablePrinter {
     @Override
     public void printTable(List<List<String>> table) {
         int[] maxSizeOfColumn = getColumnsSizes(table);
-        StringBuffer printedTable = new StringBuffer() ;
+        StringBuilder printedTable = new StringBuilder() ;
         printedTable.append(addSeparator(maxSizeOfColumn) );
-        for (int i = 0; i <table.size() ; i++) {
-            printedTable.append( addRow(table.get(i), maxSizeOfColumn));
+        for (List<String> allColumn : table) {
+            printedTable.append(addRow(allColumn, maxSizeOfColumn));
             printedTable.append(addSeparator(maxSizeOfColumn));
         }
         viewer.write(printedTable.toString());
     }
 
-    private StringBuffer addSeparator(int[] maxSizeOfColumn) {
+    private StringBuffer addSeparator(int[] maxSizeOfColumns) {
         StringBuffer result = new StringBuffer("+");
-        for (int i = 0; i < maxSizeOfColumn.length; i++) {
-            result.append(fillChars(maxSizeOfColumn[i],'-'));
+        for (int maxSizeOfColumn : maxSizeOfColumns) {
+            result.append(fillChars(maxSizeOfColumn, '-'));
             result.append("+");
         }
         result.append( System.lineSeparator());
@@ -69,13 +69,13 @@ public class FirstTablePrinter implements TablePrinter {
         return result;
     }
 
-    private int getMaxLengthInColumn(List<List<String>> table, int column ){
+    private int getMaxLengthInColumn(List<List<String>> table, int columnNumber ){
         int result = 0;
         int currentSize ;
-        for (int i = 0; i < table.size(); i++) {
-            if (table.get(i).get(column) != null) {
-            currentSize = table.get(i).get(column).length();
-            if( currentSize > result ) result = currentSize;
+        for (List<String> row : table) {
+            if (row.get(columnNumber) != null) {
+                currentSize = row.get(columnNumber).length();
+                if (currentSize > result) result = currentSize;
             }
         }
         return result;

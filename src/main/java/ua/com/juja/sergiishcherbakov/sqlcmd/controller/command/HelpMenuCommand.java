@@ -1,9 +1,7 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
-import com.google.common.collect.Lists;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.CorrectParameterChecker;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;

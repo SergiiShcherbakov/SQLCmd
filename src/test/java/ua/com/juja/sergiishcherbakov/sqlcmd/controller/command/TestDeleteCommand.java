@@ -38,7 +38,7 @@ public class TestDeleteCommand {
     public void canProcessAndExitWithGoodString() throws ClassNotFoundException, SQLException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1");
         // then
@@ -54,7 +54,7 @@ public class TestDeleteCommand {
     public void canProcessAndExitWithBadString() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "deletee|tab|row1|Value1");
         // then
@@ -70,7 +70,7 @@ public class TestDeleteCommand {
     public void canProcessAndExitWithStringLongerThenNeed() throws SQLException, ClassNotFoundException {
         // given
         setMocks();
-        boolean isExit = true;
+        boolean isExit;
         // when
         isExit = deleteCommand.processAndExit(viewer, dBManager, "delete|tab|row1|Value1|Value2");
         // then
