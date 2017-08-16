@@ -38,15 +38,15 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
-        Map addRowToTable = new HashMap();
-        addRowToTable.put("column1", "value1");
-        addRowToTable.put("column2", "value2");
-        addRowToTable.put("columnN", "valueN");
-        when(dBManager.insertRow("insert", addRowToTable )).thenReturn("Ok");
+        boolean isExit;
+        Map testTable = new HashMap();
+        testTable.put("column1", "value1");
+        testTable.put("column2", "value2");
+        testTable.put("columnN", "valueN");
+        when(dBManager.insertRow("insert", testTable )).thenReturn("Ok");
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|column1|value1|column2|value2|columnN|valueN");
         // then
-        Mockito.verify(dBManager).insertRow("tab", addRowToTable);
+        Mockito.verify(dBManager).insertRow("tab", testTable);
         Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("row \"column1=value1, column2=value2, columnN=valueN\" was added to table \"tab\"");
         Mockito.verifyNoMoreInteractions(viewer);
@@ -58,7 +58,7 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insertt|tab|column1|value1|column2|value2|columnN|valueN");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
@@ -75,7 +75,7 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab|tab|column1|value1|column2|value2|columnN|valueN");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
@@ -91,7 +91,7 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
@@ -108,7 +108,7 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert|tab");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
@@ -124,7 +124,7 @@ public class TestInsertCommand {
         // given
         setMocks();
         // when
-        boolean isExit = true;
+        boolean isExit;
         isExit = insertCommand.processAndExit(viewer, dBManager, "insert");
         // then
         Mockito.verify(dBManager, never()).insertRow(any(), any());
