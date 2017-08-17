@@ -11,7 +11,7 @@ public class FirstTablePrinter implements TablePrinter {
 
     public FirstTablePrinter(Viewer viewer) {
         this.viewer = viewer;
-        viewer.setTablePrinter( this);
+        viewer.setTablePrinter( this );
     }
 
     @Override

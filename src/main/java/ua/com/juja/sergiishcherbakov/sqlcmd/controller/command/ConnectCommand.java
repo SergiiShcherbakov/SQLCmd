@@ -9,7 +9,7 @@ import ua.com.juja.sergiishcherbakov.sqlcmd.view.Viewer;
  */
 public class ConnectCommand extends CommandSkeleton implements Command {
 
-    private static final int DBName = 1;
+    private static final int DB_NAME = 1;
     private static final int LOGIN = 2;
     private static final int PASSWORD = 3;
     private static final int COMMAND_NAME = 0;
@@ -29,8 +29,8 @@ public class ConnectCommand extends CommandSkeleton implements Command {
     @Override
     Object prepareDataToViewer(String[] parameters) {
         databaseManager.closeConnection();
-        databaseManager.setConnection(parameters[DBName], parameters[LOGIN], parameters[PASSWORD]);
-        return String.format( "connection to database %s is successful", parameters[DBName]);
+        databaseManager.setConnection(parameters[DB_NAME], parameters[LOGIN], parameters[PASSWORD]);
+        return String.format( "connection to database %s is successful", parameters[DB_NAME]);
     }
 
 
@@ -39,7 +39,7 @@ public class ConnectCommand extends CommandSkeleton implements Command {
             String [] parameters = CorrectParameterChecker.
                     getCorrectNumberOfParameters( inputCommand, PASSWORD);
             databaseManager.closeConnection();
-            if (databaseManager.setConnection(parameters[COMMAND_NAME], parameters[DBName], parameters[LOGIN])) {
+            if (databaseManager.setConnection(parameters[COMMAND_NAME], parameters[DB_NAME], parameters[LOGIN])) {
                 viewer.write( String.format("connection to database %s is successful", parameters[COMMAND_NAME] ));
                 return true;
             }

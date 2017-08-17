@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Sergii Shcherbakov on 27.04.2017.
  */
+
 public class LoginUserIntegrationTest {
 
     private ConsoleMock consoleMock;

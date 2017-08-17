@@ -42,7 +42,7 @@ public abstract class CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
+    public final boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
         setDatabaseManager(databaseManager);
         setViewer(viewer);
         try {
@@ -52,8 +52,9 @@ public abstract class CommandSkeleton implements Command {
         } catch ( RuntimeException e  ) {
             viewer.write(e.getMessage());
             viewer.write("please, try again");
+            return false;
         }
-        return false;
+        return isLastCommand();
     }
 
     boolean canProcessWithoutParameters(String command) {
@@ -63,6 +64,10 @@ public abstract class CommandSkeleton implements Command {
     abstract  String [] prepareParameters(String inputCommand);
 
     abstract  Object prepareDataToViewer(String [] parameters);
+
+    boolean isLastCommand(){
+        return false;
+    }
 
     void viewResult(Object result){
          viewer.write((String) result);

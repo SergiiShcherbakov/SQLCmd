@@ -15,19 +15,6 @@ public class ExitCommand extends CommandSkeleton implements Command {
     }
 
     @Override
-    public boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand) {
-        try {
-            CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
-            viewer.write("good by, see you soon.");
-            databaseManager.closeConnection();
-            return true;
-        } catch ( IncorrectNumberOfParametersException  e) {
-            viewer.write( e.getMessage());
-        }
-        return false;
-    }
-
-    @Override
     String[] prepareParameters(String inputCommand) {
         CorrectParameterChecker.getCorrectParameter(getName(), inputCommand);
         databaseManager.closeConnection();
@@ -42,5 +29,10 @@ public class ExitCommand extends CommandSkeleton implements Command {
     @Override
     public boolean canProcess(String command) {
         return canProcessWithoutParameters(command);
+    }
+
+    @Override
+    boolean isLastCommand() {
+        return true;
     }
 }

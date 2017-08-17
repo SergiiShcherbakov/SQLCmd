@@ -56,6 +56,7 @@ public class TestExitCommand {
         Mockito.verify(dBManager, never()).closeConnection();
         Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }
@@ -70,6 +71,7 @@ public class TestExitCommand {
         // then
         Mockito.verifyNoMoreInteractions(dBManager);
         Mockito.verify(viewer).write("\"exit\" parameter are expected but \"exitt\" is entered");
+        Mockito.verify(viewer).write("please, try again");
         Mockito.verifyNoMoreInteractions(viewer);
         assertFalse(isExit);
     }

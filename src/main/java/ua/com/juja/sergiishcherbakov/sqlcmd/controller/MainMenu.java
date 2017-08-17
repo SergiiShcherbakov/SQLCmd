@@ -25,7 +25,7 @@ class MainMenu {
     void start()  {
         mainMenuWelcome();
         while(true) {
-            if(isThisCommandLast()) return;
+            if(isThisCommandLast()){ return;}
         }
     }
 
