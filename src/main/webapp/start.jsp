@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,11 +16,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>User Name</td>
-                            <td><input type="text" name="database" value="SQLCmd" /></td>
+                            <td>Database name</td>
+                            <td><input type="text" name="database" value="SQLCm" /></td>
                         </tr>
                         <tr>
-                            <td>User Name</td>
+                            <td>User name</td>
                             <td><input type="text" name="userName" value="postgres" /></td>
                         </tr>
                         <tr>

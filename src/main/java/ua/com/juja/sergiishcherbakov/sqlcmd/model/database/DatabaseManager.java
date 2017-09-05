@@ -32,4 +32,5 @@ public interface DatabaseManager {
 
     boolean updateTable(String tableName, Pair<String, String> whereColumnValue, Map<String, String> changeColumnValue);
 
+    boolean isConnect();
 }

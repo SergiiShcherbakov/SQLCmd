@@ -155,6 +155,11 @@ public class JDBCPostgresSQLDatabaseManager implements DatabaseManager {
         return true;
     }
 
+    @Override
+    public boolean isConnect() {
+        return connectionController.isConnected();
+    }
+
     public void executeQuery(String sql)  {
         Connection connection = getConnection();
         try {

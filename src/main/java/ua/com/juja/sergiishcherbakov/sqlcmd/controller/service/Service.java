@@ -10,4 +10,8 @@ public interface Service {
     public List<String> getCommandList();
 
     public boolean isConnected();
+
+    void connect(String database, String username, String password);
+
+    void disconnect();
 }

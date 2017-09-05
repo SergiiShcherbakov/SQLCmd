@@ -18,7 +18,14 @@ public class MainServlet extends HttpServlet {
     Service service =  ServiceImpl.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String requesURI = req.getRequestURI();
+        String action = requesURI.substring(req.getContextPath().length(), requesURI.length());
+        req.setAttribute("test", action);
         if ( service.isConnected() ) {
+            if (action.equals("/exit")) {
+                service.disconnect();
+                req.getRequestDispatcher("start.jsp").forward(req, resp);
+            }
             req.setAttribute("commands", service.getCommandList());
             req.getRequestDispatcher("main.jsp").forward(req, resp);
         } else {
@@ -28,6 +35,21 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String requesURI = req.getRequestURI();
+        String action = requesURI.substring(req.getContextPath().length(), requesURI.length());
 
+        String database =  req.getParameter("database");
+        String username =  req.getParameter("userName");
+        String password =  req.getParameter("password");
+
+        try {
+            service.connect(database, username, password);
+            resp.sendRedirect(resp.encodeRedirectURL("mainMenu"));
+        } catch (Exception e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("error.jsp").forward(req, resp);
+        }
     }
+
+
 }
