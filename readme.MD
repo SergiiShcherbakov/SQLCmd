@@ -1,5 +1,6 @@
 ## Synopsis
-This is my educational project. The program in console work with database.
+This is my educational project. The program in console worked with database.
+Now it will work like web application.
 It has MVC architecture. It is used JDBC, Maven, PostgreSQL, JUnit, Mockito,
 Reflections. In the program I use patterns: MVC, Command, TemplateMethod, FabricMethod, Strategy
 
