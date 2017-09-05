@@ -1,5 +1,6 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Sergii Shcherbakov on 14.06.2017.
  */
+@Ignore
 public class MenuCommandFactoryTest {
      private final MenuCommandFactory factory = new MenuCommandFactory();
      private final List<Command> commandList = factory.getMenuCommand(Command.class);
