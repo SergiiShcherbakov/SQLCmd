@@ -1,6 +1,7 @@
 package ua.com.juja.sergiishcherbakov.sqlcmd.controller.command;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ua.com.juja.sergiishcherbakov.sqlcmd.model.database.DatabaseManager;
@@ -14,6 +15,7 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by Sergii Shcherbakov on 10.05.2017.
  */
+@Ignore
 public class TestUnsupportedCommand {
     private DatabaseManager dBManager;
     private Viewer viewer;

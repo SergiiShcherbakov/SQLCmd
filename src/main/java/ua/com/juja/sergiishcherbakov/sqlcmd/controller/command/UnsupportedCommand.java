@@ -13,7 +13,7 @@ public class UnsupportedCommand extends CommandSkeleton  {
 
     @Override
     public boolean canProcess(String command) {
-        return true;
+        return false;
     }
 
     @Override

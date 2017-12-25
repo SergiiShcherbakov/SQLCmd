@@ -14,4 +14,6 @@ public interface Command {
     boolean canProcess(String command);
 
     boolean processAndExit(Viewer viewer, DatabaseManager databaseManager, String inputCommand);
+
+    Object processAndExit(DatabaseManager dbManager, String inputCommand);
 }
